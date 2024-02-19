@@ -33,6 +33,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
   serverpod_auth_shared_flutter: 1.2.3
+  serverpod_auth_email_flutter: 1.2.3
+  hooks_riverpod: ^2.4.10
+  riverpod_annotation: ^2.3.4
+  build_runner: ^2.4.8
+  custom_lint: ^0.6.0
+  riverpod_generator: ^2.3.11
 
 dev_dependencies:
   flutter_lints: ^3.0.0
