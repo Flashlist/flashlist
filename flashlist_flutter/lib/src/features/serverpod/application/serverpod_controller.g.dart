@@ -7,7 +7,7 @@ part of 'serverpod_controller.dart';
 // **************************************************************************
 
 String _$serverpodControllerHash() =>
-    r'194254c3256a2bf4394ce63ef03cdac3c28ec379';
+    r'79f19d540bb3bbe546957b74d898cf1f8d80638b';
 
 /// See also [serverpodController].
 @ProviderFor(serverpodController)
@@ -23,7 +23,7 @@ final serverpodControllerProvider =
 );
 
 typedef ServerpodControllerRef = AutoDisposeProviderRef<ServerpodController>;
-String _$clientHash() => r'58f3eea9d2bfedd3947bb3735989a791e1fb0054';
+String _$clientHash() => r'32f81e59869efbfcffb43d8b68163bad5081b6c0';
 
 /// See also [client].
 @ProviderFor(client)
@@ -37,7 +37,7 @@ final clientProvider = AutoDisposeProvider<Client>.internal(
 );
 
 typedef ClientRef = AutoDisposeProviderRef<Client>;
-String _$sessionManagerHash() => r'bc940df4fb45528c4315d391a8c4dc32892abf1c';
+String _$sessionManagerHash() => r'a6916a0eb10ebace387384bde767f8aaed54225d';
 
 /// See also [sessionManager].
 @ProviderFor(sessionManager)
