@@ -38,13 +38,3 @@ Client client(ClientRef ref) => ref.read(serverpodControllerProvider).client;
 SessionManager sessionManager(SessionManagerRef ref) =>
     ref.read(serverpodControllerProvider).sessionManager;
 
-@riverpod
-Stream<dynamic> isAuthenticated(IsAuthenticatedRef ref) async* {
-  final sessionManager = ref.read(serverpodControllerProvider).sessionManager;
-
-  sessionManager.addListener(() {
-    ref.invalidateSelf();
-  });
-
-  yield sessionManager.signedInUser;
-}
