@@ -4,8 +4,8 @@ import 'package:serverpod_auth_email_flutter/serverpod_auth_email_flutter.dart';
 
 import 'package:flashlist_flutter/src/features/serverpod/application/serverpod_controller.dart';
 
-class AuthScreen extends ConsumerWidget {
-  const AuthScreen({super.key});
+class AuthButtons extends ConsumerWidget {
+  const AuthButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
