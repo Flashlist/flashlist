@@ -6,7 +6,7 @@ part 'authentication.g.dart';
 
 @riverpod
 Stream<dynamic> isAuthenticated(IsAuthenticatedRef ref) async* {
-  final sessionManager = ref.watch(serverpodControllerProvider).sessionManager;
+  final sessionManager = ref.watch(sessionManagerProvider);
 
   sessionManager.addListener(() {
     ref.invalidateSelf();
