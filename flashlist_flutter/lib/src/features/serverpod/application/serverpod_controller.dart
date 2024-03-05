@@ -6,24 +6,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 part 'serverpod_controller.g.dart';
 
-class ServerpodController {
-  ServerpodController(this.client, this.sessionManager) {
-    sessionManager.initialize();
-  }
-
-  final Client client;
-  final SessionManager sessionManager;
-
-  SessionManager get session => sessionManager;
-}
-
-@riverpod
-ServerpodController serverpodController(ServerpodControllerRef ref) =>
-    ServerpodController(
-      ref.watch(clientProvider),
-      ref.watch(sessionManagerProvider),
-    );
-
 @riverpod
 Client client(ClientRef ref) => Client(
       // The Android endpoint for Genymotion is 10.0.3.2
@@ -34,3 +16,19 @@ Client client(ClientRef ref) => Client(
 @riverpod
 SessionManager sessionManager(SessionManagerRef ref) =>
     SessionManager(caller: ref.watch(clientProvider).modules.auth);
+
+class ServerpodController {
+  ServerpodController(this.client, this.sessionManager) {
+    sessionManager.initialize();
+  }
+
+  final Client client;
+  final SessionManager sessionManager;
+}
+
+@riverpod
+ServerpodController serverpodController(ServerpodControllerRef ref) =>
+    ServerpodController(
+      ref.watch(clientProvider),
+      ref.watch(sessionManagerProvider),
+    );
