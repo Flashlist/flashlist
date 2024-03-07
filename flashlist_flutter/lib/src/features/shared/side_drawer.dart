@@ -9,7 +9,6 @@ class SideDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sessionManager = ref.read(sessionManagerProvider);
-    final serverpod = ref.read(serverpodControllerProvider);
     return Drawer(
       shape: const BeveledRectangleBorder(),
       child: ListView(
