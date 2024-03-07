@@ -6,11 +6,11 @@ part of 'authentication.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isAuthenticatedHash() => r'3d2035b3e3adce1fd54d891c9af92f660609e963';
+String _$isAuthenticatedHash() => r'32d1f7ea4d2f6b33df48477e2316c94fc73cc456';
 
 /// See also [isAuthenticated].
 @ProviderFor(isAuthenticated)
-final isAuthenticatedProvider = AutoDisposeStreamProvider<dynamic>.internal(
+final isAuthenticatedProvider = AutoDisposeStreamProvider<bool>.internal(
   isAuthenticated,
   name: r'isAuthenticatedProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,6 +20,6 @@ final isAuthenticatedProvider = AutoDisposeStreamProvider<dynamic>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef IsAuthenticatedRef = AutoDisposeStreamProviderRef<dynamic>;
+typedef IsAuthenticatedRef = AutoDisposeStreamProviderRef<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
