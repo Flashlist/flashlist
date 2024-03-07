@@ -6,23 +6,6 @@ part of 'serverpod_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$serverpodControllerHash() =>
-    r'79f19d540bb3bbe546957b74d898cf1f8d80638b';
-
-/// See also [serverpodController].
-@ProviderFor(serverpodController)
-final serverpodControllerProvider =
-    AutoDisposeProvider<ServerpodController>.internal(
-  serverpodController,
-  name: r'serverpodControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$serverpodControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef ServerpodControllerRef = AutoDisposeProviderRef<ServerpodController>;
 String _$clientHash() => r'32f81e59869efbfcffb43d8b68163bad5081b6c0';
 
 /// See also [client].
@@ -52,5 +35,22 @@ final sessionManagerProvider = AutoDisposeProvider<SessionManager>.internal(
 );
 
 typedef SessionManagerRef = AutoDisposeProviderRef<SessionManager>;
+String _$serverpodControllerHash() =>
+    r'79f19d540bb3bbe546957b74d898cf1f8d80638b';
+
+/// See also [serverpodController].
+@ProviderFor(serverpodController)
+final serverpodControllerProvider =
+    AutoDisposeProvider<ServerpodController>.internal(
+  serverpodController,
+  name: r'serverpodControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$serverpodControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ServerpodControllerRef = AutoDisposeProviderRef<ServerpodController>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
