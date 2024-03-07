@@ -22,10 +22,10 @@ final goRouter = GoRouter(
 
             return isAuthenticated.when(
               data: (user) {
-                if (user != null) {
-                  return const HomeScreen();
-                } else {
+                if (!user) {
                   return const AuthScreen();
+                } else {
+                  return const HomeScreen();
                 }
               },
               loading: () => const Center(
