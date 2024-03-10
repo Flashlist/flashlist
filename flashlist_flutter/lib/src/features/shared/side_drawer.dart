@@ -1,4 +1,4 @@
-import 'package:flashlist_flutter/src/features/serverpod/application/serverpod_controller.dart';
+import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,7 +8,8 @@ class SideDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sessionManager = ref.read(sessionManagerProvider);
+    final authController = ref.read(authenticationControllerProvider);
+
     return Drawer(
       shape: const BeveledRectangleBorder(),
       child: ListView(
@@ -23,7 +24,7 @@ class SideDrawer extends ConsumerWidget {
           ListTile(
             title: const Text('Sign Out'),
             onTap: () {
-              sessionManager.signOut();
+              authController.signOut();
               context.pop();
             },
           ),
