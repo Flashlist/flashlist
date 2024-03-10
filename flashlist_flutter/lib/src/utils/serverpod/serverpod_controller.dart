@@ -21,7 +21,7 @@ SessionManager sessionManager(SessionManagerRef ref) =>
 ///
 /// Usage with either [read] or [watch] from the [ref] parameter:
 /// ```dart
-/// final serverpodController = ref.watch(serverpodControllerProvider);
+/// final ServerpodHelper = ref.watch(serverpodHelperProvider);
 /// ```
 ///
 /// The individual providers are also available for direct usage:
@@ -38,8 +38,8 @@ class ServerpodHelper {
   final SessionManager sessionManager;
 }
 
-/// Provider for the serverpodController class
-/// Automatically caches and disposes the controller when no longer used.
+/// Provider for the serverpodHelper class
+/// Automatically caches and disposes the helper when no longer used.
 @riverpod
 ServerpodHelper serverpodHelper(ServerpodHelperRef ref) => ServerpodHelper(
       ref.watch(clientProvider),
