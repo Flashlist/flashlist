@@ -1,4 +1,4 @@
-import 'package:flashlist_flutter/src/features/shared/side_drawer.dart';
+import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
