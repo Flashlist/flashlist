@@ -12,6 +12,7 @@ enum AppRoute {
 final goRouter = GoRouter(
   initialLocation: '/',
   routes: [
+    // Home Route (default) - checks if user is authenticated
     GoRoute(
       path: '/',
       name: AppRoute.home.name,

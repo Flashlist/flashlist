@@ -1,18 +1,13 @@
-import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
-import 'package:flashlist_flutter/src/features/authentication/presentation/auth_screen.dart';
-import 'package:flashlist_flutter/src/features/serverpod/application/serverpod_controller.dart';
 import 'package:flashlist_flutter/src/features/shared/side_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends StatelessWidget {
+  /// HomeScreen is the default screen when the user is authenticated
+  /// Holds no [state], only UI.
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final sessionManager = ref.read(sessionManagerProvider);
-    // final isAuthenticated = ref.watch(isAuthenticatedProvider);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(

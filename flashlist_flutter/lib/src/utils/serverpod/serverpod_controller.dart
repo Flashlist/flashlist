@@ -8,7 +8,6 @@ part 'serverpod_controller.g.dart';
 
 @riverpod
 Client client(ClientRef ref) => Client(
-      // The Android endpoint for Genymotion is 10.0.3.2
       "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
       authenticationKeyManager: FlutterAuthenticationKeyManager(),
     )..connectivityMonitor = FlutterConnectivityMonitor();
@@ -17,8 +16,21 @@ Client client(ClientRef ref) => Client(
 SessionManager sessionManager(SessionManagerRef ref) =>
     SessionManager(caller: ref.watch(clientProvider).modules.auth);
 
-class ServerpodController {
-  ServerpodController(this.client, this.sessionManager) {
+/// Helper class for [ServerpodHelper] functionality.
+/// It manages the lifecycle of the client and the session manager.
+///
+/// Usage with either [read] or [watch] from the [ref] parameter:
+/// ```dart
+/// final serverpodController = ref.watch(serverpodControllerProvider);
+/// ```
+///
+/// The individual providers are also available for direct usage:
+/// ```dart
+/// final client = ref.read(clientProvider);
+/// final sessionManager = ref.watch(sessionManagerProvider);
+/// ```
+class ServerpodHelper {
+  ServerpodHelper(this.client, this.sessionManager) {
     sessionManager.initialize();
   }
 
@@ -26,9 +38,10 @@ class ServerpodController {
   final SessionManager sessionManager;
 }
 
+/// Provider for the serverpodController class
+/// Automatically caches and disposes the controller when no longer used.
 @riverpod
-ServerpodController serverpodController(ServerpodControllerRef ref) =>
-    ServerpodController(
+ServerpodHelper serverpodHelper(ServerpodHelperRef ref) => ServerpodHelper(
       ref.watch(clientProvider),
       ref.watch(sessionManagerProvider),
     );

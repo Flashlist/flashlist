@@ -6,9 +6,32 @@ part of 'authentication.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$authenticationControllerHash() =>
+    r'4a29f5be4dc9ec9c4e4f58e8419ff912484dfca5';
+
+/// Provider for the [AuthenticationController].
+///
+/// Copied from [authenticationController].
+@ProviderFor(authenticationController)
+final authenticationControllerProvider =
+    AutoDisposeProvider<AuthenticationController>.internal(
+  authenticationController,
+  name: r'authenticationControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authenticationControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthenticationControllerRef
+    = AutoDisposeProviderRef<AuthenticationController>;
 String _$isAuthenticatedHash() => r'32d1f7ea4d2f6b33df48477e2316c94fc73cc456';
 
-/// See also [isAuthenticated].
+/// Provider for the authentication-state
+/// returns a [bool] corresponding with the current authentication state.
+///
+/// Copied from [isAuthenticated].
 @ProviderFor(isAuthenticated)
 final isAuthenticatedProvider = AutoDisposeStreamProvider<bool>.internal(
   isAuthenticated,

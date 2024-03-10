@@ -35,22 +35,23 @@ final sessionManagerProvider = AutoDisposeProvider<SessionManager>.internal(
 );
 
 typedef SessionManagerRef = AutoDisposeProviderRef<SessionManager>;
-String _$serverpodControllerHash() =>
-    r'79f19d540bb3bbe546957b74d898cf1f8d80638b';
+String _$serverpodHelperHash() => r'ee86ab5189542c09d60b9269c8cfc5717079e3d8';
 
-/// See also [serverpodController].
-@ProviderFor(serverpodController)
-final serverpodControllerProvider =
-    AutoDisposeProvider<ServerpodController>.internal(
-  serverpodController,
-  name: r'serverpodControllerProvider',
+/// Provider for the serverpodController class
+/// Automatically caches and disposes the controller when no longer used.
+///
+/// Copied from [serverpodHelper].
+@ProviderFor(serverpodHelper)
+final serverpodHelperProvider = AutoDisposeProvider<ServerpodHelper>.internal(
+  serverpodHelper,
+  name: r'serverpodHelperProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$serverpodControllerHash,
+      : _$serverpodHelperHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef ServerpodControllerRef = AutoDisposeProviderRef<ServerpodController>;
+typedef ServerpodHelperRef = AutoDisposeProviderRef<ServerpodHelper>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
