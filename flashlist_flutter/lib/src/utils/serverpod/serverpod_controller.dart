@@ -16,7 +16,7 @@ Client client(ClientRef ref) => Client(
 SessionManager sessionManager(SessionManagerRef ref) =>
     SessionManager(caller: ref.watch(clientProvider).modules.auth);
 
-/// Helper class for [ServerpodHelper] functionality.
+/// Helper class for [Serverpod] functionality.
 /// It manages the lifecycle of the client and the session manager.
 ///
 /// Usage with either [read] or [watch] from the [ref] parameter:
