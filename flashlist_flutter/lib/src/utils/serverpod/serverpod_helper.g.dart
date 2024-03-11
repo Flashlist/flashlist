@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'serverpod_controller.dart';
+part of 'serverpod_helper.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -37,8 +37,8 @@ final sessionManagerProvider = AutoDisposeProvider<SessionManager>.internal(
 typedef SessionManagerRef = AutoDisposeProviderRef<SessionManager>;
 String _$serverpodHelperHash() => r'ee86ab5189542c09d60b9269c8cfc5717079e3d8';
 
-/// Provider for the serverpodController class
-/// Automatically caches and disposes the controller when no longer used.
+/// Provider for the serverpodHelper class
+/// Automatically caches and disposes the helper when no longer used.
 ///
 /// Copied from [serverpodHelper].
 @ProviderFor(serverpodHelper)
