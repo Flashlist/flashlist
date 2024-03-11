@@ -1,9 +1,10 @@
-import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
-import 'package:flashlist_flutter/src/features/authentication/presentation/auth_screen.dart';
-import 'package:flashlist_flutter/src/features/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
+import 'package:flashlist_flutter/src/features/authentication/presentation/auth_screen.dart';
+import 'package:flashlist_flutter/src/features/home/presentation/home_screen.dart';
 
 enum AppRoute {
   home,
