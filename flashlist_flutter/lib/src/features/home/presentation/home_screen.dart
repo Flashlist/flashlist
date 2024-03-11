@@ -1,5 +1,6 @@
-import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   /// HomeScreen is the default screen when the user is authenticated

@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flashlist_flutter/src/utils/serverpod/serverpod_controller.dart';
+import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 
 part 'authentication.g.dart';
@@ -24,7 +24,9 @@ class AuthenticationController {
 @riverpod
 AuthenticationController authenticationController(
         AuthenticationControllerRef ref) =>
-    AuthenticationController(ref.watch(sessionManagerProvider));
+    AuthenticationController(
+      ref.watch(sessionManagerProvider),
+    );
 
 /// Provider for the authentication-state
 /// returns a [bool] corresponding with the current authentication state.
