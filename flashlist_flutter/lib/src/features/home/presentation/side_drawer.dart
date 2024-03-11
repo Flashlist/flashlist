@@ -8,8 +8,6 @@ class SideDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authController = ref.read(authenticationControllerProvider);
-
     return Drawer(
       shape: const BeveledRectangleBorder(),
       child: ListView(
@@ -24,7 +22,7 @@ class SideDrawer extends ConsumerWidget {
           ListTile(
             title: const Text('Sign Out'),
             onTap: () {
-              authController.signOut();
+              ref.read(authenticationControllerProvider).signOut();
               context.pop();
             },
           ),
