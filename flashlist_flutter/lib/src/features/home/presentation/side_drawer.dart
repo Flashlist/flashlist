@@ -1,4 +1,5 @@
 import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
+import 'package:flashlist_flutter/src/features/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +19,12 @@ class SideDrawer extends ConsumerWidget {
               color: Colors.blue,
             ),
             child: Text('Drawer Header'),
+          ),
+          ListTile(
+            title: const Text('Profile'),
+            onTap: () {
+              context.goNamed(AppRoute.profile.name);
+            },
           ),
           ListTile(
             title: const Text('Sign Out'),
