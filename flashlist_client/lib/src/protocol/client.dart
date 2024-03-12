@@ -10,29 +10,31 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:serverpod_auth_client/module.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:flashlist_client/src/protocol/user/app_user.dart' as _i3;
+import 'package:serverpod_auth_client/module.dart' as _i4;
+import 'protocol.dart' as _i5;
 
 /// {@category Endpoint}
-class EndpointExample extends _i1.EndpointRef {
-  EndpointExample(_i1.EndpointCaller caller) : super(caller);
+class EndpointAppUser extends _i1.EndpointRef {
+  EndpointAppUser(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'example';
+  String get name => 'appUser';
 
-  _i2.Future<String> hello(String name) => caller.callServerEndpoint<String>(
-        'example',
-        'hello',
-        {'name': name},
+  _i2.Future<_i3.AppUser?> getCurrentUserObject() =>
+      caller.callServerEndpoint<_i3.AppUser?>(
+        'appUser',
+        'getCurrentUserObject',
+        {},
       );
 }
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i3.Caller(client);
+    auth = _i4.Caller(client);
   }
 
-  late final _i3.Caller auth;
+  late final _i4.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -44,22 +46,22 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i5.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
         ) {
-    example = EndpointExample(this);
+    appUser = EndpointAppUser(this);
     modules = _Modules(this);
   }
 
-  late final EndpointExample example;
+  late final EndpointAppUser appUser;
 
   late final _Modules modules;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {'appUser': appUser};
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
