@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
 import 'package:flashlist_flutter/src/features/authentication/presentation/auth_screen.dart';
 import 'package:flashlist_flutter/src/features/home/presentation/home_screen.dart';
+import 'package:flashlist_flutter/src/features/users/presentation/profile_screen.dart';
+import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 
 enum AppRoute {
   home,
+  profile,
 }
 
 final goRouter = GoRouter(
@@ -20,9 +22,8 @@ final goRouter = GoRouter(
       builder: (context, state) {
         return Consumer(
           builder: (context, ref, child) {
-            final isAuthenticated = ref.watch(isAuthenticatedProvider);
-
-            return isAuthenticated.when(
+            return AsyncValueWidget(
+              value: ref.watch(isAuthenticatedProvider),
               data: (user) {
                 if (!user) {
                   return const AuthScreen();
@@ -30,16 +31,18 @@ final goRouter = GoRouter(
                   return const HomeScreen();
                 }
               },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              error: (error, stackTrace) => Center(
-                child: Text('Error: $error'),
-              ),
             );
           },
         );
       },
+      routes: [
+        // Profile Page
+        GoRoute(
+          path: 'profile',
+          name: AppRoute.profile.name,
+          builder: (context, state) => const ProfileScreen(),
+        ),
+      ],
     ),
   ],
 );
