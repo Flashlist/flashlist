@@ -30,19 +30,31 @@ void run(List<String> args) async {
     '/*',
   );
 
-  auth.AuthConfig.set(auth.AuthConfig(
-    sendValidationEmail: (session, email, validationCode) async {
-      // Send the validation email to the user.
-      // Return `true` if the email was successfully sent, otherwise `false`.
-      print(validationCode);
-      return true;
-    },
-    sendPasswordResetEmail: (session, userInfo, validationCode) async {
-      // Send the password reset email to the user.
-      // Return `true` if the email was successfully sent, otherwise `false`.
-      return true;
-    },
-  ));
+  auth.AuthConfig.set(
+    auth.AuthConfig(
+      sendValidationEmail: (session, email, validationCode) async {
+        // Send the validation email to the user.
+        // Return `true` if the email was successfully sent, otherwise `false`.
+        print(validationCode);
+        return true;
+      },
+      sendPasswordResetEmail: (session, userInfo, validationCode) async {
+        // Send the password reset email to the user.
+        // Return `true` if the email was successfully sent, otherwise `false`.
+        return true;
+      },
+      onUserCreated: (session, userInfo) {
+        return AppUser.db.insertRow(
+          session,
+          AppUser(
+            userId: userInfo.id!,
+            email: userInfo.email!,
+            username: userInfo.userName,
+          ),
+        );
+      },
+    ),
+  );
 
   // Start the server.
   await pod.start();
