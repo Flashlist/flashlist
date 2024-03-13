@@ -29,7 +29,6 @@ class ProfileScreen extends ConsumerWidget {
               children: [
                 AvatarPlaceholder(
                   username: user.username,
-                  backgroundColor: Colors.purple,
                 ),
                 const SizedBox(height: 20),
                 Text('Name: ${user.username}'),
