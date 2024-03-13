@@ -1,8 +1,10 @@
-import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
-import 'package:flashlist_flutter/src/features/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'package:flashlist_flutter/src/branding/logo_branding_vertical.dart';
+import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
+import 'package:flashlist_flutter/src/features/routing/app_router.dart';
 
 class SideDrawer extends ConsumerWidget {
   const SideDrawer({super.key});
@@ -15,10 +17,7 @@ class SideDrawer extends ConsumerWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text('Drawer Header'),
+            child: LogoBrandingVertical(),
           ),
           ListTile(
             title: const Text('Profile'),
