@@ -1,8 +1,8 @@
-import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
+import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -27,9 +27,15 @@ class ProfileScreen extends ConsumerWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AvatarPlaceholder(
-                  username: user.username,
-                ),
+                if (user.imageSrc == null)
+                  AvatarPlaceholder(
+                    username: user.username,
+                  )
+                else
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(user.imageSrc!),
+                  ),
                 const SizedBox(height: 20),
                 Text('Name: ${user.username}'),
                 Text('Email: ${user.email}'),
