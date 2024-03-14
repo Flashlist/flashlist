@@ -20,8 +20,8 @@ bool isDarkThemeOf(context) {
   return brightnessOf(context) == Brightness.dark;
 }
 
-void showContextSnackBar({
-  context,
+void showContextSnackBar(
+  context, {
   required String message,
   SnackBarAction? action,
 }) {
