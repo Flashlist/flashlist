@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
+import 'package:flashlist_flutter/src/features/users/presentation/connections/connections.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -11,9 +13,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(),
       body: Center(
         child: AsyncValueWidget(
           value: ref.watch(currentUserProvider),
@@ -36,9 +36,11 @@ class ProfileScreen extends ConsumerWidget {
                     radius: 60,
                     backgroundImage: NetworkImage(user.imageSrc!),
                   ),
-                const SizedBox(height: 20),
+                gapH20,
                 Text('Name: ${user.username}'),
                 Text('Email: ${user.email}'),
+                gapH20,
+                const ConnectionsWidget(),
               ],
             );
           },

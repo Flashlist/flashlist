@@ -1,7 +1,7 @@
 class: AppUser
 table: flashlist_app_user
 fields:
-  userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=SetNull)
+  userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
   username: String
   email: String
   imageSrc: String?

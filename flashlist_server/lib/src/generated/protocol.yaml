@@ -1,2 +1,11 @@
 appUser:
-  - getCurrentUserObject:
+  - getCurrentUser:
+  - getUserById:
+  - getUserByUsername:
+  - getUserByEmail:
+  - getRequestById:
+  - getRequestsForUser:
+  - removeRequest:
+  - sendConnectionRequestByEmail:
+  - acceptConnectionRequest:
+  - getConnections:
