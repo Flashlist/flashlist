@@ -27,16 +27,164 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'appUser',
       endpoint: endpoints['appUser']!,
       methodConnectors: {
-        'getCurrentUserObject': _i1.MethodConnector(
-          name: 'getCurrentUserObject',
+        'getCurrentUser': _i1.MethodConnector(
+          name: 'getCurrentUser',
           params: {},
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
               (endpoints['appUser'] as _i2.AppUserEndpoint)
-                  .getCurrentUserObject(session),
-        )
+                  .getCurrentUser(session),
+        ),
+        'getUserById': _i1.MethodConnector(
+          name: 'getUserById',
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).getUserById(
+            session,
+            params['userId'],
+          ),
+        ),
+        'getUserByUsername': _i1.MethodConnector(
+          name: 'getUserByUsername',
+          params: {
+            'username': _i1.ParameterDescription(
+              name: 'username',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).getUserByUsername(
+            session,
+            params['username'],
+          ),
+        ),
+        'getUserByEmail': _i1.MethodConnector(
+          name: 'getUserByEmail',
+          params: {
+            'email': _i1.ParameterDescription(
+              name: 'email',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).getUserByEmail(
+            session,
+            params['email'],
+          ),
+        ),
+        'getRequestById': _i1.MethodConnector(
+          name: 'getRequestById',
+          params: {
+            'requestId': _i1.ParameterDescription(
+              name: 'requestId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).getRequestById(
+            session,
+            params['requestId'],
+          ),
+        ),
+        'getRequestsForUser': _i1.MethodConnector(
+          name: 'getRequestsForUser',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint)
+                  .getRequestsForUser(session),
+        ),
+        'removeRequest': _i1.MethodConnector(
+          name: 'removeRequest',
+          params: {
+            'requestId': _i1.ParameterDescription(
+              name: 'requestId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).removeRequest(
+            session,
+            params['requestId'],
+          ),
+        ),
+        'sendConnectionRequestByEmail': _i1.MethodConnector(
+          name: 'sendConnectionRequestByEmail',
+          params: {
+            'email': _i1.ParameterDescription(
+              name: 'email',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint)
+                  .sendConnectionRequestByEmail(
+            session,
+            params['email'],
+          ),
+        ),
+        'acceptConnectionRequest': _i1.MethodConnector(
+          name: 'acceptConnectionRequest',
+          params: {
+            'requestId': _i1.ParameterDescription(
+              name: 'requestId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint)
+                  .acceptConnectionRequest(
+            session,
+            params['requestId'],
+          ),
+        ),
+        'getConnections': _i1.MethodConnector(
+          name: 'getConnections',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint)
+                  .getConnections(session),
+        ),
       },
     );
     modules['serverpod_auth'] = _i3.Endpoints()..initializeEndpoints(server);
