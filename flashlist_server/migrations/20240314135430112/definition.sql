@@ -12,6 +12,41 @@ CREATE TABLE "flashlist_app_user" (
 );
 
 --
+-- Class Notification as table flashlist_notification
+--
+CREATE TABLE "flashlist_notification" (
+    "id" serial PRIMARY KEY,
+    "userId" integer NOT NULL,
+    "requestId" integer NOT NULL,
+    "type" text NOT NULL,
+    "isRead" boolean NOT NULL,
+    "timestamp" timestamp without time zone NOT NULL
+);
+
+--
+-- Class UserRelation as table flashlist_user_relation
+--
+CREATE TABLE "flashlist_user_relation" (
+    "id" serial PRIMARY KEY,
+    "userId1" integer NOT NULL,
+    "userId2" integer NOT NULL,
+    "timestamp" timestamp without time zone NOT NULL,
+    "type" text NOT NULL
+);
+
+--
+-- Class UserRequest as table flashlist_user_request
+--
+CREATE TABLE "flashlist_user_request" (
+    "id" serial PRIMARY KEY,
+    "userId1" integer NOT NULL,
+    "userId2" integer NOT NULL,
+    "type" text NOT NULL,
+    "data" text,
+    "timestamp" timestamp without time zone NOT NULL
+);
+
+--
 -- Class AuthKey as table serverpod_auth_key
 --
 CREATE TABLE "serverpod_auth_key" (
@@ -336,7 +371,55 @@ ALTER TABLE ONLY "flashlist_app_user"
     ADD CONSTRAINT "flashlist_app_user_fk_0"
     FOREIGN KEY("userId")
     REFERENCES "serverpod_user_info"("id")
-    ON DELETE SET NULL
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+--
+-- Foreign relations for "flashlist_notification" table
+--
+ALTER TABLE ONLY "flashlist_notification"
+    ADD CONSTRAINT "flashlist_notification_fk_0"
+    FOREIGN KEY("userId")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE ONLY "flashlist_notification"
+    ADD CONSTRAINT "flashlist_notification_fk_1"
+    FOREIGN KEY("requestId")
+    REFERENCES "flashlist_user_request"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+--
+-- Foreign relations for "flashlist_user_relation" table
+--
+ALTER TABLE ONLY "flashlist_user_relation"
+    ADD CONSTRAINT "flashlist_user_relation_fk_0"
+    FOREIGN KEY("userId1")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE ONLY "flashlist_user_relation"
+    ADD CONSTRAINT "flashlist_user_relation_fk_1"
+    FOREIGN KEY("userId2")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+--
+-- Foreign relations for "flashlist_user_request" table
+--
+ALTER TABLE ONLY "flashlist_user_request"
+    ADD CONSTRAINT "flashlist_user_request_fk_0"
+    FOREIGN KEY("userId1")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE ONLY "flashlist_user_request"
+    ADD CONSTRAINT "flashlist_user_request_fk_1"
+    FOREIGN KEY("userId2")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
     ON UPDATE CASCADE;
 
 --
@@ -374,9 +457,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR flashlist
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('flashlist', '20240312175157010', now())
+    VALUES ('flashlist', '20240314135430112', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20240312175157010', "timestamp" = now();
+    DO UPDATE SET "version" = '20240314135430112', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod
