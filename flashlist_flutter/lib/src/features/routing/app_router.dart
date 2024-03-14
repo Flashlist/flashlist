@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
 import 'package:flashlist_flutter/src/features/authentication/presentation/auth_screen.dart';
 import 'package:flashlist_flutter/src/features/home/presentation/home_screen.dart';
-import 'package:flashlist_flutter/src/features/users/presentation/profile_screen.dart';
+import 'package:flashlist_flutter/src/features/users/presentation/screens/profile_screen.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 
 enum AppRoute {
