@@ -16,7 +16,7 @@ class AddFlashlistIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String svgString = '''
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#${isDarkThemeOf(context) ? 'ffffff' : '000000'}"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" style="enable-background:new 0 0 841.89 595.28;" xml:space="preserve" viewBox="171.18 92.74 166.34 160.13">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#${isDarkThemeOf(context) ? '000000' : 'ffffff'}"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" style="enable-background:new 0 0 841.89 595.28;" xml:space="preserve" viewBox="171.18 92.74 166.34 160.13">
         <g>
           <g>
             <polygon class="st0" points="212.53,230.11 171.18,230.11 171.18,92.74 212.53,92.74 212.53,103.11 181.54,103.11 181.54,219.75     212.53,219.75   "/>
