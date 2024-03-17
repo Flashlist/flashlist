@@ -35,11 +35,11 @@ final currentUserProvider = AutoDisposeFutureProvider<AppUser?>.internal(
 );
 
 typedef CurrentUserRef = AutoDisposeFutureProviderRef<AppUser?>;
-String _$connectionsHash() => r'8fb2f1b8552bd331129ea2a731c501727ca35371';
+String _$connectionsHash() => r'99c248a0741a9018ebfbb03ccc69651ecae3c334';
 
 /// See also [connections].
 @ProviderFor(connections)
-final connectionsProvider = AutoDisposeFutureProvider<List<AppUser>>.internal(
+final connectionsProvider = AutoDisposeFutureProvider<List<AppUser?>>.internal(
   connections,
   name: r'connectionsProvider',
   debugGetCreateSourceHash:
@@ -48,7 +48,7 @@ final connectionsProvider = AutoDisposeFutureProvider<List<AppUser>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef ConnectionsRef = AutoDisposeFutureProviderRef<List<AppUser>>;
+typedef ConnectionsRef = AutoDisposeFutureProviderRef<List<AppUser?>>;
 String _$pendingRequestsHash() => r'cea332daf44ce8fcea811430108bc7d5ebb9adb5';
 
 /// See also [pendingRequests].
