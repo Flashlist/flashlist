@@ -20,6 +20,10 @@ bool isDarkThemeOf(context) {
   return brightnessOf(context) == Brightness.dark;
 }
 
+MediaQueryData mediaQueryOf(context) {
+  return MediaQuery.of(context);
+}
+
 void showContextSnackBar(
   context, {
   required String message,
