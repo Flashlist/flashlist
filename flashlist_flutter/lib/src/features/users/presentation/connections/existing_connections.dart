@@ -24,7 +24,7 @@ class ExistingConnections extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final connection = connections[index];
 
-                return UserAvatarRow(username: connection.username);
+                return UserAvatarRow(username: connection!.username);
               },
             );
           },

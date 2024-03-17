@@ -56,7 +56,7 @@ Future<AppUser?> currentUser(CurrentUserRef ref) =>
     ref.watch(userControllerProvider).getCurrentUser();
 
 @riverpod
-Future<List<AppUser>> connections(ConnectionsRef ref) =>
+Future<List<AppUser?>> connections(ConnectionsRef ref) =>
     ref.watch(userControllerProvider).getConnections();
 
 @riverpod
