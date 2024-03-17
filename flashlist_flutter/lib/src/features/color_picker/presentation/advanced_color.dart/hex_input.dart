@@ -1,0 +1,63 @@
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
+import 'package:flashlist_flutter/src/features/color_picker/application/color_picker_controller.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class HexInput extends ConsumerWidget {
+  /// HexInput is a widget that allows the user to input a hex value
+  /// The hex value is then parsed and the color is updated
+  /// It uses the [ColorPickerController] to update the color
+  ///
+  const HexInput({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colorPickerController =
+        ref.watch(colorPickerControllerProvider.notifier);
+
+    final hexInputController = TextEditingController();
+
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: hexInputController,
+              onSubmitted: (value) {
+                colorPickerController.takeHex(value);
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                labelText: 'Hex',
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 2,
+          ),
+          Container(
+            width: Sizes.p42,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: colorSchemeOf(context).onBackground,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.numbers_sharp),
+              onPressed: () {
+                colorPickerController.takeHex(hexInputController.text);
+                // editModeController.toggleAdvancedColor();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
