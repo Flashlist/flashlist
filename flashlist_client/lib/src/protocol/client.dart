@@ -12,8 +12,9 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:flashlist_client/src/protocol/user/app_user.dart' as _i3;
 import 'package:flashlist_client/src/protocol/user/user_request.dart' as _i4;
-import 'package:serverpod_auth_client/module.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'package:flashlist_client/src/protocol/flashlist/flashlist.dart' as _i5;
+import 'package:serverpod_auth_client/module.dart' as _i6;
+import 'protocol.dart' as _i7;
 
 /// {@category Endpoint}
 class EndpointAppUser extends _i1.EndpointRef {
@@ -93,12 +94,54 @@ class EndpointAppUser extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointFlashlist extends _i1.EndpointRef {
+  EndpointFlashlist(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'flashlist';
+
+  _i2.Future<int?> getCurrentUserId() => caller.callServerEndpoint<int?>(
+        'flashlist',
+        'getCurrentUserId',
+        {},
+      );
+
+  _i2.Future<_i3.AppUser?> getCurrentUser() =>
+      caller.callServerEndpoint<_i3.AppUser?>(
+        'flashlist',
+        'getCurrentUser',
+        {},
+      );
+
+  _i2.Future<_i5.Flashlist> createFlashlist(_i5.Flashlist flashlist) =>
+      caller.callServerEndpoint<_i5.Flashlist>(
+        'flashlist',
+        'createFlashlist',
+        {'flashlist': flashlist},
+      );
+
+  _i2.Future<List<_i5.Flashlist>> getFlashlistsForUser() =>
+      caller.callServerEndpoint<List<_i5.Flashlist>>(
+        'flashlist',
+        'getFlashlistsForUser',
+        {},
+      );
+
+  _i2.Future<bool> deleteFlashlist(int flashlistId) =>
+      caller.callServerEndpoint<bool>(
+        'flashlist',
+        'deleteFlashlist',
+        {'flashlistId': flashlistId},
+      );
+}
+
 class _Modules {
   _Modules(Client client) {
-    auth = _i5.Caller(client);
+    auth = _i6.Caller(client);
   }
 
-  late final _i5.Caller auth;
+  late final _i6.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -110,22 +153,28 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i6.Protocol(),
+          _i7.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
         ) {
     appUser = EndpointAppUser(this);
+    flashlist = EndpointFlashlist(this);
     modules = _Modules(this);
   }
 
   late final EndpointAppUser appUser;
 
+  late final EndpointFlashlist flashlist;
+
   late final _Modules modules;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'appUser': appUser};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'appUser': appUser,
+        'flashlist': flashlist,
+      };
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
