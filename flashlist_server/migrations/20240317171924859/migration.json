@@ -3,6 +3,58 @@
     {
       "type": "createTable",
       "createTable": {
+        "name": "flashlist",
+        "dartName": "Flashlist",
+        "module": "flashlist",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 2,
+            "isNullable": false,
+            "columnDefault": "nextval('flashlist_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "uuid",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "title",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "color",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "flashlist_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    },
+    {
+      "type": "createTable",
+      "createTable": {
         "name": "flashlist_app_user",
         "dartName": "AppUser",
         "module": "flashlist",
@@ -58,6 +110,52 @@
         "indexes": [
           {
             "indexName": "flashlist_app_user_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "flashlist_flashlist_item",
+        "dartName": "FlashlistItem",
+        "module": "flashlist",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 2,
+            "isNullable": false,
+            "columnDefault": "nextval('flashlist_flashlist_item_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "name",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "orderNr",
+            "columnType": 2,
+            "isNullable": false,
+            "dartType": "int"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "flashlist_flashlist_item_pkey",
             "elements": [
               {
                 "type": 0,
@@ -149,6 +247,85 @@
         "indexes": [
           {
             "indexName": "flashlist_notification_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "flashlist_permission",
+        "dartName": "FlashlistPermission",
+        "module": "flashlist",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 2,
+            "isNullable": false,
+            "columnDefault": "nextval('flashlist_permission_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "userId",
+            "columnType": 2,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "flashlistId",
+            "columnType": 2,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "accessLevel",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "constraintName": "flashlist_permission_fk_0",
+            "columns": [
+              "userId"
+            ],
+            "referenceTable": "serverpod_user_info",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 4,
+            "onDelete": 4
+          },
+          {
+            "constraintName": "flashlist_permission_fk_1",
+            "columns": [
+              "flashlistId"
+            ],
+            "referenceTable": "flashlist",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 4,
+            "onDelete": 4
+          }
+        ],
+        "indexes": [
+          {
+            "indexName": "flashlist_permission_pkey",
             "elements": [
               {
                 "type": 0,
