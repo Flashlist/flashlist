@@ -9,3 +9,9 @@ appUser:
   - sendConnectionRequestByEmail:
   - acceptConnectionRequest:
   - getConnections:
+flashlist:
+  - getCurrentUserId:
+  - getCurrentUser:
+  - createFlashlist:
+  - getFlashlistsForUser:
+  - deleteFlashlist:
