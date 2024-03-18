@@ -1,0 +1,9 @@
+# Message for Flashlist-Stream
+# The initial message sent to the client from the server
+# After the client connected to the server via the websocket
+# Holds the collection of flashlists the user has access to
+# If collection is empty, it serves as a signal, that the loading process
+# has already finished and the user just doesn't have any lists.
+class: FlashlistBatch
+fields:
+  collection: List<Flashlist>

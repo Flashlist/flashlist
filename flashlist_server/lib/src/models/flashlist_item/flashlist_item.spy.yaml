@@ -1,0 +1,5 @@
+class: FlashlistItem
+table: flashlist_flashlist_item
+fields:
+  name: String
+  orderNr: int
