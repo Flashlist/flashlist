@@ -3,12 +3,31 @@ BEGIN;
 --
 -- ACTION CREATE TABLE
 --
+CREATE TABLE "flashlist" (
+    "id" serial PRIMARY KEY,
+    "uuid" text NOT NULL,
+    "title" text NOT NULL,
+    "color" text NOT NULL
+);
+
+--
+-- ACTION CREATE TABLE
+--
 CREATE TABLE "flashlist_app_user" (
     "id" serial PRIMARY KEY,
     "userId" integer NOT NULL,
     "username" text NOT NULL,
     "email" text NOT NULL,
     "imageSrc" text
+);
+
+--
+-- ACTION CREATE TABLE
+--
+CREATE TABLE "flashlist_flashlist_item" (
+    "id" serial PRIMARY KEY,
+    "name" text NOT NULL,
+    "orderNr" integer NOT NULL
 );
 
 --
@@ -21,6 +40,16 @@ CREATE TABLE "flashlist_notification" (
     "type" text NOT NULL,
     "isRead" boolean NOT NULL,
     "timestamp" timestamp without time zone NOT NULL
+);
+
+--
+-- ACTION CREATE TABLE
+--
+CREATE TABLE "flashlist_permission" (
+    "id" serial PRIMARY KEY,
+    "userId" integer NOT NULL,
+    "flashlistId" integer NOT NULL,
+    "accessLevel" text NOT NULL
 );
 
 --
@@ -393,6 +422,22 @@ ALTER TABLE ONLY "flashlist_notification"
 --
 -- ACTION CREATE FOREIGN KEY
 --
+ALTER TABLE ONLY "flashlist_permission"
+    ADD CONSTRAINT "flashlist_permission_fk_0"
+    FOREIGN KEY("userId")
+    REFERENCES "serverpod_user_info"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE ONLY "flashlist_permission"
+    ADD CONSTRAINT "flashlist_permission_fk_1"
+    FOREIGN KEY("flashlistId")
+    REFERENCES "flashlist"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+--
+-- ACTION CREATE FOREIGN KEY
+--
 ALTER TABLE ONLY "flashlist_user_relation"
     ADD CONSTRAINT "flashlist_user_relation_fk_0"
     FOREIGN KEY("userId1")
@@ -457,9 +502,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR flashlist
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('flashlist', '20240314135430112', now())
+    VALUES ('flashlist', '20240317171924859', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20240314135430112', "timestamp" = now();
+    DO UPDATE SET "version" = '20240317171924859', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

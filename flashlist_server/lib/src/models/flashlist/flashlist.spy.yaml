@@ -1,0 +1,7 @@
+class: Flashlist
+table: flashlist
+fields:
+  uuid: String
+  title: String
+  color: String
+  items: List<FlashlistItem?>?, !persist
