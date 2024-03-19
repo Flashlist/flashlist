@@ -1,42 +1,38 @@
-import 'package:flashlist_flutter/src/features/edit_mode/domain/edit_mode_state.dart';
+import 'package:flashlist_client/flashlist_client.dart';
+import 'package:flashlist_flutter/src/features/color_picker/application/color_picker_controller.dart';
+import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_mode_controller.g.dart';
 
-@riverpod
+/// A general controller for the edit mode.
+/// To be used from the Widget tree.
+/// When passing a Flashlist to [toggleEditMode] it opens the edit mode panel
+/// When passing null to [toggleEditMode] it closes the edit mode panel
+/// Edit Mode will also hold a text input for the Flashlist title.
+/// This should be handled here.
+class EditModeController {
+  EditModeController({required this.ref});
 
-/// State Notifier class for the edit mode
-/// Allows to manipulate the edit mode state through,
-/// [toggleEditMode], [startEditMode], [toggleAdvancedColor]
-/// It can be called from anywhere in the app and will update the state
-/// It will later have to hold a uuid or id to identify which flashlist is being edited
-class EditModeController extends _$EditModeController {
-  @override
-  EditModeState build() {
-    return const EditModeState(
-      isEditMode: false,
-      isAdvancedColorExpanded: false,
-    );
-  }
+  final Ref ref;
 
-  void toggleEditMode() {
-    state = state.copyWith(
-      isEditMode: !state.isEditMode,
-    );
-    if (state.isAdvancedColorExpanded) {
-      toggleAdvancedColor();
+  void toggleEditMode(Flashlist? flashlist) {
+    final editModePanelController =
+        ref.read(editModePanelControllerProvider.notifier);
+
+    final colorPickerController =
+        ref.read(colorPickerControllerProvider.notifier);
+
+    if (flashlist != null) {
+      colorPickerController.takeInt(int.parse(flashlist.color));
+      editModePanelController.togglePanel(flashlist.id);
+    } else {
+      editModePanelController.togglePanel(0);
     }
   }
-
-  void startEditMode() {
-    state = state.copyWith(
-      isEditMode: true,
-    );
-  }
-
-  void toggleAdvancedColor() {
-    state = state.copyWith(
-      isAdvancedColorExpanded: !state.isAdvancedColorExpanded,
-    );
-  }
 }
+
+@riverpod
+EditModeController editModeController(EditModeControllerRef ref) =>
+    EditModeController(ref: ref);
