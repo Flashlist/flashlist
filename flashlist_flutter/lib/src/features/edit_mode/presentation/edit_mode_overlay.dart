@@ -1,6 +1,6 @@
 import 'package:flashlist_flutter/src/features/color_picker/presentation/advanced_color.dart/advanced_color.dart';
 import 'package:flashlist_flutter/src/features/color_picker/presentation/color_slider.dart';
-import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_controller.dart';
+import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/presentation/edit_mode_controls.dart';
 import 'package:flashlist_flutter/src/shared/sliding_panel/presentation/sliding_panel.dart';
 import 'package:flashlist_flutter/src/shared/sliding_panel/presentation/sliding_panel_animator.dart';
@@ -21,8 +21,9 @@ class EditModeOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editMode = ref.watch(editModeControllerProvider);
-    final editModeController = ref.read(editModeControllerProvider.notifier);
+    final editMode = ref.watch(editModePanelControllerProvider);
+    final editModeController =
+        ref.watch(editModePanelControllerProvider.notifier);
 
     return SafeArea(
       child: Stack(
