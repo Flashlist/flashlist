@@ -1,6 +1,7 @@
-import 'package:flashlist_flutter/src/features/color_picker/domain/color_picker_state.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'package:flashlist_flutter/src/features/color_picker/domain/color_picker_state.dart';
 
 part 'color_picker_controller.g.dart';
 
@@ -41,6 +42,18 @@ class ColorPickerController extends _$ColorPickerController {
   void changeVValue(double value) {
     state = state.copyWith(
       vValue: value,
+    );
+  }
+
+  void takeInt(int value) {
+    final color = Color(value);
+    final hsvColor = HSVColor.fromColor(color);
+    state = state.copyWith(
+      hue: hsvColor.hue,
+      saturation: hsvColor.saturation,
+      vValue: hsvColor.value,
+      color: hsvColor,
+      colorHexValue: color.value.toRadixString(16).substring(2),
     );
   }
 

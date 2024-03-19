@@ -7,13 +7,13 @@ part of 'edit_mode_controller.dart';
 // **************************************************************************
 
 String _$editModeControllerHash() =>
-    r'715f810c51dd26d4aed642e2e0431e73fa64126c';
+    r'4c4a8d0057284484def7fa132033db213e6f8879';
 
-/// See also [EditModeController].
-@ProviderFor(EditModeController)
+/// See also [editModeController].
+@ProviderFor(editModeController)
 final editModeControllerProvider =
-    AutoDisposeNotifierProvider<EditModeController, EditModeState>.internal(
-  EditModeController.new,
+    AutoDisposeProvider<EditModeController>.internal(
+  editModeController,
   name: r'editModeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -22,6 +22,6 @@ final editModeControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$EditModeController = AutoDisposeNotifier<EditModeState>;
+typedef EditModeControllerRef = AutoDisposeProviderRef<EditModeController>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

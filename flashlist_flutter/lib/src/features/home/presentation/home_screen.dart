@@ -1,6 +1,6 @@
 import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/branding/add_flashlist.dart';
-import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_controller.dart';
+import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/presentation/edit_mode_overlay.dart';
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_collection.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editModeController = ref.watch(editModeControllerProvider);
+    final editModeController = ref.watch(editModePanelControllerProvider);
     final flashlistController = ref.watch(flashlistControllerProvider);
 
     return Scaffold(
