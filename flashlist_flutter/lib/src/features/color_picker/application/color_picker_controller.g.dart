@@ -7,9 +7,17 @@ part of 'color_picker_controller.dart';
 // **************************************************************************
 
 String _$colorPickerControllerHash() =>
-    r'ef801439364d7afe9ec55b1c6b7c98884f8e9afb';
+    r'c46d32cd436c6e340470b1b09eb3f146543bfe3d';
 
-/// See also [ColorPickerController].
+/// State Notifier class for the color picker
+///
+/// Allows to manipulate the color picker state through,
+///
+/// [changeAlpha], [changeHue], [changeSaturation], [changeVValue], [takeHex]
+///
+/// It can be called from anywhere in the app and will update the state
+///
+/// Copied from [ColorPickerController].
 @ProviderFor(ColorPickerController)
 final colorPickerControllerProvider = AutoDisposeNotifierProvider<
     ColorPickerController, ColorPickerState>.internal(
