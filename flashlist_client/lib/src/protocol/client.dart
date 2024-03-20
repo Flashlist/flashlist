@@ -13,8 +13,10 @@ import 'dart:async' as _i2;
 import 'package:flashlist_client/src/protocol/user/app_user.dart' as _i3;
 import 'package:flashlist_client/src/protocol/user/user_request.dart' as _i4;
 import 'package:flashlist_client/src/protocol/flashlist/flashlist.dart' as _i5;
-import 'package:serverpod_auth_client/module.dart' as _i6;
-import 'protocol.dart' as _i7;
+import 'package:flashlist_client/src/protocol/flashlist/stream_messages/update_flashlist.dart'
+    as _i6;
+import 'package:serverpod_auth_client/module.dart' as _i7;
+import 'protocol.dart' as _i8;
 
 /// {@category Endpoint}
 class EndpointAppUser extends _i1.EndpointRef {
@@ -101,19 +103,9 @@ class EndpointFlashlist extends _i1.EndpointRef {
   @override
   String get name => 'flashlist';
 
-  _i2.Future<int?> getCurrentUserId() => caller.callServerEndpoint<int?>(
-        'flashlist',
-        'getCurrentUserId',
-        {},
-      );
-
-  _i2.Future<_i3.AppUser?> getCurrentUser() =>
-      caller.callServerEndpoint<_i3.AppUser?>(
-        'flashlist',
-        'getCurrentUser',
-        {},
-      );
-
+  /// Creates a new flashlist from the given [flashlist] object.
+  /// Also creates a new permission for the currently authenticated user
+  /// with access level 'owner'.
   _i2.Future<_i5.Flashlist> createFlashlist(_i5.Flashlist flashlist) =>
       caller.callServerEndpoint<_i5.Flashlist>(
         'flashlist',
@@ -121,6 +113,8 @@ class EndpointFlashlist extends _i1.EndpointRef {
         {'flashlist': flashlist},
       );
 
+  /// Returns all flashlists that the currently authenticated user has permission to view.
+  /// Returns an empty list if the user has no permissions.
   _i2.Future<List<_i5.Flashlist>> getFlashlistsForUser() =>
       caller.callServerEndpoint<List<_i5.Flashlist>>(
         'flashlist',
@@ -128,20 +122,42 @@ class EndpointFlashlist extends _i1.EndpointRef {
         {},
       );
 
+  /// Returns the flashlist with the given [flashlistId].
+  /// Throws an exception if the user does not have permission to view the flashlist.
+  /// Returns null if the flashlist does not exist.
+  _i2.Future<_i5.Flashlist?> getFlashlistById(int flashlistId) =>
+      caller.callServerEndpoint<_i5.Flashlist?>(
+        'flashlist',
+        'getFlashlistById',
+        {'flashlistId': flashlistId},
+      );
+
+  /// Deletes the flashlist with the given [flashlistId].
+  /// Throws an exception if the user does not have permission to delete the flashlist.
   _i2.Future<bool> deleteFlashlist(int flashlistId) =>
       caller.callServerEndpoint<bool>(
         'flashlist',
         'deleteFlashlist',
         {'flashlistId': flashlistId},
       );
+
+  /// Updates the flashlist with [id] matching the [update] object.
+  /// Throws an exception if the user does not have permission to update the flashlist.
+  /// Returns the updated flashlist if successful.
+  _i2.Future<_i5.Flashlist> updateFlashlist(_i6.UpdateFlashlist update) =>
+      caller.callServerEndpoint<_i5.Flashlist>(
+        'flashlist',
+        'updateFlashlist',
+        {'update': update},
+      );
 }
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i6.Caller(client);
+    auth = _i7.Caller(client);
   }
 
-  late final _i6.Caller auth;
+  late final _i7.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -153,7 +169,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i7.Protocol(),
+          _i8.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

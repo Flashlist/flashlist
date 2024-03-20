@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/features/color_picker/application/color_picker_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_mode_controller.g.dart';
 
@@ -25,7 +27,10 @@ class EditModeController {
         ref.read(colorPickerControllerProvider.notifier);
 
     if (flashlist != null) {
+      // To properly update this is called here and in the flashlist-card
+      // TODO: refactor edit-mode-controller
       colorPickerController.takeInt(int.parse(flashlist.color));
+
       editModePanelController.togglePanel(flashlist.id);
     } else {
       editModePanelController.togglePanel(0);
@@ -34,5 +39,13 @@ class EditModeController {
 }
 
 @riverpod
+
+/// Provider for the editModeController
 EditModeController editModeController(EditModeControllerRef ref) =>
     EditModeController(ref: ref);
+
+@riverpod
+TextEditingController flashlistTitleInputController(
+    FlashlistTitleInputControllerRef ref) {
+  return TextEditingController();
+}

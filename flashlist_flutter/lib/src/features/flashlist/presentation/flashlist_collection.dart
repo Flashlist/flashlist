@@ -1,9 +1,12 @@
-import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
-import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_card.dart';
-import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
+import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_card.dart';
+import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
+
+/// An independent Widget reading the [flashlistForUserProvider] (Stream)
+/// and displaying the flashlists in a list.
 class FlashlistCollection extends ConsumerWidget {
   const FlashlistCollection({super.key});
 

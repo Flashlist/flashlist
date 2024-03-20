@@ -6,7 +6,9 @@ import 'package:flashlist_flutter/src/features/color_picker/application/color_pi
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
+import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_title.dart';
 
+/// A widget to display a single flashlist
 class FlashlistCard extends ConsumerWidget {
   const FlashlistCard({super.key, required this.flashlist});
 
@@ -14,17 +16,23 @@ class FlashlistCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editMode = ref.watch(editModePanelControllerProvider);
-    // final editModeController =
-    //     ref.watch(editModePanelControllerProvider.notifier);
+    final editModePanel = ref.watch(editModePanelControllerProvider);
 
     final colorPicker = ref.watch(colorPickerControllerProvider);
-    // final colorPickerController =
-    //     ref.watch(colorPickerControllerProvider.notifier);
 
-    final flashlistColor = editMode.flashlistInEditMode == flashlist.id
+    final flashlistColor = editModePanel.flashlistInEditMode == flashlist.id
         ? colorPicker.color.toColor()
         : Color(int.parse(flashlist.color));
+
+    // This function will launch the edit mode for the flashlist
+    // TODO: Implement this cleaner
+    void launchEditModeForFlashlist() {
+      ref.read(flashlistTitleInputControllerProvider).text = flashlist.title;
+      ref
+          .read(colorPickerControllerProvider.notifier)
+          .takeInt(int.parse(flashlist.color));
+      ref.read(editModeControllerProvider).toggleEditMode(flashlist);
+    }
 
     return AnimatedContainer(
       margin: const EdgeInsets.all(8),
@@ -49,15 +57,13 @@ class FlashlistCard extends ConsumerWidget {
                   },
                   icon: const Icon(Icons.delete),
                 ),
-                Text(flashlist.title),
+                FlashlistTitle(
+                  flashlist: flashlist,
+                ),
                 IconButton(
-                  onPressed: editMode.isEditMode
+                  onPressed: editModePanel.isEditMode
                       ? null
-                      : () {
-                          ref
-                              .read(editModeControllerProvider)
-                              .toggleEditMode(flashlist);
-                        },
+                      : launchEditModeForFlashlist,
                   icon: const Icon(Icons.edit),
                 ),
               ],
