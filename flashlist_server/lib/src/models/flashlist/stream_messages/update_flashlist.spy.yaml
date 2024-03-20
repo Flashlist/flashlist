@@ -1,0 +1,5 @@
+class: UpdateFlashlist
+fields:
+  id: int
+  title: String?
+  color: String?
