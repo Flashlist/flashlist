@@ -7,13 +7,14 @@ part of 'edit_mode_panel_controller.dart';
 // **************************************************************************
 
 String _$editModePanelControllerHash() =>
-    r'0475df0b06cd3db25071a01270310df011a07a77';
+    r'9dfb6bf284e9d40903bd68c1928d273dd4992862';
 
 /// State Notifier class for the EditModePanel
+/// EditModePanel utilizes lib/src/shared/sliding_panel to build EditModeOverlay
 /// Allows to manipulate the EditModePanel state through,
-/// [toggleEditMode],  [toggleAdvancedColor]
+/// [togglePanel],  [toggleAdvancedColor]
 /// It can be called from anywhere in the app and will update the state
-/// Holds the ID of the flashlist in edit mode
+/// Holds the ID of the flashlist in edit mode if no flashlist is in edit mode it will be 0
 ///
 /// Copied from [EditModePanelController].
 @ProviderFor(EditModePanelController)
