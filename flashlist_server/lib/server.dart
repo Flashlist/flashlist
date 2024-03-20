@@ -41,6 +41,7 @@ void run(List<String> args) async {
       sendPasswordResetEmail: (session, userInfo, validationCode) async {
         // Send the password reset email to the user.
         // Return `true` if the email was successfully sent, otherwise `false`.
+        print(validationCode);
         return true;
       },
       onUserCreated: (session, userInfo) {
