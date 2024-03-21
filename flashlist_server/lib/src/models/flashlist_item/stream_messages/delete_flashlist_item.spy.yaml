@@ -1,0 +1,7 @@
+# Message for Flashlist-Stream
+# This message informs the Flashlist-Stream to delete an item from the flashlist
+# The item is identified by its id
+class: DeleteFlashlistItem
+fields:
+  id: int
+  parentId: int
