@@ -14,12 +14,14 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
   FlashlistItem._({
     this.id,
     required this.name,
+    required this.parentId,
     required this.orderNr,
   });
 
   factory FlashlistItem({
     int? id,
     required String name,
+    required int parentId,
     required int orderNr,
   }) = _FlashlistItemImpl;
 
@@ -30,6 +32,8 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
     return FlashlistItem(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
+      parentId:
+          serializationManager.deserialize<int>(jsonSerialization['parentId']),
       orderNr:
           serializationManager.deserialize<int>(jsonSerialization['orderNr']),
     );
@@ -42,11 +46,14 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
 
   String name;
 
+  int parentId;
+
   int orderNr;
 
   FlashlistItem copyWith({
     int? id,
     String? name,
+    int? parentId,
     int? orderNr,
   });
   @override
@@ -54,6 +61,7 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'parentId': parentId,
       'orderNr': orderNr,
     };
   }
@@ -65,10 +73,12 @@ class _FlashlistItemImpl extends FlashlistItem {
   _FlashlistItemImpl({
     int? id,
     required String name,
+    required int parentId,
     required int orderNr,
   }) : super._(
           id: id,
           name: name,
+          parentId: parentId,
           orderNr: orderNr,
         );
 
@@ -76,11 +86,13 @@ class _FlashlistItemImpl extends FlashlistItem {
   FlashlistItem copyWith({
     Object? id = _Undefined,
     String? name,
+    int? parentId,
     int? orderNr,
   }) {
     return FlashlistItem(
       id: id is int? ? id : this.id,
       name: name ?? this.name,
+      parentId: parentId ?? this.parentId,
       orderNr: orderNr ?? this.orderNr,
     );
   }
