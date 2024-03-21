@@ -43,6 +43,21 @@ class FlashlistController {
       await client.flashlist.sendStreamMessage(update);
     }
   }
+
+  Future<void> createFlashlistItem(FlashlistItem flashlistItem) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(flashlistItem);
+  }
+
+  Future<void> deleteFlashlistItem(DeleteFlashlistItem itemToDelete) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(itemToDelete);
+  }
+
+  Future<void> reOrderFlashlistItems(ReOrderFlashlistItem reOrder) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(reOrder);
+  }
 }
 
 @riverpod
@@ -57,6 +72,8 @@ Future<Flashlist?> flashlistById(FlashlistByIdRef ref, int flashlistId) async {
 @riverpod
 Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
   final client = ref.watch(clientProvider);
+
+  client.flashlist.resetStream();
 
   await client.openStreamingConnection();
 
