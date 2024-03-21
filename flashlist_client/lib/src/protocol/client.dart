@@ -15,8 +15,12 @@ import 'package:flashlist_client/src/protocol/user/user_request.dart' as _i4;
 import 'package:flashlist_client/src/protocol/flashlist/flashlist.dart' as _i5;
 import 'package:flashlist_client/src/protocol/flashlist/stream_messages/update_flashlist.dart'
     as _i6;
-import 'package:serverpod_auth_client/module.dart' as _i7;
-import 'protocol.dart' as _i8;
+import 'package:flashlist_client/src/protocol/flashlist_item/flashlist_item.dart'
+    as _i7;
+import 'package:flashlist_client/src/protocol/flashlist_item/stream_messages/delete_flashlist_item.dart'
+    as _i8;
+import 'package:serverpod_auth_client/module.dart' as _i9;
+import 'protocol.dart' as _i10;
 
 /// {@category Endpoint}
 class EndpointAppUser extends _i1.EndpointRef {
@@ -150,14 +154,34 @@ class EndpointFlashlist extends _i1.EndpointRef {
         'updateFlashlist',
         {'update': update},
       );
+
+  /// Creates a new flashlist item from the given [flashlistItem] object.
+  /// Returns the created flashlist item if successful.
+  _i2.Future<_i7.FlashlistItem> createFlashlistItem(
+          _i7.FlashlistItem flashlistItem) =>
+      caller.callServerEndpoint<_i7.FlashlistItem>(
+        'flashlist',
+        'createFlashlistItem',
+        {'flashlistItem': flashlistItem},
+      );
+
+  /// Deletes the flashlist item with the given [flashlistItemId].
+  /// Returns true if successful.
+  _i2.Future<bool> deleteFlashlistItem(
+          _i8.DeleteFlashlistItem deleteItemObject) =>
+      caller.callServerEndpoint<bool>(
+        'flashlist',
+        'deleteFlashlistItem',
+        {'deleteItemObject': deleteItemObject},
+      );
 }
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i7.Caller(client);
+    auth = _i9.Caller(client);
   }
 
-  late final _i7.Caller auth;
+  late final _i9.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -169,7 +193,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i8.Protocol(),
+          _i10.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

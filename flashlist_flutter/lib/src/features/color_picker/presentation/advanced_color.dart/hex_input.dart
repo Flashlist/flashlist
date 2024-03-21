@@ -1,5 +1,6 @@
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/color_picker/application/color_picker_controller.dart';
+import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,8 +52,12 @@ class HexInput extends ConsumerWidget {
             child: IconButton(
               icon: const Icon(Icons.numbers_sharp),
               onPressed: () {
+                // TODO - Fix this bug
                 colorPickerController.takeHex(hexInputController.text);
-                // editModeController.toggleAdvancedColor();
+                colorPickerController.takeHex(hexInputController.text);
+                ref
+                    .read(editModePanelControllerProvider.notifier)
+                    .toggleAdvancedColor();
               },
             ),
           ),

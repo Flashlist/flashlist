@@ -14,7 +14,11 @@ import '../endpoints/flashlist_endpoint.dart' as _i3;
 import 'package:flashlist_server/src/generated/flashlist/flashlist.dart' as _i4;
 import 'package:flashlist_server/src/generated/flashlist/stream_messages/update_flashlist.dart'
     as _i5;
-import 'package:serverpod_auth_server/module.dart' as _i6;
+import 'package:flashlist_server/src/generated/flashlist_item/flashlist_item.dart'
+    as _i6;
+import 'package:flashlist_server/src/generated/flashlist_item/stream_messages/delete_flashlist_item.dart'
+    as _i7;
+import 'package:serverpod_auth_server/module.dart' as _i8;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -284,8 +288,46 @@ class Endpoints extends _i1.EndpointDispatch {
             params['update'],
           ),
         ),
+        'createFlashlistItem': _i1.MethodConnector(
+          name: 'createFlashlistItem',
+          params: {
+            'flashlistItem': _i1.ParameterDescription(
+              name: 'flashlistItem',
+              type: _i1.getType<_i6.FlashlistItem>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
+                  .createFlashlistItem(
+            session,
+            params['flashlistItem'],
+          ),
+        ),
+        'deleteFlashlistItem': _i1.MethodConnector(
+          name: 'deleteFlashlistItem',
+          params: {
+            'deleteItemObject': _i1.ParameterDescription(
+              name: 'deleteItemObject',
+              type: _i1.getType<_i7.DeleteFlashlistItem>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
+                  .deleteFlashlistItem(
+            session,
+            params['deleteItemObject'],
+          ),
+        ),
       },
     );
-    modules['serverpod_auth'] = _i6.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i8.Endpoints()..initializeEndpoints(server);
   }
 }

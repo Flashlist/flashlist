@@ -139,13 +139,33 @@
           "dartType": "String"
         },
         {
+          "name": "parentId",
+          "columnType": 2,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
           "name": "orderNr",
           "columnType": 2,
           "isNullable": false,
           "dartType": "int"
         }
       ],
-      "foreignKeys": [],
+      "foreignKeys": [
+        {
+          "constraintName": "flashlist_flashlist_item_fk_0",
+          "columns": [
+            "parentId"
+          ],
+          "referenceTable": "flashlist",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 4,
+          "onDelete": 4
+        }
+      ],
       "indexes": [
         {
           "indexName": "flashlist_flashlist_item_pkey",
@@ -2189,7 +2209,7 @@
   "installedModules": [
     {
       "module": "flashlist",
-      "version": "20240317171924859"
+      "version": "20240320203541853"
     },
     {
       "module": "serverpod",

@@ -2,4 +2,5 @@ class: FlashlistItem
 table: flashlist_flashlist_item
 fields:
   name: String
+  parentId: int, relation(parent = flashlist, onUpdate = CASCADE, onDelete = CASCADE)
   orderNr: int

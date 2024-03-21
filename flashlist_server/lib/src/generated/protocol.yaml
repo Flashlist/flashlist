@@ -15,3 +15,5 @@ flashlist:
   - getFlashlistById:
   - deleteFlashlist:
   - updateFlashlist:
+  - createFlashlistItem:
+  - deleteFlashlistItem:

@@ -1,3 +1,5 @@
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,24 +30,38 @@ class FlashlistTitle extends ConsumerWidget {
             editModePanel.flashlistInEditMode == flashlist.id
         ? Expanded(
             child: SizedBox(
-            height: 35,
-            child: TextField(
-              onChanged: (value) {
-                textEditingController.text = value;
-              },
-              onSubmitted: (value) {
-                textEditingController.text = value;
-              },
-              textAlign: TextAlign.center,
-              controller: textEditingController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
+              height: Sizes.p42,
+              child: TextField(
+                style: TextStyle(
+                  color: colorSchemeOf(context).onBackground,
+                  fontSize: Sizes.p24,
+                  fontWeight: FontWeight.bold,
                 ),
-                labelText: 'Title',
+                onChanged: (value) {
+                  textEditingController.text = value;
+                },
+                onSubmitted: (value) {
+                  textEditingController.text = value;
+                },
+                textAlign: TextAlign.center,
+                textAlignVertical: TextAlignVertical.top,
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  labelText: 'Title',
+                ),
               ),
             ),
-          ))
-        : Text(flashlist.title);
+          )
+        : Text(
+            flashlist.title,
+            style: TextStyle(
+              color: colorSchemeOf(context).onBackground,
+              fontSize: Sizes.p24,
+              fontWeight: FontWeight.bold,
+            ),
+          );
   }
 }

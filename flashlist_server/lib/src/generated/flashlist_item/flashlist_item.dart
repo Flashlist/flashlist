@@ -14,12 +14,14 @@ abstract class FlashlistItem extends _i1.TableRow {
   FlashlistItem._({
     int? id,
     required this.name,
+    required this.parentId,
     required this.orderNr,
   }) : super(id);
 
   factory FlashlistItem({
     int? id,
     required String name,
+    required int parentId,
     required int orderNr,
   }) = _FlashlistItemImpl;
 
@@ -30,6 +32,8 @@ abstract class FlashlistItem extends _i1.TableRow {
     return FlashlistItem(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
+      parentId:
+          serializationManager.deserialize<int>(jsonSerialization['parentId']),
       orderNr:
           serializationManager.deserialize<int>(jsonSerialization['orderNr']),
     );
@@ -41,6 +45,8 @@ abstract class FlashlistItem extends _i1.TableRow {
 
   String name;
 
+  int parentId;
+
   int orderNr;
 
   @override
@@ -49,6 +55,7 @@ abstract class FlashlistItem extends _i1.TableRow {
   FlashlistItem copyWith({
     int? id,
     String? name,
+    int? parentId,
     int? orderNr,
   });
   @override
@@ -56,6 +63,7 @@ abstract class FlashlistItem extends _i1.TableRow {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'parentId': parentId,
       'orderNr': orderNr,
     };
   }
@@ -66,6 +74,7 @@ abstract class FlashlistItem extends _i1.TableRow {
     return {
       'id': id,
       'name': name,
+      'parentId': parentId,
       'orderNr': orderNr,
     };
   }
@@ -75,6 +84,7 @@ abstract class FlashlistItem extends _i1.TableRow {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'parentId': parentId,
       'orderNr': orderNr,
     };
   }
@@ -91,6 +101,9 @@ abstract class FlashlistItem extends _i1.TableRow {
         return;
       case 'name':
         name = value;
+        return;
+      case 'parentId':
+        parentId = value;
         return;
       case 'orderNr':
         orderNr = value;
@@ -248,10 +261,12 @@ class _FlashlistItemImpl extends FlashlistItem {
   _FlashlistItemImpl({
     int? id,
     required String name,
+    required int parentId,
     required int orderNr,
   }) : super._(
           id: id,
           name: name,
+          parentId: parentId,
           orderNr: orderNr,
         );
 
@@ -259,11 +274,13 @@ class _FlashlistItemImpl extends FlashlistItem {
   FlashlistItem copyWith({
     Object? id = _Undefined,
     String? name,
+    int? parentId,
     int? orderNr,
   }) {
     return FlashlistItem(
       id: id is int? ? id : this.id,
       name: name ?? this.name,
+      parentId: parentId ?? this.parentId,
       orderNr: orderNr ?? this.orderNr,
     );
   }
@@ -276,6 +293,10 @@ class FlashlistItemTable extends _i1.Table {
       'name',
       this,
     );
+    parentId = _i1.ColumnInt(
+      'parentId',
+      this,
+    );
     orderNr = _i1.ColumnInt(
       'orderNr',
       this,
@@ -284,12 +305,15 @@ class FlashlistItemTable extends _i1.Table {
 
   late final _i1.ColumnString name;
 
+  late final _i1.ColumnInt parentId;
+
   late final _i1.ColumnInt orderNr;
 
   @override
   List<_i1.Column> get columns => [
         id,
         name,
+        parentId,
         orderNr,
       ];
 }

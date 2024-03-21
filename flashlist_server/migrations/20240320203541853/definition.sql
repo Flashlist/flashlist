@@ -27,6 +27,7 @@ CREATE TABLE "flashlist_app_user" (
 CREATE TABLE "flashlist_flashlist_item" (
     "id" serial PRIMARY KEY,
     "name" text NOT NULL,
+    "parentId" integer NOT NULL,
     "orderNr" integer NOT NULL
 );
 
@@ -404,6 +405,16 @@ ALTER TABLE ONLY "flashlist_app_user"
     ON UPDATE CASCADE;
 
 --
+-- Foreign relations for "flashlist_flashlist_item" table
+--
+ALTER TABLE ONLY "flashlist_flashlist_item"
+    ADD CONSTRAINT "flashlist_flashlist_item_fk_0"
+    FOREIGN KEY("parentId")
+    REFERENCES "flashlist"("id")
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+--
 -- Foreign relations for "flashlist_notification" table
 --
 ALTER TABLE ONLY "flashlist_notification"
@@ -502,9 +513,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR flashlist
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('flashlist', '20240317171924859', now())
+    VALUES ('flashlist', '20240320203541853', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20240317171924859', "timestamp" = now();
+    DO UPDATE SET "version" = '20240320203541853', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

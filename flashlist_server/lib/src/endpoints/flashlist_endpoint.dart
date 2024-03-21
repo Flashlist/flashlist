@@ -112,6 +112,18 @@ class FlashlistEndpoint extends Endpoint {
         where: (flashlist) => flashlist.id.inSet(permissionsForUserIds),
       );
 
+      final flashlistItemsCollection = await FlashlistItem.db.find(
+        session,
+        where: (item) => item.parentId.inSet(permissionsForUserIds),
+      );
+
+      for (final flashlist in flashlistCollection) {
+        flashlist.items = flashlistItemsCollection
+            .where((item) => item.parentId == flashlist.id)
+            .toList();
+        flashlist.items!.sort((a, b) => a!.orderNr.compareTo(b!.orderNr));
+      }
+
       return flashlistCollection;
     } catch (e) {
       throw Exception('Failed to get flashlists for user: $e');
@@ -205,11 +217,118 @@ class FlashlistEndpoint extends Endpoint {
     }
   }
 
+  /// Creates a new flashlist item from the given [flashlistItem] object.
+  /// Returns the created flashlist item if successful.
+  Future<FlashlistItem> createFlashlistItem(
+    Session session,
+    FlashlistItem flashlistItem,
+  ) async {
+    try {
+      return await FlashlistItem.db.insertRow(session, flashlistItem);
+    } catch (e) {
+      throw Exception('Failed to create flashlist item: $e');
+    }
+  }
+
+  /// Updates the orderNr for all siblings of the given [flashlistItem].
+  /// If [newOrderNr] is null, the item is being deleted and the orderNr for all
+  /// siblings coming after the item should be reduced by 1.
+  /// If [newOrderNr] is not null, the item is being moved and the orderNr for all
+  /// siblings coming after the item should be increased or decreased accordingly.
+  Future<void> _updateOrderNrForSiblings(
+    Session session,
+    FlashlistItem flashlistItem,
+    int? newOrderNr,
+  ) async {
+    final flashlistItems = await FlashlistItem.db.find(session,
+        where: (currentItem) =>
+            currentItem.parentId.equals(flashlistItem.parentId));
+
+    if (newOrderNr == null) {
+      // Item is being deleted, reduce orderNr for all siblings coming after
+      for (var currentItem in flashlistItems) {
+        if (currentItem.orderNr >= flashlistItem.orderNr &&
+            currentItem.id != flashlistItem.id) {
+          await FlashlistItem.db.updateRow(
+            session,
+            currentItem.copyWith(orderNr: currentItem.orderNr - 1),
+          );
+        }
+      }
+    } else {
+      // Item is being moved
+      int oldOrderNr = flashlistItem.orderNr;
+      for (var currentItem in flashlistItems) {
+        if (currentItem.id != flashlistItem.id) {
+          if (oldOrderNr < newOrderNr &&
+              currentItem.orderNr > oldOrderNr &&
+              currentItem.orderNr <= newOrderNr) {
+            // Item is moving down the list, decrease the orderNr of every following item by 1
+            await FlashlistItem.db.updateRow(
+              session,
+              currentItem.copyWith(orderNr: currentItem.orderNr - 1),
+            );
+          } else if (oldOrderNr > newOrderNr &&
+              currentItem.orderNr < oldOrderNr &&
+              currentItem.orderNr >= newOrderNr) {
+            // Item is moving up the list, increase the orderNr of every preceding item by 1
+            await FlashlistItem.db.updateRow(
+              session,
+              currentItem.copyWith(orderNr: currentItem.orderNr + 1),
+            );
+          }
+        }
+      }
+      // Finally, update the orderNr of the moved item
+      await FlashlistItem.db.updateRow(
+        session,
+        flashlistItem.copyWith(orderNr: newOrderNr),
+      );
+    }
+  }
+
+  /// Deletes the flashlist item with the given [flashlistItemId].
+  /// Returns true if successful.
+  Future<bool> deleteFlashlistItem(
+    Session session,
+    DeleteFlashlistItem deleteItemObject,
+  ) async {
+    try {
+      final flashlistItemToDelete = await FlashlistItem.db.findFirstRow(
+        session,
+        where: (item) => item.id.equals(deleteItemObject.id),
+      );
+
+      if (flashlistItemToDelete == null) {
+        throw Exception('Flashlist item does not exist');
+      }
+
+      await FlashlistItem.db.deleteRow(
+        session,
+        flashlistItemToDelete,
+      );
+
+      await _updateOrderNrForSiblings(
+        session,
+        flashlistItemToDelete,
+        null,
+      );
+
+      return true;
+    } catch (e) {
+      throw Exception('Failed to delete flashlist item: $e');
+    }
+  }
+
   /// Parses the channel name for the currently authenticated user.
   /// To be used in StreamingSessions.
-  Future<String> _parseChannelName(Session session) async {
+  Future<String> _parseUserChannelName(Session session) async {
     final id = await session.auth.authenticatedUserId;
     return 'channel-flashlist-user-$id';
+  }
+
+  String _parseListChannelName(int listId) {
+    return 'flashlist-channel-$listId';
   }
 
   @override
@@ -218,7 +337,7 @@ class FlashlistEndpoint extends Endpoint {
       final currentUser = await _getCurrentUser(session);
       setUserObject(session, currentUser);
 
-      final channelName = await _parseChannelName(session);
+      final channelName = await _parseUserChannelName(session);
 
       final flashlists = await getFlashlistsForUser(session);
 
@@ -227,6 +346,13 @@ class FlashlistEndpoint extends Endpoint {
       session.messages.addListener(channelName, (message) {
         sendStreamMessage(session, message);
       });
+
+      for (final flashlist in flashlists) {
+        session.messages.addListener(_parseListChannelName(flashlist.id!),
+            (message) {
+          sendStreamMessage(session, message);
+        });
+      }
     } catch (e) {
       print('Failed to open stream: $e');
     }
@@ -234,23 +360,60 @@ class FlashlistEndpoint extends Endpoint {
 
   @override
   Future<void> handleStreamMessage(
-      StreamingSession session, SerializableEntity message) async {
-    final channelName = await _parseChannelName(session);
+    StreamingSession session,
+    SerializableEntity message,
+  ) async {
+    final userChannel = await _parseUserChannelName(session);
 
     if (message is Flashlist) {
       final flashlist = await createFlashlist(session, message);
-      session.messages.postMessage(channelName, flashlist);
+
+      session.messages.addListener('flashlist-channel-${message.id}',
+          (message) {
+        sendStreamMessage(session, message);
+      });
+
+      session.messages.postMessage(userChannel, flashlist);
     }
 
     if (message is DeleteFlashlist) {
       await deleteFlashlist(session, message.flashlistId);
-      session.messages.postMessage(channelName, message);
+      session.messages.postMessage(userChannel, message);
+
+      session.messages.removeListener(
+        _parseListChannelName(message.flashlistId),
+        (message) {
+          sendStreamMessage(session, message);
+        },
+      );
     }
 
     if (message is UpdateFlashlist) {
       await updateFlashlist(session, message);
 
-      session.messages.postMessage(channelName, message);
+      session.messages.postMessage('flashlist-channel-${message.id}', message);
+    }
+
+    if (message is FlashlistItem) {
+      final flashlistItem = await createFlashlistItem(session, message);
+      session.messages
+          .postMessage(_parseListChannelName(message.parentId), flashlistItem);
+    }
+
+    if (message is DeleteFlashlistItem) {
+      await deleteFlashlistItem(session, message);
+      session.messages
+          .postMessage(_parseListChannelName(message.parentId), message);
+    }
+
+    if (message is ReOrderFlashlistItem) {
+      final reOrder = await FlashlistItem.db.findFirstRow(
+        session,
+        where: (item) => item.id.equals(message.id),
+      );
+      await _updateOrderNrForSiblings(session, reOrder!, message.newOrderNr!);
+      session.messages
+          .postMessage(_parseListChannelName(message.parentId), message);
     }
   }
 }
