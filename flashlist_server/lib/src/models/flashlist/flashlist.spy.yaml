@@ -5,3 +5,4 @@ fields:
   title: String
   color: String
   items: List<FlashlistItem?>?, !persist
+  authors: List<AppUser?>?, !persist

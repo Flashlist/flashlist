@@ -19,6 +19,7 @@ abstract class Flashlist extends _i1.TableRow {
     required this.title,
     required this.color,
     this.items,
+    this.authors,
   }) : super(id);
 
   factory Flashlist({
@@ -27,6 +28,7 @@ abstract class Flashlist extends _i1.TableRow {
     required String title,
     required String color,
     List<_i2.FlashlistItem?>? items,
+    List<_i2.AppUser?>? authors,
   }) = _FlashlistImpl;
 
   factory Flashlist.fromJson(
@@ -42,6 +44,8 @@ abstract class Flashlist extends _i1.TableRow {
           serializationManager.deserialize<String>(jsonSerialization['color']),
       items: serializationManager
           .deserialize<List<_i2.FlashlistItem?>?>(jsonSerialization['items']),
+      authors: serializationManager
+          .deserialize<List<_i2.AppUser?>?>(jsonSerialization['authors']),
     );
   }
 
@@ -57,6 +61,8 @@ abstract class Flashlist extends _i1.TableRow {
 
   List<_i2.FlashlistItem?>? items;
 
+  List<_i2.AppUser?>? authors;
+
   @override
   _i1.Table get table => t;
 
@@ -66,6 +72,7 @@ abstract class Flashlist extends _i1.TableRow {
     String? title,
     String? color,
     List<_i2.FlashlistItem?>? items,
+    List<_i2.AppUser?>? authors,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -76,6 +83,8 @@ abstract class Flashlist extends _i1.TableRow {
       'color': color,
       if (items != null)
         'items': items?.toJson(valueToJson: (v) => v?.toJson()),
+      if (authors != null)
+        'authors': authors?.toJson(valueToJson: (v) => v?.toJson()),
     };
   }
 
@@ -99,6 +108,8 @@ abstract class Flashlist extends _i1.TableRow {
       'color': color,
       if (items != null)
         'items': items?.toJson(valueToJson: (v) => v?.allToJson()),
+      if (authors != null)
+        'authors': authors?.toJson(valueToJson: (v) => v?.allToJson()),
     };
   }
 
@@ -277,12 +288,14 @@ class _FlashlistImpl extends Flashlist {
     required String title,
     required String color,
     List<_i2.FlashlistItem?>? items,
+    List<_i2.AppUser?>? authors,
   }) : super._(
           id: id,
           uuid: uuid,
           title: title,
           color: color,
           items: items,
+          authors: authors,
         );
 
   @override
@@ -292,6 +305,7 @@ class _FlashlistImpl extends Flashlist {
     String? title,
     String? color,
     Object? items = _Undefined,
+    Object? authors = _Undefined,
   }) {
     return Flashlist(
       id: id is int? ? id : this.id,
@@ -299,6 +313,7 @@ class _FlashlistImpl extends Flashlist {
       title: title ?? this.title,
       color: color ?? this.color,
       items: items is List<_i2.FlashlistItem?>? ? items : this.items?.clone(),
+      authors: authors is List<_i2.AppUser?>? ? authors : this.authors?.clone(),
     );
   }
 }
