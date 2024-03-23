@@ -1,17 +1,15 @@
 import 'package:flashlist_server/src/generated/protocol.dart';
+import 'package:flashlist_server/src/helpers/user/user_helper.dart';
 import 'package:serverpod/serverpod.dart';
 
 class AppUserEndpoint extends Endpoint {
-  // Retrieve User
-  Future<AppUser?> getCurrentUser(Session session) async {
-    final currentUserId = await session.auth.authenticatedUserId;
+  final userHelper = UserHelper();
 
-    return await AppUser.db.findFirstRow(
-      session,
-      where: (appUser) => appUser.userId.equals(currentUserId),
-    );
+  Future<AppUser?> getCurrentUser(Session session) async {
+    return await userHelper.getAuthenticatedUser(session);
   }
 
+  // Retrieve User
   Future<AppUser?> getUserById(Session session, int userId) async {
     return await AppUser.db.findFirstRow(
       session,
@@ -40,7 +38,7 @@ class AppUserEndpoint extends Endpoint {
 
   Future<List<UserRequest?>> getRequestsForUser(Session session) async {
     try {
-      final currentUser = await getCurrentUser(session);
+      final currentUser = await userHelper.getAuthenticatedUser(session);
       if (currentUser == null) {
         throw Exception('Current user not found');
       }
@@ -86,7 +84,7 @@ class AppUserEndpoint extends Endpoint {
         return;
       }
       // get current user
-      final currentUser = await getCurrentUser(session);
+      final currentUser = await userHelper.getAuthenticatedUser(session);
       if (currentUser == null) {
         throw Exception('Current user not found');
       }
@@ -155,7 +153,7 @@ class AppUserEndpoint extends Endpoint {
         throw Exception('Request not found');
       }
 
-      final currentUser = await getCurrentUser(session);
+      final currentUser = await userHelper.getAuthenticatedUser(session);
       if (currentUser == null) {
         throw Exception('Current user not found');
       }
@@ -197,7 +195,7 @@ class AppUserEndpoint extends Endpoint {
   // Handle User Connections
   Future<List<AppUser>> getConnections(Session session) async {
     try {
-      final currentUser = await getCurrentUser(session);
+      final currentUser = await userHelper.getAuthenticatedUser(session);
       if (currentUser == null) {
         throw Exception('Current user not found');
       }
