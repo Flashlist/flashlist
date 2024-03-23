@@ -348,7 +348,7 @@ class FlashlistEndpoint extends Endpoint {
       });
 
       for (final flashlist in flashlists) {
-        session.messages.addListener(_parseListChannelName(flashlist.id!),
+        session.messages.addListener('flashlist-channel-${flashlist.id}',
             (message) {
           sendStreamMessage(session, message);
         });
@@ -368,17 +368,18 @@ class FlashlistEndpoint extends Endpoint {
     if (message is Flashlist) {
       final flashlist = await createFlashlist(session, message);
 
-      session.messages.addListener('flashlist-channel-${message.id}',
+      session.messages.postMessage(userChannel, flashlist);
+
+      session.messages.addListener(_parseListChannelName(flashlist.id!),
           (message) {
         sendStreamMessage(session, message);
       });
-
-      session.messages.postMessage(userChannel, flashlist);
     }
 
     if (message is DeleteFlashlist) {
       await deleteFlashlist(session, message.flashlistId);
-      session.messages.postMessage(userChannel, message);
+      session.messages
+          .postMessage(_parseListChannelName(message.flashlistId), message);
 
       session.messages.removeListener(
         _parseListChannelName(message.flashlistId),
@@ -391,7 +392,7 @@ class FlashlistEndpoint extends Endpoint {
     if (message is UpdateFlashlist) {
       await updateFlashlist(session, message);
 
-      session.messages.postMessage('flashlist-channel-${message.id}', message);
+      session.messages.postMessage(_parseListChannelName(message.id), message);
     }
 
     if (message is FlashlistItem) {

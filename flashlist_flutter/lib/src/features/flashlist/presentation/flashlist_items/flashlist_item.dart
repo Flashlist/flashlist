@@ -23,7 +23,7 @@ class FlashlistItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       direction: DismissDirection.endToStart,
-      key: Key(item.id.toString()),
+      key: Key('dismissible-${item.id.toString()}'),
       onDismissed: onDismissed,
       background: Container(
         decoration: BoxDecoration(

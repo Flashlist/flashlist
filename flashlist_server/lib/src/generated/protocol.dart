@@ -650,6 +650,11 @@ class Protocol extends _i1.SerializationManagerServer {
               .toList()
           : null) as dynamic;
     }
+    if (t == _i1.getType<List<_i16.AppUser?>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i16.AppUser?>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == List<_i16.Flashlist>) {
       return (data as List).map((e) => deserialize<_i16.Flashlist>(e)).toList()
           as dynamic;
