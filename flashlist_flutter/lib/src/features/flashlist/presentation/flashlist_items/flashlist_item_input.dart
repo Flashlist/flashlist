@@ -22,6 +22,9 @@ class FlashlistItemInput extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final flashlistItemInputTextController = TextEditingController();
 
+    final currentOrderNr =
+        flashlist.items != null ? flashlist.items!.length + 1 : 1;
+
     return isAdding
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
@@ -33,14 +36,14 @@ class FlashlistItemInput extends ConsumerWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    labelText: '#${flashlist.items!.length + 1}',
+                    labelText: '#$currentOrderNr',
                   ),
                   onEditingComplete: () {
                     ref.read(flashlistControllerProvider).createFlashlistItem(
                           FlashlistItem(
                             parentId: flashlist.id!,
                             name: flashlistItemInputTextController.text,
-                            orderNr: flashlist.items!.length + 1,
+                            orderNr: currentOrderNr,
                           ),
                         );
                     flashlistItemInputTextController.clear();

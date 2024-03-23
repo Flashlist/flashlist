@@ -21,9 +21,8 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Home'),
-        ),
+        title: const Center(),
+        actions: const [Icon(Icons.notifications)],
       ),
       drawer: const SideDrawer(),
       floatingActionButton: editModeController.isEditMode
@@ -37,6 +36,7 @@ class HomeScreen extends ConsumerWidget {
                     uuid: const Uuid().v4(),
                     title: 'New Flashlist',
                     color: const Color(0xFF2bb673).value.toString(),
+                    authors: [],
                   ),
                 );
               },
