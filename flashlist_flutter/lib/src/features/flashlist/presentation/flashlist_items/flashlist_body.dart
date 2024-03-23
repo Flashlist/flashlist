@@ -43,7 +43,7 @@ class FlashlistBodyState extends ConsumerState<FlashlistBody> {
         for (final item in flashlistItems)
           ReorderableDelayedDragStartListener(
             index: flashlistItems.indexOf(item),
-            key: Key(item!.id.toString()),
+            key: Key('reorderable-${item!.id.toString()}'),
             child: FlashlistItemWidget(
               item: item,
               onDismissed: (direction) {
