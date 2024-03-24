@@ -15,7 +15,7 @@ class PendingConnectionRequests extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueWidget(
-      value: ref.watch(pendingRequestsProvider),
+      value: ref.watch(pendingRequestsProvider('connection')),
       data: (requests) {
         if (requests.isEmpty) {
           return const SizedBox();

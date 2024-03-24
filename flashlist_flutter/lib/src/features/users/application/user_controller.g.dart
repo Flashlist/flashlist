@@ -49,23 +49,7 @@ final connectionsProvider = AutoDisposeFutureProvider<List<AppUser?>>.internal(
 );
 
 typedef ConnectionsRef = AutoDisposeFutureProviderRef<List<AppUser?>>;
-String _$pendingRequestsHash() => r'cea332daf44ce8fcea811430108bc7d5ebb9adb5';
-
-/// See also [pendingRequests].
-@ProviderFor(pendingRequests)
-final pendingRequestsProvider =
-    AutoDisposeFutureProvider<List<UserRequest?>>.internal(
-  pendingRequests,
-  name: r'pendingRequestsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$pendingRequestsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef PendingRequestsRef = AutoDisposeFutureProviderRef<List<UserRequest?>>;
-String _$userByIdHash() => r'f2f634bb62b227c4331275c4f5f9adaed16777dc';
+String _$pendingRequestsHash() => r'1d5392682a8a81947ac0df2944f142ed0374111d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -87,6 +71,136 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [pendingRequests].
+@ProviderFor(pendingRequests)
+const pendingRequestsProvider = PendingRequestsFamily();
+
+/// See also [pendingRequests].
+class PendingRequestsFamily extends Family<AsyncValue<List<UserRequest?>>> {
+  /// See also [pendingRequests].
+  const PendingRequestsFamily();
+
+  /// See also [pendingRequests].
+  PendingRequestsProvider call(
+    String parameter,
+  ) {
+    return PendingRequestsProvider(
+      parameter,
+    );
+  }
+
+  @override
+  PendingRequestsProvider getProviderOverride(
+    covariant PendingRequestsProvider provider,
+  ) {
+    return call(
+      provider.parameter,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'pendingRequestsProvider';
+}
+
+/// See also [pendingRequests].
+class PendingRequestsProvider
+    extends AutoDisposeFutureProvider<List<UserRequest?>> {
+  /// See also [pendingRequests].
+  PendingRequestsProvider(
+    String parameter,
+  ) : this._internal(
+          (ref) => pendingRequests(
+            ref as PendingRequestsRef,
+            parameter,
+          ),
+          from: pendingRequestsProvider,
+          name: r'pendingRequestsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$pendingRequestsHash,
+          dependencies: PendingRequestsFamily._dependencies,
+          allTransitiveDependencies:
+              PendingRequestsFamily._allTransitiveDependencies,
+          parameter: parameter,
+        );
+
+  PendingRequestsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.parameter,
+  }) : super.internal();
+
+  final String parameter;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<UserRequest?>> Function(PendingRequestsRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PendingRequestsProvider._internal(
+        (ref) => create(ref as PendingRequestsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        parameter: parameter,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<UserRequest?>> createElement() {
+    return _PendingRequestsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PendingRequestsProvider && other.parameter == parameter;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, parameter.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin PendingRequestsRef on AutoDisposeFutureProviderRef<List<UserRequest?>> {
+  /// The parameter `parameter` of this provider.
+  String get parameter;
+}
+
+class _PendingRequestsProviderElement
+    extends AutoDisposeFutureProviderElement<List<UserRequest?>>
+    with PendingRequestsRef {
+  _PendingRequestsProviderElement(super.provider);
+
+  @override
+  String get parameter => (origin as PendingRequestsProvider).parameter;
+}
+
+String _$userByIdHash() => r'f2f634bb62b227c4331275c4f5f9adaed16777dc';
 
 /// See also [userById].
 @ProviderFor(userById)

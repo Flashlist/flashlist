@@ -42,9 +42,10 @@ class UserController {
     return await client.appUser.getConnections();
   }
 
-  Future<List<UserRequest?>> getPendingRequests() async {
+  Future<List<UserRequest?>> getPendingRequestsByParameter(
+      String parameter) async {
     final client = ref.read(clientProvider);
-    return await client.appUser.getRequestsForUser();
+    return await client.appUser.getRequestForUserByParameter(parameter);
   }
 }
 
@@ -60,8 +61,9 @@ Future<List<AppUser?>> connections(ConnectionsRef ref) =>
     ref.watch(userControllerProvider).getConnections();
 
 @riverpod
-Future<List<UserRequest?>> pendingRequests(PendingRequestsRef ref) =>
-    ref.watch(userControllerProvider).getPendingRequests();
+Future<List<UserRequest?>> pendingRequests(
+        PendingRequestsRef ref, String parameter) =>
+    ref.watch(userControllerProvider).getPendingRequestsByParameter(parameter);
 
 @riverpod
 Future<AppUser?> userById(UserByIdRef ref, int id) =>
