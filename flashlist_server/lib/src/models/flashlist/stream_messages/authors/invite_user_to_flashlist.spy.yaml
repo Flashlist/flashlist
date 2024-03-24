@@ -1,0 +1,6 @@
+class: InviteUserToFlashlist
+fields:
+    userId: int?
+    email: String
+    flashlistId: int
+    accessLevel: String

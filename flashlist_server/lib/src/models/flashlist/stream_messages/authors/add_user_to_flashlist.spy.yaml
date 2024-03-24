@@ -1,0 +1,5 @@
+class: AddUserToFlashlist
+fields:
+    user: AppUser
+    flashlistId: int
+    accessLevel: String
