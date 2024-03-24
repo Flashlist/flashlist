@@ -12,11 +12,6 @@ class FlashlistController {
 
   final Ref ref;
 
-  Future<List<Flashlist?>> getFlashlistsForUser() async {
-    final client = ref.read(clientProvider);
-    return await client.flashlist.getFlashlistsForUser();
-  }
-
   Future<Flashlist?> getFlashlistById(int flashlistId) async {
     final client = ref.read(clientProvider);
     return await client.flashlist.getFlashlistById(flashlistId);
@@ -58,6 +53,36 @@ class FlashlistController {
     final client = ref.read(clientProvider);
     await client.flashlist.sendStreamMessage(reOrder);
   }
+
+  Future<void> addUserToFlashlist(AddUserToFlashlist addUserEvent) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(addUserEvent);
+  }
+
+  Future<void> inviteUserToFlashlist(
+    InviteUserToFlashlist inviteUserEvent,
+  ) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(inviteUserEvent);
+  }
+
+  Future<void> acceptFlashlistInvite(
+    AcceptInviteToFlashlist acceptInvite,
+  ) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(acceptInvite);
+  }
+
+  // Future<String?> getUserFlashlistPermission(int flashlistId) async {
+  //   final client = ref.read(clientProvider);
+  //   return await client.flashlist.doesUserHavePermission(flashlistId);
+  // }
+
+  // Future<void> removeUserFromFlashlist(
+  //     FlashlistRemoveUser removeConnection) async {
+  //   final client = ref.read(clientProvider);
+  //   await client.flashlist.sendStreamMessage(removeConnection);
+  // }
 }
 
 @riverpod
@@ -84,7 +109,16 @@ Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
   var streamItems = <Flashlist>[];
 
   await for (final message in client.flashlist.stream) {
-    handleFlashlistStreamMessage(streamItems, message);
+    handleFlashlistStreamMessage(ref, streamItems, message);
     yield streamItems;
   }
 }
+
+// @riverpod
+// Future<String?> userFlashlistPermission(
+//   UserFlashlistPermissionRef ref,
+//   int flashlistId,
+// ) async {
+//   final flashlistController = ref.watch(flashlistControllerProvider);
+//   return await flashlistController.getUserFlashlistPermission(flashlistId);
+// }

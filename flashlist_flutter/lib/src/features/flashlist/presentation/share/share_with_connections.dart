@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,13 +29,13 @@ class ShareWithConnections extends ConsumerWidget {
               ),
               title: Text(connection.username),
               onTap: () {
-                // ref.read(flashlistControllerProvider).addUserToFlashlist(
-                //       FlashlistAddUser(
-                //         user: connection,
-                //         listId: flashlist.id!,
-                //         accessLevel: 'editor',
-                //       ),
-                //     );
+                ref.read(flashlistControllerProvider).addUserToFlashlist(
+                      AddUserToFlashlist(
+                        user: connection,
+                        flashlistId: flashlist.id!,
+                        accessLevel: 'editor',
+                      ),
+                    );
                 Navigator.pop(context);
               },
             );

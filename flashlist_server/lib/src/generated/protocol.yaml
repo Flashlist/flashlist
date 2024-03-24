@@ -4,16 +4,10 @@ appUser:
   - getUserByUsername:
   - getUserByEmail:
   - getRequestById:
-  - getRequestsForUser:
+  - getRequestForUserByParameter:
   - removeRequest:
   - sendConnectionRequestByEmail:
   - acceptConnectionRequest:
   - getConnections:
 flashlist:
-  - createFlashlist:
-  - getFlashlistsForUser:
   - getFlashlistById:
-  - deleteFlashlist:
-  - updateFlashlist:
-  - createFlashlistItem:
-  - deleteFlashlistItem:

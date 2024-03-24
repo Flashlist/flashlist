@@ -71,6 +71,9 @@ class FlashlistCard extends HookConsumerWidget {
         ),
         // Only visible when isAdding is true
         FlashlistItemInput(flashlist: flashlist, isAdding: isAdding),
+
+        gapH8,
+        for (var item in flashlist.authors ?? []) Text(item.username ?? ''),
       ],
     );
   }

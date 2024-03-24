@@ -25,4 +25,17 @@ class UserHelper {
       throw Exception('Failed to get current user: $e');
     }
   }
+
+  Future<AppUser?> getUserByEmail(Session session, String email) async {
+    try {
+      final user = await AppUser.db.findFirstRow(
+        session,
+        where: (user) => user.email.equals(email),
+      );
+
+      return user;
+    } catch (e) {
+      throw Exception('Failed to get user by email: $e');
+    }
+  }
 }

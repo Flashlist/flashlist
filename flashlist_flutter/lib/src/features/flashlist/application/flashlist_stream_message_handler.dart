@@ -1,4 +1,6 @@
 import 'package:flashlist_client/flashlist_client.dart';
+import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Function returning a List object from [streamItems] corresponding
 /// with the passed flashlistId
@@ -62,6 +64,7 @@ void updateOrderNrForSiblings(
 /// It will check for the type of the [message] and manipulate
 /// the list [streamItems] accordingly.
 void handleFlashlistStreamMessage(
+  Ref ref,
   List<Flashlist?> streamItems,
   SerializableEntity message,
 ) {
@@ -149,5 +152,21 @@ void handleFlashlistStreamMessage(
       itemToUpdate!,
       newOrderNr,
     );
+  }
+
+  if (message is AddUserToFlashlist) {
+    final flashlistToUpdate =
+        getFlashlistByFromStream(streamItems, message.flashlistId);
+
+    if (flashlistToUpdate!.authors == null) {
+      flashlistToUpdate.authors = <AppUser>[message.user];
+    } else {
+      flashlistToUpdate.authors!.add(message.user);
+    }
+  }
+
+  if (message is JoinFlashlist) {
+    final client = ref.read(clientProvider);
+    client.flashlist.sendStreamMessage(message);
   }
 }

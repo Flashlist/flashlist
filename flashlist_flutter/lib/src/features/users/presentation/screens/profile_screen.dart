@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/features/users/presentation/requests/requests_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -41,6 +42,7 @@ class ProfileScreen extends ConsumerWidget {
                 Text('Email: ${user.email}'),
                 gapH20,
                 const ConnectionsWidget(),
+                const RequestsWidget(),
               ],
             );
           },

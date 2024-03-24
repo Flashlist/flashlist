@@ -12,19 +12,36 @@ class FlashlistPermissionHelper {
     int userId,
     String accessLevel,
   ) async {
-    FlashlistPermission.db.insertRow(
-      session,
-      FlashlistPermission(
-        flashlistId: flashlistId,
-        userId: userId,
-        accessLevel: accessLevel,
-      ),
-    );
+    try {
+      final existingPermission = await FlashlistPermission.db.findFirstRow(
+        session,
+        where: (permission) {
+          return permission.flashlistId.equals(flashlistId) &
+              permission.userId.equals(userId);
+        },
+      );
+
+      if (existingPermission != null) {
+        throw Exception('Permission already exists');
+      }
+
+      FlashlistPermission.db.insertRow(
+        session,
+        FlashlistPermission(
+          flashlistId: flashlistId,
+          userId: userId,
+          accessLevel: accessLevel,
+        ),
+      );
+    } catch (e) {
+      throw Exception('Failed to create permission: $e');
+    }
   }
 
   /// Returns all permissions for the currently authenticated user
   Future<List<FlashlistPermission>> getFlashlistPermissionsForUser(
-      Session session) async {
+    Session session,
+  ) async {
     try {
       final userId = await userHelper.getAuthenticatedUserId(session);
 
@@ -94,5 +111,45 @@ class FlashlistPermissionHelper {
     } catch (e) {
       throw Exception('Failed to check flashlist permission: $e');
     }
+  }
+
+  /// Checks if there are permissions corresponding with the
+  /// passed [flashlistId].
+  /// Returns a list of [AppUser] objects.
+  /// If no permissions are found, an empty list is returned.
+  Future<List<AppUser?>> getUsersByFlashlistId(
+    Session session,
+    int flashlistId,
+  ) async {
+    final permissions = await getPermissionsByFlashlistId(session, flashlistId);
+
+    if (permissions.isEmpty) return [];
+
+    final userIds = permissions.map((permission) => permission!.userId).toSet();
+
+    final users = await AppUser.db.find(
+      session,
+      where: (user) => user.id.inSet(userIds),
+    );
+
+    return users;
+  }
+
+  /// Checks if there are permissions corresponding with the
+  /// passed [flashlistId].
+  /// Returns a list of [AppUser] objects that are not the
+  /// currently authenticated user.
+  Future<List<AppUser?>> getCoAuthorsByFlashlistId(
+    Session session,
+    int flashlistId,
+  ) async {
+    final authenticatedUserId =
+        await userHelper.getAuthenticatedUserId(session);
+    final authors = await getUsersByFlashlistId(session, flashlistId);
+    final coAuthors = authors
+        .where((currentAuthor) => currentAuthor?.id != authenticatedUserId)
+        .toList();
+
+    return coAuthors;
   }
 }

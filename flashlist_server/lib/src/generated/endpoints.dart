@@ -11,14 +11,7 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/app_user_endpoint.dart' as _i2;
 import '../endpoints/flashlist_endpoint.dart' as _i3;
-import 'package:flashlist_server/src/generated/flashlist/flashlist.dart' as _i4;
-import 'package:flashlist_server/src/generated/flashlist/stream_messages/update_flashlist.dart'
-    as _i5;
-import 'package:flashlist_server/src/generated/flashlist_item/flashlist_item.dart'
-    as _i6;
-import 'package:flashlist_server/src/generated/flashlist_item/stream_messages/delete_flashlist_item.dart'
-    as _i7;
-import 'package:serverpod_auth_server/module.dart' as _i8;
+import 'package:serverpod_auth_server/module.dart' as _i4;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -123,15 +116,24 @@ class Endpoints extends _i1.EndpointDispatch {
             params['requestId'],
           ),
         ),
-        'getRequestsForUser': _i1.MethodConnector(
-          name: 'getRequestsForUser',
-          params: {},
+        'getRequestForUserByParameter': _i1.MethodConnector(
+          name: 'getRequestForUserByParameter',
+          params: {
+            'parameter': _i1.ParameterDescription(
+              name: 'parameter',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
               (endpoints['appUser'] as _i2.AppUserEndpoint)
-                  .getRequestsForUser(session),
+                  .getRequestForUserByParameter(
+            session,
+            params['parameter'],
+          ),
         ),
         'removeRequest': _i1.MethodConnector(
           name: 'removeRequest',
@@ -205,34 +207,6 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'flashlist',
       endpoint: endpoints['flashlist']!,
       methodConnectors: {
-        'createFlashlist': _i1.MethodConnector(
-          name: 'createFlashlist',
-          params: {
-            'flashlist': _i1.ParameterDescription(
-              name: 'flashlist',
-              type: _i1.getType<_i4.Flashlist>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint).createFlashlist(
-            session,
-            params['flashlist'],
-          ),
-        ),
-        'getFlashlistsForUser': _i1.MethodConnector(
-          name: 'getFlashlistsForUser',
-          params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
-                  .getFlashlistsForUser(session),
-        ),
         'getFlashlistById': _i1.MethodConnector(
           name: 'getFlashlistById',
           params: {
@@ -251,83 +225,9 @@ class Endpoints extends _i1.EndpointDispatch {
             session,
             params['flashlistId'],
           ),
-        ),
-        'deleteFlashlist': _i1.MethodConnector(
-          name: 'deleteFlashlist',
-          params: {
-            'flashlistId': _i1.ParameterDescription(
-              name: 'flashlistId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint).deleteFlashlist(
-            session,
-            params['flashlistId'],
-          ),
-        ),
-        'updateFlashlist': _i1.MethodConnector(
-          name: 'updateFlashlist',
-          params: {
-            'update': _i1.ParameterDescription(
-              name: 'update',
-              type: _i1.getType<_i5.UpdateFlashlist>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint).updateFlashlist(
-            session,
-            params['update'],
-          ),
-        ),
-        'createFlashlistItem': _i1.MethodConnector(
-          name: 'createFlashlistItem',
-          params: {
-            'flashlistItem': _i1.ParameterDescription(
-              name: 'flashlistItem',
-              type: _i1.getType<_i6.FlashlistItem>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
-                  .createFlashlistItem(
-            session,
-            params['flashlistItem'],
-          ),
-        ),
-        'deleteFlashlistItem': _i1.MethodConnector(
-          name: 'deleteFlashlistItem',
-          params: {
-            'deleteItemObject': _i1.ParameterDescription(
-              name: 'deleteItemObject',
-              type: _i1.getType<_i7.DeleteFlashlistItem>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
-                  .deleteFlashlistItem(
-            session,
-            params['deleteItemObject'],
-          ),
-        ),
+        )
       },
     );
-    modules['serverpod_auth'] = _i8.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i4.Endpoints()..initializeEndpoints(server);
   }
 }

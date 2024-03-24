@@ -36,7 +36,10 @@ class AppUserEndpoint extends Endpoint {
     return await UserRequest.db.findById(session, requestId);
   }
 
-  Future<List<UserRequest?>> getRequestsForUser(Session session) async {
+  Future<List<UserRequest?>> getRequestForUserByParameter(
+    Session session,
+    String parameter,
+  ) async {
     try {
       final currentUser = await userHelper.getAuthenticatedUser(session);
       if (currentUser == null) {
@@ -45,7 +48,9 @@ class AppUserEndpoint extends Endpoint {
 
       return await UserRequest.db.find(
         session,
-        where: (request) => request.userId2.equals(currentUser.userId),
+        where: (request) =>
+            request.userId2.equals(currentUser.userId) &
+            request.type.equals(parameter),
       );
     } catch (e) {
       print('Failed to get requests for user: $e');
