@@ -1,8 +1,8 @@
 class: Flashlist
 table: flashlist
 fields:
-  uuid: String
-  title: String
-  color: String
-  items: List<FlashlistItem?>?, !persist
-  authors: List<AppUser?>?, !persist
+    uuid: String
+    title: String
+    color: String
+    items: List<FlashlistItem?>?, !persist
+    authors: List<AppUser?>?, !persist

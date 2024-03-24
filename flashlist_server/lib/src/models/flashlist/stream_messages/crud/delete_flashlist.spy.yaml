@@ -4,4 +4,4 @@
 # The flashlistId is the id of the flashlist to delete.
 class: DeleteFlashlist
 fields: 
-  flashlistId: int
+    flashlistId: int

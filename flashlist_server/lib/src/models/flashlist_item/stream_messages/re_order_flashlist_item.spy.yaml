@@ -1,6 +1,6 @@
 class: ReOrderFlashlistItem
 fields:
- id: int  
- parentId: int
- oldOrderNr: int
- newOrderNr: int?
+    id: int  
+    parentId: int
+    oldOrderNr: int
+    newOrderNr: int?

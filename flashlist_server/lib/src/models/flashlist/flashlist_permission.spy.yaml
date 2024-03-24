@@ -1,6 +1,6 @@
 class: FlashlistPermission
 table: flashlist_permission
 fields:
-  userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
-  flashlistId: int, relation(parent=flashlist, onUpdate=Cascade, onDelete=Cascade)
-  accessLevel: String # enum(owner, editor)
+    userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
+    flashlistId: int, relation(parent=flashlist, onUpdate=Cascade, onDelete=Cascade)
+    accessLevel: String # enum(owner, editor)

@@ -1,8 +1,8 @@
 class: Notification
 table: flashlist_notification
 fields:
-  userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
-  requestId: int, relation(parent=flashlist_user_request, onUpdate=Cascade, onDelete=Cascade)
-  type: String # connection_request | connection_accepted
-  isRead: bool # initial=false
-  timestamp: DateTime
+    userId: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
+    requestId: int, relation(parent=flashlist_user_request, onUpdate=Cascade, onDelete=Cascade)
+    type: String # connection_request | connection_accepted
+    isRead: bool # initial=false
+    timestamp: DateTime

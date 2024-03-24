@@ -1,7 +1,7 @@
 class: UserRelation
 table: flashlist_user_relation
 fields:
-  userId1: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
-  userId2: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
-  timestamp: DateTime
-  type: String # 'connection'
+    userId1: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
+    userId2: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
+    timestamp: DateTime
+    type: String # 'connection'

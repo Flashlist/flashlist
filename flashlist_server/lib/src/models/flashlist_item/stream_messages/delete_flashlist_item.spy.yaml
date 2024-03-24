@@ -3,5 +3,5 @@
 # The item is identified by its id
 class: DeleteFlashlistItem
 fields:
-  id: int
-  parentId: int
+    id: int
+    parentId: int

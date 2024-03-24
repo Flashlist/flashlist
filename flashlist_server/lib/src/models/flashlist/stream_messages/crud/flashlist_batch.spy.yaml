@@ -6,4 +6,4 @@
 # has already finished and the user just doesn't have any lists.
 class: FlashlistBatch
 fields:
-  collection: List<Flashlist>
+    collection: List<Flashlist>
