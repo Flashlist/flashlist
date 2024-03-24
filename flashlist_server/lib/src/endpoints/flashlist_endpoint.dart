@@ -1,203 +1,29 @@
-import 'package:flashlist_server/src/helpers/flashlist/flashlist_item_helper.dart';
-import 'package:flashlist_server/src/helpers/flashlist/flashlist_permission_helper.dart';
-import 'package:flashlist_server/src/helpers/user/user_helper.dart';
+import 'package:flashlist_server/src/helpers/user/user_request_helper.dart';
 import 'package:serverpod/serverpod.dart';
 
 import 'package:flashlist_server/src/generated/protocol.dart';
+import 'package:flashlist_server/src/helpers/flashlist/flashlist_helper.dart';
+import 'package:flashlist_server/src/helpers/flashlist/flashlist_item_helper.dart';
+import 'package:flashlist_server/src/helpers/flashlist/flashlist_permission_helper.dart';
+import 'package:flashlist_server/src/helpers/user/user_helper.dart';
 
 class FlashlistEndpoint extends Endpoint {
-  final userHelper = UserHelper();
-
+  final flashlistHelper = FlashlistHelper();
   final flashlistItemHelper = FlashlistItemHelper();
 
+  final userHelper = UserHelper();
+  final userRequestHelper = UserRequestHelper();
   final flashlistPermissionHelper = FlashlistPermissionHelper();
 
-  /// Creates a new flashlist from the given [flashlist] object.
-  /// Also creates a new permission for the currently authenticated user
-  /// with access level 'owner'.
-  Future<Flashlist> createFlashlist(
-    Session session,
-    Flashlist flashlist,
-  ) async {
-    try {
-      final newFlashlist = await Flashlist.db.insertRow(session, flashlist);
-      final userId = await userHelper.getAuthenticatedUserId(session);
-
-      await flashlistPermissionHelper.createFlashlistPermission(
-        session,
-        newFlashlist.id!,
-        userId!,
-        'owner',
-      );
-
-      return newFlashlist;
-    } catch (e) {
-      throw Exception('Failed to create flashlist: $e');
-    }
-  }
-
-  /// Returns all flashlists that the currently authenticated user has permission to view.
-  /// Returns an empty list if the user has no permissions.
-  Future<List<Flashlist>> getFlashlistsForUser(Session session) async {
-    try {
-      final permissionsForUser = await flashlistPermissionHelper
-          .getFlashlistPermissionsForUser(session);
-
-      if (permissionsForUser.isEmpty) {
-        return [];
-      } else {
-        final permissionsForUserIds =
-            permissionsForUser.map((e) => e.flashlistId).toSet();
-
-        final flashlistCollection = await Flashlist.db.find(
-          session,
-          where: (flashlist) => flashlist.id.inSet(permissionsForUserIds),
-        );
-
-        for (final flashlist in flashlistCollection) {
-          flashlist.items = await flashlistItemHelper
-              .getFlashlistItemsByFlashlistId(session, flashlist.id!);
-        }
-
-        return flashlistCollection;
-      }
-    } catch (e) {
-      throw Exception('Failed to get flashlists for user: $e');
-    }
-  }
-
-  /// Returns the flashlist with the given [flashlistId].
-  /// Throws an exception if the user does not have permission to view the flashlist.
-  /// Returns null if the flashlist does not exist.
-  Future<Flashlist?> getFlashlistById(Session session, int flashlistId) async {
-    try {
-      final userAccessLevel = await flashlistPermissionHelper
-          .getUserAccessLevelByFlashlistId(session, flashlistId);
-
-      if (userAccessLevel == null) {
-        throw Exception('User does not have permission to view flashlist');
-      }
-
-      final flashlist = await Flashlist.db.findFirstRow(
-        session,
-        where: (flashlist) => flashlist.id.equals(flashlistId),
-      );
-
-      return flashlist;
-    } catch (e) {
-      throw Exception('Failed to get flashlist by id: $e');
-    }
-  }
-
-  /// Deletes the flashlist with the given [flashlistId].
-  /// Throws an exception if the user does not have permission to delete the flashlist.
-  Future<bool> deleteFlashlist(
+  Future<Flashlist?> getFlashlistById(
     Session session,
     int flashlistId,
   ) async {
-    try {
-      final accessLevel = await flashlistPermissionHelper
-          .getUserAccessLevelByFlashlistId(session, flashlistId);
-
-      if (accessLevel == null || accessLevel != 'owner') {
-        throw Exception('User cannot delete Flashlist');
-      }
-
-      final flashlistToDelete = await getFlashlistById(session, flashlistId);
-
-      if (flashlistToDelete == null) {
-        throw Exception('Flashlist does not exist');
-      }
-
-      await flashlistPermissionHelper.deletePermissionsForFlashlist(
-        session,
-        flashlistId,
-      );
-
-      await Flashlist.db.deleteRow(
-        session,
-        flashlistToDelete,
-      );
-
-      return true;
-    } catch (e) {
-      throw Exception('Failed to delete flashlist: $e');
-    }
+    return await flashlistHelper.getFlashlistById(session, flashlistId);
   }
 
-  /// Updates the flashlist with [id] matching the [update] object.
-  /// Throws an exception if the user does not have permission to update the flashlist.
-  /// Returns the updated flashlist if successful.
-  Future<Flashlist> updateFlashlist(
-    Session session,
-    UpdateFlashlist update,
-  ) async {
-    try {
-      final flashlistToUpdate = await getFlashlistById(session, update.id);
-
-      return await Flashlist.db.updateRow(
-        session,
-        flashlistToUpdate!.copyWith(
-          title: update.title,
-          color: update.color,
-        ),
-      );
-    } catch (e) {
-      throw Exception('Failed to update flashlist: $e');
-    }
-  }
-
-  /// Creates a new flashlist item from the given [flashlistItem] object.
-  /// Returns the created flashlist item if successful.
-  Future<FlashlistItem> createFlashlistItem(
-    Session session,
-    FlashlistItem flashlistItem,
-  ) async {
-    try {
-      return await FlashlistItem.db.insertRow(session, flashlistItem);
-    } catch (e) {
-      throw Exception('Failed to create flashlist item: $e');
-    }
-  }
-
-  /// Deletes the flashlist item with the given [flashlistItemId].
-  /// Returns true if successful.
-  Future<bool> deleteFlashlistItem(
-    Session session,
-    DeleteFlashlistItem deleteItemObject,
-  ) async {
-    try {
-      final flashlistItemToDelete = await FlashlistItem.db.findFirstRow(
-        session,
-        where: (item) => item.id.equals(deleteItemObject.id),
-      );
-
-      if (flashlistItemToDelete == null) {
-        throw Exception('Flashlist item does not exist');
-      }
-
-      await FlashlistItem.db.deleteRow(
-        session,
-        flashlistItemToDelete,
-      );
-
-      await flashlistItemHelper.updateOrderNumbers(
-        session,
-        flashlistItemToDelete,
-        null,
-      );
-
-      return true;
-    } catch (e) {
-      throw Exception('Failed to delete flashlist item: $e');
-    }
-  }
-
-  /// Parses the channel name for the currently authenticated user.
-  /// To be used in StreamingSessions.
-  Future<String> _parseUserChannelName(Session session) async {
-    final id = await session.auth.authenticatedUserId;
-    return 'channel-flashlist-user-$id';
+  String _parseChannelNameForUser(int userId) {
+    return 'user-channel-$userId';
   }
 
   String _parseChannelNameForList(int listId) {
@@ -210,9 +36,9 @@ class FlashlistEndpoint extends Endpoint {
       final currentUser = await userHelper.getAuthenticatedUser(session);
       setUserObject(session, currentUser);
 
-      final channelName = await _parseUserChannelName(session);
+      final channelName = _parseChannelNameForUser(currentUser!.id!);
 
-      final flashlists = await getFlashlistsForUser(session);
+      final flashlists = await flashlistHelper.getFlashlistsForUser(session);
 
       sendStreamMessage(session, FlashlistBatch(collection: flashlists));
 
@@ -221,7 +47,7 @@ class FlashlistEndpoint extends Endpoint {
       });
 
       for (final flashlist in flashlists) {
-        session.messages.addListener('flashlist-channel-${flashlist.id}',
+        session.messages.addListener(_parseChannelNameForList(flashlist.id!),
             (message) {
           sendStreamMessage(session, message);
         });
@@ -236,15 +62,18 @@ class FlashlistEndpoint extends Endpoint {
     StreamingSession session,
     SerializableEntity message,
   ) async {
-    final userChannel = await _parseUserChannelName(session);
-
     /// Add Flashlist to db
     /// Post list to [userChannel]
     /// Subscribe to [listChannel]
     if (message is Flashlist) {
-      final flashlist = await createFlashlist(session, message);
+      final flashlist = await flashlistHelper.createFlashlist(session, message);
 
-      session.messages.postMessage(userChannel, flashlist);
+      session.messages.postMessage(
+        _parseChannelNameForUser(
+          getUserObject(session).id,
+        ),
+        flashlist,
+      );
 
       session.messages.addListener(_parseChannelNameForList(flashlist.id!),
           (message) {
@@ -256,7 +85,7 @@ class FlashlistEndpoint extends Endpoint {
     /// Post message to [listChannel]
     /// Unsubscribe [listChannel]
     if (message is DeleteFlashlist) {
-      await deleteFlashlist(session, message.flashlistId);
+      await flashlistHelper.deleteFlashlist(session, message.flashlistId);
 
       session.messages.postMessage(
         _parseChannelNameForList(message.flashlistId),
@@ -274,7 +103,7 @@ class FlashlistEndpoint extends Endpoint {
     /// Update Flashlist
     /// Post message to [listChannel]
     if (message is UpdateFlashlist) {
-      await updateFlashlist(session, message);
+      await flashlistHelper.updateFlashlist(session, message);
 
       session.messages.postMessage(
         _parseChannelNameForList(message.id),
@@ -285,7 +114,8 @@ class FlashlistEndpoint extends Endpoint {
     /// Add FlashlistItem
     /// Post message to [listChannel]
     if (message is FlashlistItem) {
-      final flashlistItem = await createFlashlistItem(session, message);
+      final flashlistItem =
+          await flashlistItemHelper.createFlashlistItem(session, message);
 
       session.messages.postMessage(
         _parseChannelNameForList(message.parentId),
@@ -296,7 +126,7 @@ class FlashlistEndpoint extends Endpoint {
     /// Delete FlashlistItem
     /// Post message to [listChannel]
     if (message is DeleteFlashlistItem) {
-      await deleteFlashlistItem(session, message);
+      await flashlistItemHelper.deleteFlashlistItem(session, message);
 
       session.messages.postMessage(
         _parseChannelNameForList(message.parentId),
@@ -319,6 +149,128 @@ class FlashlistEndpoint extends Endpoint {
       session.messages.postMessage(
         _parseChannelNameForList(message.parentId),
         message,
+      );
+    }
+
+    /// Adds user to Flashlist
+    /// By creating a new [FlashlistPermission]
+    /// Posts [JoinFlashlist] to [userChannel]
+    /// Where it is sent back to to trigger the [JoinFlashlist]
+    /// event below, when the joining user is online/listening to his channel
+    if (message is AddUserToFlashlist) {
+      await flashlistPermissionHelper.createFlashlistPermission(
+        session,
+        message.flashlistId,
+        message.user.id!,
+        message.accessLevel,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForList(message.flashlistId),
+        message,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForUser(message.user.id!),
+        JoinFlashlist(
+          user: message.user,
+          flashlistId: message.flashlistId,
+          accessLevel: message.accessLevel,
+        ),
+      );
+    }
+
+    /// This is sent back by the user who was just added to the flashlist,
+    /// if it is sent back the this means the user has an active session and
+    /// a listener to the [listChannel] is added.
+    if (message is JoinFlashlist) {
+      final flashlist = await flashlistHelper.getFlashlistByIdWithAttachments(
+        session,
+        message.flashlistId,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForUser(message.user.id!),
+        flashlist!,
+      );
+
+      session.messages.addListener(
+        _parseChannelNameForList(message.flashlistId),
+        (message) {
+          sendStreamMessage(session, message);
+        },
+      );
+    }
+
+    /// Checks if a user with this email-address exists
+    /// If it does, a [UserRequest] is created
+    if (message is InviteUserToFlashlist) {
+      final invitedUser =
+          await userHelper.getUserByEmail(session, message.email);
+
+      if (invitedUser == null) {
+        throw Exception('User does not exist');
+      }
+
+      await UserRequest.db.insertRow(
+        session,
+        UserRequest(
+          userId1: getUserObject(session).id,
+          userId2: invitedUser.userId,
+          type: 'join_flashlist',
+          data: message.flashlistId.toString(),
+          timestamp: DateTime.now(),
+        ),
+      );
+    }
+
+    /// Accepts a [UserRequest] to join a flashlist
+    /// Checks if a request exists with the given [requestId]
+    /// If it does, the [Flashlist] is fetched with it's attachments
+    /// A [FlashlistPermission] is created for the user
+    /// The [UserRequest] is deleted
+    /// The [Flashlist] is posted to the [userChannel]
+    /// The user is added to the [listChannel]
+    /// A listener is added to the [listChannel]
+    if (message is AcceptInviteToFlashlist) {
+      final request = await userRequestHelper.getUserRequestById(
+        session,
+        message.requestId,
+      );
+
+      final flashlist = await flashlistHelper.getFlashlistByIdWithAttachments(
+        session,
+        int.parse(request!.data!),
+      );
+
+      await flashlistPermissionHelper.createFlashlistPermission(
+        session,
+        int.parse(request.data!),
+        getUserObject(session).id,
+        'editor',
+      );
+
+      await userRequestHelper.deleteUserRequest(session, request.id!);
+
+      session.messages.postMessage(
+        _parseChannelNameForUser(getUserObject(session).id),
+        flashlist!,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForList(int.parse(request.data!)),
+        AddUserToFlashlist(
+          user: getUserObject(session),
+          flashlistId: message.flashlistId,
+          accessLevel: message.accessLevel,
+        ),
+      );
+
+      session.messages.addListener(
+        _parseChannelNameForList(int.parse(request.data!)),
+        (message) {
+          sendStreamMessage(session, message);
+        },
       );
     }
   }

@@ -1,8 +1,64 @@
-import 'package:flashlist_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
+
+import 'package:flashlist_server/src/generated/protocol.dart';
 
 /// Helper Class For [FlashlistItem]s
 class FlashlistItemHelper {
+  /// Creates a new flashlist item from the given [flashlistItem] object.
+  /// Returns the created flashlist item if successful.
+  Future<FlashlistItem> createFlashlistItem(
+    Session session,
+    FlashlistItem flashlistItem,
+  ) async {
+    try {
+      final flashlist = await Flashlist.db.findFirstRow(
+        session,
+        where: (list) => list.id.equals(flashlistItem.parentId),
+      );
+
+      if (flashlist == null) {
+        throw Exception('Flashlist not found');
+      }
+
+      return await FlashlistItem.db.insertRow(session, flashlistItem);
+    } catch (e) {
+      throw Exception('Failed to create flashlist item: $e');
+    }
+  }
+
+  /// Deletes the flashlist item with the given [flashlistItemId].
+  /// Returns true if successful.
+  Future<bool> deleteFlashlistItem(
+    Session session,
+    DeleteFlashlistItem deleteItemObject,
+  ) async {
+    try {
+      final flashlistItemToDelete = await FlashlistItem.db.findFirstRow(
+        session,
+        where: (item) => item.id.equals(deleteItemObject.id),
+      );
+
+      if (flashlistItemToDelete == null) {
+        throw Exception('Flashlist item does not exist');
+      }
+
+      await FlashlistItem.db.deleteRow(
+        session,
+        flashlistItemToDelete,
+      );
+
+      await updateOrderNumbers(
+        session,
+        flashlistItemToDelete,
+        null,
+      );
+
+      return true;
+    } catch (e) {
+      throw Exception('Failed to delete flashlist item: $e');
+    }
+  }
+
   /// Returns all items where [parentId] == [flashlistId].
   /// Also sorts them
   Future<List<FlashlistItem?>> getFlashlistItemsByFlashlistId(
