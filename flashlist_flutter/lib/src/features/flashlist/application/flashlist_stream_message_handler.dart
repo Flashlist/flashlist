@@ -169,4 +169,12 @@ void handleFlashlistStreamMessage(
     final client = ref.read(clientProvider);
     client.flashlist.sendStreamMessage(message);
   }
+
+  if (message is RemoveUserFromFlashlist) {
+    final flashlistToUpdate =
+        getFlashlistByFromStream(streamItems, message.flashlistId);
+
+    flashlistToUpdate!.authors!
+        .removeWhere((currentAuthor) => currentAuthor!.id == message.userId);
+  }
 }
