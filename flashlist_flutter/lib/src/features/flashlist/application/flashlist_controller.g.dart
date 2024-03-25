@@ -188,5 +188,137 @@ final flashlistsForUserProvider =
 );
 
 typedef FlashlistsForUserRef = AutoDisposeStreamProviderRef<List<Flashlist?>>;
+String _$userAccessLevelForFlashlistHash() =>
+    r'8d805aeb7aafe84a192af02f4af4f097cc98c5ed';
+
+/// See also [userAccessLevelForFlashlist].
+@ProviderFor(userAccessLevelForFlashlist)
+const userAccessLevelForFlashlistProvider = UserAccessLevelForFlashlistFamily();
+
+/// See also [userAccessLevelForFlashlist].
+class UserAccessLevelForFlashlistFamily extends Family<AsyncValue<String?>> {
+  /// See also [userAccessLevelForFlashlist].
+  const UserAccessLevelForFlashlistFamily();
+
+  /// See also [userAccessLevelForFlashlist].
+  UserAccessLevelForFlashlistProvider call(
+    int flashlistId,
+  ) {
+    return UserAccessLevelForFlashlistProvider(
+      flashlistId,
+    );
+  }
+
+  @override
+  UserAccessLevelForFlashlistProvider getProviderOverride(
+    covariant UserAccessLevelForFlashlistProvider provider,
+  ) {
+    return call(
+      provider.flashlistId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'userAccessLevelForFlashlistProvider';
+}
+
+/// See also [userAccessLevelForFlashlist].
+class UserAccessLevelForFlashlistProvider
+    extends AutoDisposeFutureProvider<String?> {
+  /// See also [userAccessLevelForFlashlist].
+  UserAccessLevelForFlashlistProvider(
+    int flashlistId,
+  ) : this._internal(
+          (ref) => userAccessLevelForFlashlist(
+            ref as UserAccessLevelForFlashlistRef,
+            flashlistId,
+          ),
+          from: userAccessLevelForFlashlistProvider,
+          name: r'userAccessLevelForFlashlistProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$userAccessLevelForFlashlistHash,
+          dependencies: UserAccessLevelForFlashlistFamily._dependencies,
+          allTransitiveDependencies:
+              UserAccessLevelForFlashlistFamily._allTransitiveDependencies,
+          flashlistId: flashlistId,
+        );
+
+  UserAccessLevelForFlashlistProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.flashlistId,
+  }) : super.internal();
+
+  final int flashlistId;
+
+  @override
+  Override overrideWith(
+    FutureOr<String?> Function(UserAccessLevelForFlashlistRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UserAccessLevelForFlashlistProvider._internal(
+        (ref) => create(ref as UserAccessLevelForFlashlistRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        flashlistId: flashlistId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<String?> createElement() {
+    return _UserAccessLevelForFlashlistProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserAccessLevelForFlashlistProvider &&
+        other.flashlistId == flashlistId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, flashlistId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UserAccessLevelForFlashlistRef on AutoDisposeFutureProviderRef<String?> {
+  /// The parameter `flashlistId` of this provider.
+  int get flashlistId;
+}
+
+class _UserAccessLevelForFlashlistProviderElement
+    extends AutoDisposeFutureProviderElement<String?>
+    with UserAccessLevelForFlashlistRef {
+  _UserAccessLevelForFlashlistProviderElement(super.provider);
+
+  @override
+  int get flashlistId =>
+      (origin as UserAccessLevelForFlashlistProvider).flashlistId;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

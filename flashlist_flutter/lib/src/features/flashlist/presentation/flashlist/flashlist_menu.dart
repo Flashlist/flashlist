@@ -32,16 +32,23 @@ class FlashlistMenu extends ConsumerWidget {
       ref.read(flashlistControllerProvider).deleteFlashlist(flashlist.id!);
     }
 
-    // bool isAuthenticatedUserOwner =
-    //     ref.watch(userFlashlistPermissionProvider(flashlist.id!)).value ==
-    //         'owner';
+    void leaveFlashlist() {
+      ref.read(flashlistControllerProvider).leaveFlashlist(
+            RemoveUserFromFlashlist(
+              userId: ref.read(sessionManagerProvider).signedInUser!.id!,
+              flashlistId: flashlist.id!,
+            ),
+          );
+    }
 
-    int userId = ref.read(sessionManagerProvider).signedInUser!.id!;
+    bool isAuthenticatedUserOwner =
+        ref.watch(userAccessLevelForFlashlistProvider(flashlist.id!)).value ==
+            'owner';
 
     return SizedBox(
         width: Sizes.p42,
         child: PopupMenuButton(itemBuilder: (BuildContext context) {
-          if (true) {
+          if (isAuthenticatedUserOwner) {
             return <PopupMenuEntry>[
               PopupMenuItem(
                 onTap: launchEditModeForFlashlist,
@@ -76,14 +83,7 @@ class FlashlistMenu extends ConsumerWidget {
           } else {
             return <PopupMenuEntry>[
               PopupMenuItem(
-                onTap: () {
-                  // ref.read(flashlistControllerProvider).removeUserFromFlashlist(
-                  //       FlashlistRemoveUser(
-                  //         userId: userId,
-                  //         listId: flashlist.id!,
-                  //       ),
-                  //     );
-                },
+                onTap: leaveFlashlist,
                 child: const Text('Leave List'),
               ),
             ];

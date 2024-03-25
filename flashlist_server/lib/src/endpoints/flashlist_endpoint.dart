@@ -22,6 +22,16 @@ class FlashlistEndpoint extends Endpoint {
     return await flashlistHelper.getFlashlistById(session, flashlistId);
   }
 
+  Future<String?> getUserAccessLevelForFlashlist(
+    Session session,
+    int flashlistId,
+  ) async {
+    return await flashlistPermissionHelper.getUserAccessLevelByFlashlistId(
+      session,
+      flashlistId,
+    );
+  }
+
   String _parseChannelNameForUser(int userId) {
     return 'user-channel-$userId';
   }
@@ -268,6 +278,31 @@ class FlashlistEndpoint extends Endpoint {
 
       session.messages.addListener(
         _parseChannelNameForList(int.parse(request.data!)),
+        (message) {
+          sendStreamMessage(session, message);
+        },
+      );
+    }
+
+    if (message is RemoveUserFromFlashlist) {
+      await flashlistPermissionHelper.deleteFlashlistPermission(
+        session,
+        message.flashlistId,
+        message.userId,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForList(message.flashlistId),
+        message,
+      );
+
+      session.messages.postMessage(
+        _parseChannelNameForUser(message.userId),
+        DeleteFlashlist(flashlistId: message.flashlistId),
+      );
+
+      session.messages.removeListener(
+        _parseChannelNameForList(message.flashlistId),
         (message) {
           sendStreamMessage(session, message);
         },

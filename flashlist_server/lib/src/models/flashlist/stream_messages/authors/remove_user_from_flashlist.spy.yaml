@@ -1,0 +1,4 @@
+class: RemoveUserFromFlashlist
+fields:
+    userId: int
+    flashlistId: int

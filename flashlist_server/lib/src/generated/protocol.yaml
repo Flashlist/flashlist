@@ -11,3 +11,4 @@ appUser:
   - getConnections:
 flashlist:
   - getFlashlistById:
+  - getUserAccessLevelForFlashlist:
