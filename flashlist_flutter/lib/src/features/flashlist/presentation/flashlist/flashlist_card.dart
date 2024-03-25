@@ -5,7 +5,7 @@ import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/color_picker/application/color_picker_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
-import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist/flashlist_card_header.dart';
+import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist/flashlist_card_header/flashlist_card_header.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_items/flashlist_body.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_items/flashlist_item_input.dart';
 
@@ -73,7 +73,6 @@ class FlashlistCard extends HookConsumerWidget {
         FlashlistItemInput(flashlist: flashlist, isAdding: isAdding),
 
         gapH8,
-        for (var item in flashlist.authors ?? []) Text(item.username ?? ''),
       ],
     );
   }
