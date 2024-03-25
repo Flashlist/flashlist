@@ -108,6 +108,13 @@ class EndpointFlashlist extends _i1.EndpointRef {
         'getFlashlistById',
         {'flashlistId': flashlistId},
       );
+
+  _i2.Future<String?> getUserAccessLevelForFlashlist(int flashlistId) =>
+      caller.callServerEndpoint<String?>(
+        'flashlist',
+        'getUserAccessLevelForFlashlist',
+        {'flashlistId': flashlistId},
+      );
 }
 
 class _Modules {
