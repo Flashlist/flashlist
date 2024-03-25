@@ -53,7 +53,7 @@ class AvatarPlaceholder extends StatelessWidget {
         initials,
         style: TextStyle(
           color: Colors.white,
-          fontSize: radius * 0.8,
+          fontSize: radius * 0.6,
         ),
       ),
     );
