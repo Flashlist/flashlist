@@ -225,7 +225,26 @@ class Endpoints extends _i1.EndpointDispatch {
             session,
             params['flashlistId'],
           ),
-        )
+        ),
+        'getUserAccessLevelForFlashlist': _i1.MethodConnector(
+          name: 'getUserAccessLevelForFlashlist',
+          params: {
+            'flashlistId': _i1.ParameterDescription(
+              name: 'flashlistId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['flashlist'] as _i3.FlashlistEndpoint)
+                  .getUserAccessLevelForFlashlist(
+            session,
+            params['flashlistId'],
+          ),
+        ),
       },
     );
     modules['serverpod_auth'] = _i4.Endpoints()..initializeEndpoints(server);
