@@ -68,6 +68,30 @@ class FlashlistPermissionHelper {
     );
   }
 
+  Future<void> deleteFlashlistPermission(
+    Session session,
+    int flashlistId,
+    int userId,
+  ) async {
+    try {
+      final permission = await FlashlistPermission.db.findFirstRow(
+        session,
+        where: (currentPermission) {
+          return currentPermission.flashlistId.equals(flashlistId) &
+              currentPermission.userId.equals(userId);
+        },
+      );
+
+      if (permission == null) {
+        throw Exception('Permission does not exist');
+      }
+
+      FlashlistPermission.db.deleteRow(session, permission);
+    } catch (e) {
+      throw Exception('Failed to delete permission: $e');
+    }
+  }
+
   /// Deletes all permissions with [flashlistId] == [flashlistId]
   Future<bool> deletePermissionsForFlashlist(
     Session session,
