@@ -28,30 +28,28 @@ class FlashlistTitle extends ConsumerWidget {
 
     return editModePanel.isEditMode &&
             editModePanel.flashlistInEditMode == flashlist.id
-        ? Expanded(
-            child: SizedBox(
-              height: Sizes.p42,
-              child: TextField(
-                style: TextStyle(
-                  color: colorSchemeOf(context).onBackground,
-                  fontSize: Sizes.p24,
-                  fontWeight: FontWeight.bold,
+        ? Flexible(
+            child: TextField(
+              maxLines: 1,
+              style: TextStyle(
+                color: colorSchemeOf(context).onBackground,
+                fontSize: Sizes.p24,
+                fontWeight: FontWeight.bold,
+              ),
+              onChanged: (value) {
+                textEditingController.text = value;
+              },
+              onSubmitted: (value) {
+                textEditingController.text = value;
+              },
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.top,
+              controller: textEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                onChanged: (value) {
-                  textEditingController.text = value;
-                },
-                onSubmitted: (value) {
-                  textEditingController.text = value;
-                },
-                textAlign: TextAlign.center,
-                textAlignVertical: TextAlignVertical.top,
-                controller: textEditingController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  labelText: 'Title',
-                ),
+                labelText: 'Title',
               ),
             ),
           )
