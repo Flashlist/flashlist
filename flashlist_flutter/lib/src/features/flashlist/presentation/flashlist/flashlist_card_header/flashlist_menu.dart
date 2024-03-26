@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,17 +29,37 @@ class FlashlistMenu extends ConsumerWidget {
       ref.read(editModeControllerProvider).toggleEditMode(flashlist);
     }
 
-    void deleteFlashlist() {
-      ref.read(flashlistControllerProvider).deleteFlashlist(flashlist.id!);
+    void deleteFlashlist() async {
+      final wantsToDelete = await showConfirmDialog(
+        context: context,
+        title: 'Delete ${flashlist.title}?',
+        content: 'This action cannot be undone.',
+        confirmAction: Icons.delete,
+        cancelAction: Icons.cancel,
+      );
+
+      if (wantsToDelete == true) {
+        ref.read(flashlistControllerProvider).deleteFlashlist(flashlist.id!);
+      }
     }
 
-    void leaveFlashlist() {
-      ref.read(flashlistControllerProvider).leaveFlashlist(
-            RemoveUserFromFlashlist(
-              userId: ref.read(sessionManagerProvider).signedInUser!.id!,
-              flashlistId: flashlist.id!,
-            ),
-          );
+    void leaveFlashlist() async {
+      final wantsToLeave = await showConfirmDialog(
+        context: context,
+        title: 'Delete ${flashlist.title}?',
+        content: 'This action cannot be undone.',
+        confirmAction: Icons.delete,
+        cancelAction: Icons.cancel,
+      );
+
+      if (wantsToLeave == true) {
+        ref.read(flashlistControllerProvider).removeUserFromFlashlist(
+              RemoveUserFromFlashlist(
+                userId: ref.read(sessionManagerProvider).signedInUser!.id!,
+                flashlistId: flashlist.id!,
+              ),
+            );
+      }
     }
 
     bool isAuthenticatedUserOwner =
@@ -46,8 +67,9 @@ class FlashlistMenu extends ConsumerWidget {
             'owner';
 
     return SizedBox(
-        width: Sizes.p42,
-        child: PopupMenuButton(itemBuilder: (BuildContext context) {
+      width: Sizes.p42,
+      child: PopupMenuButton(
+        itemBuilder: (BuildContext context) {
           if (isAuthenticatedUserOwner) {
             return <PopupMenuEntry>[
               PopupMenuItem(
@@ -57,7 +79,7 @@ class FlashlistMenu extends ConsumerWidget {
               PopupMenuItem(
                 onTap: () {
                   showModalBottomSheet(
-                    isScrollControlled: true,
+                    // isScrollControlled: true,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(Sizes.p4),
@@ -88,6 +110,8 @@ class FlashlistMenu extends ConsumerWidget {
               ),
             ];
           }
-        }));
+        },
+      ),
+    );
   }
 }
