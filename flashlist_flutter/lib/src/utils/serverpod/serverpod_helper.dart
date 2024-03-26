@@ -8,6 +8,7 @@ part 'serverpod_helper.g.dart';
 
 @riverpod
 Client client(ClientRef ref) => Client(
+      // 'http://192.168.2.16:8080/',
       "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
       authenticationKeyManager: FlutterAuthenticationKeyManager(),
     )..connectivityMonitor = FlutterConnectivityMonitor();
