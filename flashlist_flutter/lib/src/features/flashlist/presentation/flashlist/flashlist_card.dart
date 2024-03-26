@@ -61,8 +61,8 @@ class FlashlistCard extends HookConsumerWidget {
                 IconButton(
                   onPressed: toggleIsAdding,
                   icon: isAdding
-                      ? const Icon(Icons.arrow_upward)
-                      : const Icon(Icons.add),
+                      ? const Icon(Icons.remove_circle_outline)
+                      : const Icon(Icons.add_circle_outline),
                 ),
                 gapH8,
               ],
