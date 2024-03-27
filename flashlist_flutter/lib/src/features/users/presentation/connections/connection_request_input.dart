@@ -5,10 +5,10 @@ import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
+/// Widget for sending a connection request by email.
+/// Holds a [TextField] for the email and a [IconButton] to send the request.
+/// Does not provide any feedback; if a user with the given email exists,
 class ConnectionRequestInput extends ConsumerWidget {
-  /// Widget for sending a connection request by email.
-  /// Holds a text field for the email and a button to send the request.
-  /// Does not provide any feedback; if a user with the given email exists,
   const ConnectionRequestInput({super.key});
 
   @override
@@ -25,28 +25,45 @@ class ConnectionRequestInput extends ConsumerWidget {
       );
     }
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
       children: [
-        Expanded(
-          child: TextField(
-            controller: emailTextController,
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              hintText: 'Of the user you want to connect with',
+        const Row(
+          children: [
+            Text(
+              'Connect with other users via email',
+              textAlign: TextAlign.start,
+              style: TextStyle(fontSize: 18),
             ),
-          ),
+          ],
         ),
-        gapW12,
-        IconButton(
-          onPressed: () async {
-            await userController.sendConnectionRequestByEmail(
-              emailTextController.text,
-            );
-            showSnackBar();
-            emailTextController.clear();
-          },
-          icon: const Icon(Icons.send),
+        gapH12,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TextField(
+                controller: emailTextController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'Of the user you want to connect with',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+              ),
+            ),
+            gapW12,
+            IconButton(
+              onPressed: () async {
+                await userController.sendConnectionRequestByEmail(
+                  emailTextController.text,
+                );
+                showSnackBar();
+                emailTextController.clear();
+              },
+              icon: const Icon(Icons.send),
+            ),
+          ],
         ),
       ],
     );
