@@ -461,9 +461,9 @@
         },
         {
           "name": "data",
-          "columnType": 0,
+          "columnType": 2,
           "isNullable": true,
-          "dartType": "String?"
+          "dartType": "int?"
         },
         {
           "name": "timestamp",
@@ -2209,7 +2209,7 @@
   "installedModules": [
     {
       "module": "flashlist",
-      "version": "20240320203541853"
+      "version": "20240327123949051"
     },
     {
       "module": "serverpod",
