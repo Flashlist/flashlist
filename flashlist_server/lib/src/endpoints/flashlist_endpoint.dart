@@ -228,7 +228,7 @@ class FlashlistEndpoint extends Endpoint {
           userId1: getUserObject(session).id,
           userId2: invitedUser.userId,
           type: 'join_flashlist',
-          data: message.flashlistId.toString(),
+          data: message.flashlistId,
           timestamp: DateTime.now(),
         ),
       );
@@ -250,12 +250,12 @@ class FlashlistEndpoint extends Endpoint {
 
       final flashlist = await flashlistHelper.getFlashlistByIdWithAttachments(
         session,
-        int.parse(request!.data!),
+        request!.data!,
       );
 
       await flashlistPermissionHelper.createFlashlistPermission(
         session,
-        int.parse(request.data!),
+        request.data!,
         getUserObject(session).id,
         'editor',
       );
@@ -268,7 +268,7 @@ class FlashlistEndpoint extends Endpoint {
       );
 
       session.messages.postMessage(
-        _parseChannelNameForList(int.parse(request.data!)),
+        _parseChannelNameForList(request.data!),
         AddUserToFlashlist(
           user: getUserObject(session),
           flashlistId: message.flashlistId,
@@ -277,7 +277,7 @@ class FlashlistEndpoint extends Endpoint {
       );
 
       session.messages.addListener(
-        _parseChannelNameForList(int.parse(request.data!)),
+        _parseChannelNameForList(request.data!),
         (message) {
           sendStreamMessage(session, message);
         },

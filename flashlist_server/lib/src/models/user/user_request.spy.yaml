@@ -3,6 +3,6 @@ table: flashlist_user_request
 fields:
     userId1: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
     userId2: int, relation(parent=serverpod_user_info, onUpdate=Cascade, onDelete=Cascade)
-    type: String # enum ['connection', 'join_list']
-    data: String? # flashlist uuid when type is 'join_list' or null when type is 'connection'
+    type: String # enum ['connection', 'join_flashlist']
+    data: int? # flashlist id when type is 'join_flashlist' or null when type is 'connection'
     timestamp: DateTime

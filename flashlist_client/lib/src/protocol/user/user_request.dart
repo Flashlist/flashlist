@@ -25,7 +25,7 @@ abstract class UserRequest extends _i1.SerializableEntity {
     required int userId1,
     required int userId2,
     required String type,
-    String? data,
+    int? data,
     required DateTime timestamp,
   }) = _UserRequestImpl;
 
@@ -40,8 +40,7 @@ abstract class UserRequest extends _i1.SerializableEntity {
       userId2:
           serializationManager.deserialize<int>(jsonSerialization['userId2']),
       type: serializationManager.deserialize<String>(jsonSerialization['type']),
-      data:
-          serializationManager.deserialize<String?>(jsonSerialization['data']),
+      data: serializationManager.deserialize<int?>(jsonSerialization['data']),
       timestamp: serializationManager
           .deserialize<DateTime>(jsonSerialization['timestamp']),
     );
@@ -58,7 +57,7 @@ abstract class UserRequest extends _i1.SerializableEntity {
 
   String type;
 
-  String? data;
+  int? data;
 
   DateTime timestamp;
 
@@ -67,7 +66,7 @@ abstract class UserRequest extends _i1.SerializableEntity {
     int? userId1,
     int? userId2,
     String? type,
-    String? data,
+    int? data,
     DateTime? timestamp,
   });
   @override
@@ -91,7 +90,7 @@ class _UserRequestImpl extends UserRequest {
     required int userId1,
     required int userId2,
     required String type,
-    String? data,
+    int? data,
     required DateTime timestamp,
   }) : super._(
           id: id,
@@ -116,7 +115,7 @@ class _UserRequestImpl extends UserRequest {
       userId1: userId1 ?? this.userId1,
       userId2: userId2 ?? this.userId2,
       type: type ?? this.type,
-      data: data is String? ? data : this.data,
+      data: data is int? ? data : this.data,
       timestamp: timestamp ?? this.timestamp,
     );
   }

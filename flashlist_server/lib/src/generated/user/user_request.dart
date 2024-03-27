@@ -26,7 +26,7 @@ abstract class UserRequest extends _i1.TableRow {
     required int userId1,
     required int userId2,
     required String type,
-    String? data,
+    int? data,
     required DateTime timestamp,
   }) = _UserRequestImpl;
 
@@ -41,8 +41,7 @@ abstract class UserRequest extends _i1.TableRow {
       userId2:
           serializationManager.deserialize<int>(jsonSerialization['userId2']),
       type: serializationManager.deserialize<String>(jsonSerialization['type']),
-      data:
-          serializationManager.deserialize<String?>(jsonSerialization['data']),
+      data: serializationManager.deserialize<int?>(jsonSerialization['data']),
       timestamp: serializationManager
           .deserialize<DateTime>(jsonSerialization['timestamp']),
     );
@@ -58,7 +57,7 @@ abstract class UserRequest extends _i1.TableRow {
 
   String type;
 
-  String? data;
+  int? data;
 
   DateTime timestamp;
 
@@ -70,7 +69,7 @@ abstract class UserRequest extends _i1.TableRow {
     int? userId1,
     int? userId2,
     String? type,
-    String? data,
+    int? data,
     DateTime? timestamp,
   });
   @override
@@ -290,7 +289,7 @@ class _UserRequestImpl extends UserRequest {
     required int userId1,
     required int userId2,
     required String type,
-    String? data,
+    int? data,
     required DateTime timestamp,
   }) : super._(
           id: id,
@@ -315,7 +314,7 @@ class _UserRequestImpl extends UserRequest {
       userId1: userId1 ?? this.userId1,
       userId2: userId2 ?? this.userId2,
       type: type ?? this.type,
-      data: data is String? ? data : this.data,
+      data: data is int? ? data : this.data,
       timestamp: timestamp ?? this.timestamp,
     );
   }
@@ -336,7 +335,7 @@ class UserRequestTable extends _i1.Table {
       'type',
       this,
     );
-    data = _i1.ColumnString(
+    data = _i1.ColumnInt(
       'data',
       this,
     );
@@ -352,7 +351,7 @@ class UserRequestTable extends _i1.Table {
 
   late final _i1.ColumnString type;
 
-  late final _i1.ColumnString data;
+  late final _i1.ColumnInt data;
 
   late final _i1.ColumnDateTime timestamp;
 

@@ -461,9 +461,9 @@
         },
         {
           "name": "data",
-          "columnType": 0,
+          "columnType": 2,
           "isNullable": true,
-          "dartType": "String?"
+          "dartType": "int?"
         },
         {
           "name": "timestamp",
