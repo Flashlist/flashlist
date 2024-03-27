@@ -26,6 +26,12 @@ class SideDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            title: const Text('Connections and Requests'),
+            onTap: () {
+              context.goNamed(AppRoute.connections.name);
+            },
+          ),
+          ListTile(
             title: const Text('Sign Out'),
             onTap: () {
               ref.read(authenticationControllerProvider).signOut();

@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/features/users/presentation/screens/connections_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +11,7 @@ import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 enum AppRoute {
   home,
   profile,
+  connections,
 }
 
 final goRouter = GoRouter(
@@ -41,6 +43,12 @@ final goRouter = GoRouter(
           path: 'profile',
           name: AppRoute.profile.name,
           builder: (context, state) => const ProfileScreen(),
+        ),
+        // Connections and Requests Page
+        GoRoute(
+          path: 'connections',
+          name: AppRoute.connections.name,
+          builder: (context, state) => const ConnectionsScreen(),
         ),
       ],
     ),

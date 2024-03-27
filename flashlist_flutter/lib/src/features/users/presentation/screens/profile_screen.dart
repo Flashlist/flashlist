@@ -1,13 +1,13 @@
-import 'package:flashlist_flutter/src/features/users/presentation/requests/requests_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
-import 'package:flashlist_flutter/src/features/users/presentation/connections/connections.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
 
+/// Screen for managing [UserProfile]
+/// WIP
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
@@ -41,8 +41,6 @@ class ProfileScreen extends ConsumerWidget {
                 Text('Name: ${user.username}'),
                 Text('Email: ${user.email}'),
                 gapH20,
-                const ConnectionsWidget(),
-                const RequestsWidget(),
               ],
             );
           },
