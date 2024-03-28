@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -78,12 +77,11 @@ class FlashlistBodyState extends ConsumerState<FlashlistBody> {
       );
     }
 
-    // If the flashlist has no items, display a Text widget
+    // If the flashlist has no items, display a placeholder
+    // TODO: Add a nice placeholder or empty card
+    // * maybe something informing the user how to edit and add items
     if (flashlistItems == null || flashlistItems.isEmpty) {
-      return const Text(
-        'No items yet',
-        style: TextStyle(fontSize: Sizes.p16),
-      );
+      return const Text('No items placeholder');
     }
 
     // Return the ReorderableListView

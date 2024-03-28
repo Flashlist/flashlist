@@ -5,6 +5,7 @@ import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/share/share_via_email.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/share/share_with_connections.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 /// A modal to share a flashlist with connections or via email
 class ShareModal extends ConsumerWidget {
@@ -22,13 +23,13 @@ class ShareModal extends ConsumerWidget {
         child: Column(
           children: [
             Text(
-              'Share ${flashlist.title} ',
+              '${localizationsOf(context).share} ${flashlist.title}',
               style: const TextStyle(fontSize: Sizes.p20),
             ),
-            const TabBar(
+            TabBar(
               tabs: [
-                Tab(text: 'With Connections'),
-                Tab(text: 'Via Email'),
+                Tab(text: localizationsOf(context).withConnections),
+                Tab(text: localizationsOf(context).viaEmail),
               ],
             ),
             Expanded(

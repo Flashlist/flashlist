@@ -20,19 +20,23 @@ class ConnectionRequestInput extends ConsumerWidget {
     void showSnackBar() {
       showContextSnackBar(
         context,
-        message:
-            'Request sent. If a user with this email exists, they will receive a connection request.',
+        message: localizationsOf(context).requestSentMessage,
       );
     }
 
     return Column(
       children: [
-        const Row(
+        Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
-              'Connect with other users via email',
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 18),
+            Expanded(
+              child: Text(
+                localizationsOf(context).connectWithOtherUsersViaEmail,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textAlign: TextAlign.start,
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
           ],
         ),
@@ -44,8 +48,7 @@ class ConnectionRequestInput extends ConsumerWidget {
               child: TextField(
                 controller: emailTextController,
                 decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Of the user you want to connect with',
+                  labelText: localizationsOf(context).email,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
                   ),

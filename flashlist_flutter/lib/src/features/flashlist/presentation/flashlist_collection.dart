@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist/flashlist_card.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 /// An independent Widget reading the [flashlistForUserProvider] (Stream)
 /// and displaying the flashlists in a list.
@@ -26,8 +27,8 @@ class FlashlistCollection extends HookConsumerWidget {
       value: flashlistsForUser,
       data: (flashlists) {
         if (flashlists.isEmpty) {
-          return const Center(
-            child: Text('No flashlists yet'),
+          return Center(
+            child: Text(localizationsOf(context).noFlashlists),
           );
         }
 

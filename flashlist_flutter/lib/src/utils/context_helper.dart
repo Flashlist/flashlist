@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 ThemeData themeOf(context) {
   return Theme.of(context);
@@ -18,6 +19,10 @@ Brightness brightnessOf(context) {
 
 bool isDarkThemeOf(context) {
   return brightnessOf(context) == Brightness.dark;
+}
+
+AppLocalizations localizationsOf(context) {
+  return AppLocalizations.of(context)!;
 }
 
 MediaQueryData mediaQueryOf(context) {

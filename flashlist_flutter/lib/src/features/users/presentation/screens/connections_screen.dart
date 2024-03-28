@@ -8,6 +8,7 @@ import 'package:flashlist_flutter/src/features/users/presentation/connections/co
 import 'package:flashlist_flutter/src/features/users/presentation/connections/connection_request_row.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/user_avatar_row.dart';
 import 'package:flashlist_flutter/src/shared/async_list_with_title.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 /// Screen for managing connections and requests.
 /// [StatelessWidget] that holds the [ConnectionRequests] and the [ListRequestsWidget].
@@ -18,7 +19,8 @@ class ConnectionsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Connections and Requests')),
+        title: Center(
+            child: Text(localizationsOf(context).connectionsAndRequests)),
         actions: const [
           SizedBox(
             width: Sizes.p20,
@@ -32,29 +34,29 @@ class ConnectionsScreen extends ConsumerWidget {
             children: [
               gapH20, const ConnectionRequestInput(),
               gapH16,
-              // Pending requests to connect
+              // * Pending requests to connect
               AsyncValueListWithTitle(
-                title: 'Pending requests:',
+                title: localizationsOf(context).pendingConnectionRequests,
                 value: ref.watch(pendingRequestsProvider('connection')),
                 listItemBuilder: (UserRequest? request) {
                   return ConnectionRequestRow(request!);
                 },
               ),
               gapH20,
-              // Connections list
+              // * List of connections
               AsyncValueListWithTitle(
-                title: 'Connections',
+                title: localizationsOf(context).connections,
                 value: ref.watch(connectionsProvider),
                 listItemBuilder: (AppUser? connection) {
                   return UserAvatarRow(username: connection!.username);
                 },
               ),
               gapH20,
-              // Pending requests to join a list
+              // * Pending requests to join a list
               // TODO: think about a nice way to display list invites
               // What info should be displayed?
               AsyncValueListWithTitle(
-                title: 'Pending list requests',
+                title: localizationsOf(context).pendingFlashlistRequests,
                 value: ref.watch(pendingRequestsProvider('join_flashlist')),
                 listItemBuilder: (UserRequest? request) {
                   return request != null
