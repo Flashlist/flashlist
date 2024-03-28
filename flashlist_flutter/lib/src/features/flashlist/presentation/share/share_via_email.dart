@@ -1,7 +1,6 @@
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

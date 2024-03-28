@@ -1,10 +1,8 @@
-import 'package:flashlist_client/flashlist_client.dart';
-import 'package:flashlist_flutter/src/constants/app_sizes.dart';
-import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
-import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:flashlist_client/flashlist_client.dart';
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/connections/request_controls.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/user_avatar_row.dart';
