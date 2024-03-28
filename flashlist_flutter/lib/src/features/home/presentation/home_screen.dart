@@ -8,6 +8,7 @@ import 'package:flashlist_flutter/src/features/edit_mode/presentation/edit_mode_
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_collection.dart';
 import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 class HomeScreen extends ConsumerWidget {
   /// HomeScreen is the default screen when the user is authenticated
@@ -34,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
                 flashlistController.createFlashlist(
                   Flashlist(
                     uuid: const Uuid().v4(),
-                    title: 'New Flashlist',
+                    title: localizationsOf(context).newFlashlist,
                     color: const Color(0xFF2bb673).value.toString(),
                     authors: [],
                   ),

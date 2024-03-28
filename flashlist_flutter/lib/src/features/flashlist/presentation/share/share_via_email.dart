@@ -1,10 +1,11 @@
-import 'package:flashlist_flutter/src/constants/app_sizes.dart';
-import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
+import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
 class ShareViaEmail extends ConsumerWidget {
   const ShareViaEmail(this.flashlist, {super.key});
@@ -38,9 +39,9 @@ class ShareViaEmail extends ConsumerWidget {
             children: [
               Expanded(
                 child: TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: localizationsOf(context).email,
+                    border: const OutlineInputBorder(),
                   ),
                   controller: emailController,
                   onSubmitted: (_) => submitInvitation(),
@@ -49,7 +50,7 @@ class ShareViaEmail extends ConsumerWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: submitInvitation,
-                child: const Text('Send'),
+                child: Text(localizationsOf(context).send),
               ),
             ],
           ),
@@ -60,9 +61,9 @@ class ShareViaEmail extends ConsumerWidget {
               borderRadius: BorderRadius.circular(4),
               border: Border.all(color: Colors.grey),
             ),
-            child: const Text(
-              'You can invite a user here via email. If a user with the provided email exists, they will receive your invitation',
-              style: TextStyle(fontSize: Sizes.p16),
+            child: Text(
+              localizationsOf(context).inviteUsersViaEmailMessage,
+              style: const TextStyle(fontSize: Sizes.p16),
             ),
           ),
         ],

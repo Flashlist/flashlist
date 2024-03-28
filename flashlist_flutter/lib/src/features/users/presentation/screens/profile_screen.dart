@@ -5,6 +5,7 @@ import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 /// Screen for managing [UserProfile]
 /// WIP
@@ -20,8 +21,8 @@ class ProfileScreen extends ConsumerWidget {
           value: ref.watch(currentUserProvider),
           data: (user) {
             if (user == null) {
-              return const Center(
-                child: Text('No user data available.'),
+              return Center(
+                child: Text(localizationsOf(context).noUserData),
               );
             }
 
@@ -38,8 +39,8 @@ class ProfileScreen extends ConsumerWidget {
                     backgroundImage: NetworkImage(user.imageSrc!),
                   ),
                 gapH20,
-                Text('Name: ${user.username}'),
-                Text('Email: ${user.email}'),
+                Text('${localizationsOf(context).name}: ${user.username}'),
+                Text(' ${localizationsOf(context).email}: ${user.email}'),
                 gapH20,
               ],
             );
