@@ -1,4 +1,3 @@
-import 'package:flashlist_server/src/helpers/user/user_request_helper.dart';
 import 'package:serverpod/serverpod.dart';
 
 import 'package:flashlist_server/src/generated/protocol.dart';
@@ -6,6 +5,7 @@ import 'package:flashlist_server/src/helpers/flashlist/flashlist_helper.dart';
 import 'package:flashlist_server/src/helpers/flashlist/flashlist_item_helper.dart';
 import 'package:flashlist_server/src/helpers/flashlist/flashlist_permission_helper.dart';
 import 'package:flashlist_server/src/helpers/user/user_helper.dart';
+import 'package:flashlist_server/src/helpers/user/user_request_helper.dart';
 
 class FlashlistEndpoint extends Endpoint {
   final flashlistHelper = FlashlistHelper();
@@ -284,6 +284,12 @@ class FlashlistEndpoint extends Endpoint {
       );
     }
 
+    /// Removes a user from a flashlist
+    /// Deletes the [FlashlistPermission] for the user
+    /// Posts the message to the [listChannel] where it will remove the user from the author-list
+    /// Posts [DeleteFlashlist] to the [userChannel] where it will remove the list from the stream
+    /// Removes the listener from the [listChannel]
+    /// Posts [LeaveFlashlist] to the [userChannel] where it will reset the stream
     if (message is RemoveUserFromFlashlist) {
       await flashlistPermissionHelper.deleteFlashlistPermission(
         session,
@@ -296,16 +302,21 @@ class FlashlistEndpoint extends Endpoint {
         message,
       );
 
-      session.messages.postMessage(
-        _parseChannelNameForUser(message.userId),
-        DeleteFlashlist(flashlistId: message.flashlistId),
-      );
-
       session.messages.removeListener(
         _parseChannelNameForList(message.flashlistId),
         (message) {
           sendStreamMessage(session, message);
         },
+      );
+
+      /// When received in the frontend, LeaveFlashlist will reset the stream
+      /// and invalidate the ref, which will trigger a re-fetch of the flashlists
+      session.messages.postMessage(
+        _parseChannelNameForUser(message.userId),
+        LeaveFlashlist(
+          flashlistId: message.flashlistId,
+          userId: message.userId,
+        ),
       );
     }
   }
