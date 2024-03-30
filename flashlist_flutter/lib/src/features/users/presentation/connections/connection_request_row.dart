@@ -28,7 +28,7 @@ class ConnectionRequestRow extends ConsumerWidget {
           ),
         gapW8,
         RequestControls(
-          requestId: request.id!,
+          request: request,
         )
       ],
     );

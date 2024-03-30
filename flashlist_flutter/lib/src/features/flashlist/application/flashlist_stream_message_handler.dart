@@ -67,7 +67,7 @@ void handleFlashlistStreamMessage(
   Ref ref,
   List<Flashlist?> streamItems,
   SerializableEntity message,
-) {
+) async {
   /// [FlashlistBatch] is a message that contains a collection of [Flashlist]
   /// entities. It is sent when the user first connects to the WebSocket.
   if (message is FlashlistBatch) {
@@ -154,6 +154,9 @@ void handleFlashlistStreamMessage(
     );
   }
 
+  /// [AddUserToFlashlist] is a message that contains the [id] of a [Flashlist]
+  /// entity that should be updated. It also contains the [user] that should be added
+  /// to [flashlist.authors]. If [flashlist.authors] is null, it will be initialized
   if (message is AddUserToFlashlist) {
     final flashlistToUpdate =
         getFlashlistByFromStream(streamItems, message.flashlistId);
@@ -161,20 +164,39 @@ void handleFlashlistStreamMessage(
     if (flashlistToUpdate!.authors == null) {
       flashlistToUpdate.authors = <AppUser>[message.user];
     } else {
-      flashlistToUpdate.authors!.add(message.user);
+      flashlistToUpdate.authors?.add(message.user);
     }
   }
 
+  /// [InviteUserToFlashlist] is a message that is sent to a user that is added to a list.
+  /// It only bounces the message back to the server.
+  /// When JoinFlashlist is sent back to the server we know the invitee has a active session.
+  /// To which we want to add a listener for the flashlist.
   if (message is JoinFlashlist) {
     final client = ref.read(clientProvider);
+
     client.flashlist.sendStreamMessage(message);
   }
 
+  /// [RemoveUserFromFlashlist] is a message that contains the [id] of a [Flashlist]
+  /// entity that should be updated. It also contains the [userId] that should be removed
+  /// from [flashlist.authors].
+  /// Can be sent both by the user that wants to leave the list or by the owner of the list.
   if (message is RemoveUserFromFlashlist) {
     final flashlistToUpdate =
         getFlashlistByFromStream(streamItems, message.flashlistId);
 
-    flashlistToUpdate!.authors!
+    flashlistToUpdate?.authors!
         .removeWhere((currentAuthor) => currentAuthor!.id == message.userId);
+  }
+
+  /// [LeaveFlashlist] is a message that is sent to a user that is removed from a list.
+  /// It resets the stream and invalidates the ref.
+  if (message is LeaveFlashlist) {
+    final client = ref.read(clientProvider);
+
+    client.flashlist.resetStream();
+
+    ref.invalidateSelf();
   }
 }
