@@ -10,34 +10,26 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class AcceptInviteToFlashlist extends _i1.SerializableEntity {
-  AcceptInviteToFlashlist._({
+abstract class LeaveFlashlist extends _i1.SerializableEntity {
+  LeaveFlashlist._({
     required this.userId,
     required this.flashlistId,
-    required this.requestId,
-    required this.accessLevel,
   });
 
-  factory AcceptInviteToFlashlist({
+  factory LeaveFlashlist({
     required int userId,
     required int flashlistId,
-    required int requestId,
-    required String accessLevel,
-  }) = _AcceptInviteToFlashlistImpl;
+  }) = _LeaveFlashlistImpl;
 
-  factory AcceptInviteToFlashlist.fromJson(
+  factory LeaveFlashlist.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return AcceptInviteToFlashlist(
+    return LeaveFlashlist(
       userId:
           serializationManager.deserialize<int>(jsonSerialization['userId']),
       flashlistId: serializationManager
           .deserialize<int>(jsonSerialization['flashlistId']),
-      requestId:
-          serializationManager.deserialize<int>(jsonSerialization['requestId']),
-      accessLevel: serializationManager
-          .deserialize<String>(jsonSerialization['accessLevel']),
     );
   }
 
@@ -45,52 +37,36 @@ abstract class AcceptInviteToFlashlist extends _i1.SerializableEntity {
 
   int flashlistId;
 
-  int requestId;
-
-  String accessLevel;
-
-  AcceptInviteToFlashlist copyWith({
+  LeaveFlashlist copyWith({
     int? userId,
     int? flashlistId,
-    int? requestId,
-    String? accessLevel,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
       'flashlistId': flashlistId,
-      'requestId': requestId,
-      'accessLevel': accessLevel,
     };
   }
 }
 
-class _AcceptInviteToFlashlistImpl extends AcceptInviteToFlashlist {
-  _AcceptInviteToFlashlistImpl({
+class _LeaveFlashlistImpl extends LeaveFlashlist {
+  _LeaveFlashlistImpl({
     required int userId,
     required int flashlistId,
-    required int requestId,
-    required String accessLevel,
   }) : super._(
           userId: userId,
           flashlistId: flashlistId,
-          requestId: requestId,
-          accessLevel: accessLevel,
         );
 
   @override
-  AcceptInviteToFlashlist copyWith({
+  LeaveFlashlist copyWith({
     int? userId,
     int? flashlistId,
-    int? requestId,
-    String? accessLevel,
   }) {
-    return AcceptInviteToFlashlist(
+    return LeaveFlashlist(
       userId: userId ?? this.userId,
       flashlistId: flashlistId ?? this.flashlistId,
-      requestId: requestId ?? this.requestId,
-      accessLevel: accessLevel ?? this.accessLevel,
     );
   }
 }

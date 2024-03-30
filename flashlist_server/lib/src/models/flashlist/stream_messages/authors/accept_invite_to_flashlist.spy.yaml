@@ -1,6 +1,6 @@
 class: AcceptInviteToFlashlist
 fields:
-    user: AppUser
+    userId: int
     flashlistId: int
     requestId: int
     accessLevel: String
