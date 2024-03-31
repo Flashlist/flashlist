@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/features/settings/presentation/settings_screen.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/screens/connections_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ enum AppRoute {
   home,
   profile,
   connections,
+  settings,
 }
 
 final goRouter = GoRouter(
@@ -49,6 +51,11 @@ final goRouter = GoRouter(
           path: 'connections',
           name: AppRoute.connections.name,
           builder: (context, state) => const ConnectionsScreen(),
+        ),
+        GoRoute(
+          path: 'settings',
+          name: AppRoute.settings.name,
+          builder: (context, state) => const SettingsScreen(),
         ),
       ],
     ),

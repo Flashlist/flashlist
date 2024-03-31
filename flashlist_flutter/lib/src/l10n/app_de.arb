@@ -5,6 +5,7 @@
     "email": "E-Mail",
     "connectionsAndRequests": "Verbindungen und Anfragen",
     "noUserData": "Keine Benutzerdaten",
+    "settings": "Einstellungen",
     "signOut": "Ausloggen",
     "newFlashlist": "Neue Flashlist",
     "noFlashlists": "Keine Flashlists",
@@ -23,5 +24,24 @@
     "send": "Senden",
     "inviteUsersViaEmailMessage": "Wenn ein Benutzer mit ger angegebenen Email existiert, erhält er deine Einladung.",
     "withConnections": "Mit Verbindungen",
-    "viaEmail": "Via Email"
+    "viaEmail": "Via Email",
+    "inviteNamedUser": "{name} einladen",
+    "@inviteNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "wantToInviteNamedUserMessage": "{userName} einladen? Der user bekommt dadurch zugang zur liste und kann elemente hinzufügen und löschen {flashlistName}.",
+    "@wantToInviteNamedUserMessage": {
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "flashlistName": {
+                "type": "String"
+            }
+        }
+    }
 }

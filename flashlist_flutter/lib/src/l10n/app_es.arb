@@ -5,6 +5,7 @@
     "email": "Correo electrónico",
     "connectionsAndRequests": "Conexiones y Peticiones",
     "noUserData": "No se encontraron datos de usuario.",
+    "settings": "Configuración",
     "signOut": "Cerrar sesión",
     "newFlashlist": "Nuevo Flashlist",
     "noFlashlists": "No hay Flashlists",
@@ -22,5 +23,24 @@
     "send": "Enviar",
     "inviteUsersViaEmailMessage": "Si existe un usuario con el correo electrónico proporcionado, recibirán tu invitación.",
     "withConnections": "Con conexiones",
-    "viaEmail": "Por correo"
+    "viaEmail": "Por correo",
+    "inviteNamedUser": "Invitar a {name}",
+    "@inviteNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "wantToInviteNamedUserMessage": "¿Quieres invitar a {userName}? El usuario tendrá acceso a la lista y podrá agregar y eliminar elementos en {flashlistName}.",
+    "@wantToInviteNamedUserMessage": {
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "flashlistName": {
+                "type": "String"
+            }
+        }
+    }
 }
