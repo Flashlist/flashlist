@@ -5,6 +5,7 @@
     "email": "Email",
     "connectionsAndRequests": "Connections and Requests",
     "noUserData": "No user data",
+    "settings": "Settings",
     "signOut": "Sign Out",
     "newFlashlist": "New Flashlist",
     "noFlashlists": "No Flashlists",
@@ -22,5 +23,24 @@
     "send": "Send",
     "inviteUsersViaEmailMessage": "If a user with the provided email exists, they will receive your invitation.",
     "withConnections": "With Connections",
-    "viaEmail": "Via Email"
+    "viaEmail": "Via Email",
+    "inviteNamedUser": "Invite {name}",
+    "@inviteNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "wantToInviteNamedUserMessage": "Do you want to invite {userName}? This will give them access to view and edit {flashlistName}.",
+    "@wantToInviteNamedUserMessage": {
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "flashlistName": {
+                "type": "String"
+            }
+        }
+    }
 }

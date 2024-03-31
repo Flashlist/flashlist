@@ -1,5 +1,6 @@
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,9 +45,13 @@ class ShareWithConnections extends ConsumerWidget {
               onTap: () async {
                 final wantsToShare = await showConfirmDialog(
                   context: context,
-                  title: 'Invite ${connection.username}',
+                  title: localizationsOf(context)
+                      .inviteNamedUser(connection.username),
                   content:
-                      'Do you want to invite ${connection.username} to this flashlist? This will give them access to view and edit the flashlist.',
+                      localizationsOf(context).wantToInviteNamedUserMessage(
+                    connection.username,
+                    flashlist.title,
+                  ),
                   confirmAction: 'Share',
                   cancelAction: 'Cancel',
                 );
