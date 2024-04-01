@@ -38,9 +38,27 @@ class ProfileScreen extends ConsumerWidget {
                     radius: 60,
                     backgroundImage: NetworkImage(user.imageSrc!),
                   ),
-                gapH20,
-                Text('${localizationsOf(context).name}: ${user.username}'),
-                Text(' ${localizationsOf(context).email}: ${user.email}'),
+                gapH32,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${localizationsOf(context).name}: ',
+                      style: textThemeOf(context).titleMedium,
+                    ),
+                    Text(user.username),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${localizationsOf(context).email}: ',
+                      style: textThemeOf(context).titleMedium,
+                    ),
+                    Text(user.email),
+                  ],
+                ),
                 gapH20,
               ],
             );
