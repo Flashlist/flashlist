@@ -1,0 +1,3 @@
+class SettingsState {
+  SettingsState();
+}
