@@ -302,13 +302,6 @@ class FlashlistEndpoint extends Endpoint {
         message,
       );
 
-      session.messages.removeListener(
-        _parseChannelNameForList(message.flashlistId),
-        (message) {
-          sendStreamMessage(session, message);
-        },
-      );
-
       /// When received in the frontend, LeaveFlashlist will reset the stream
       /// and invalidate the ref, which will trigger a re-fetch of the flashlists
       session.messages.postMessage(

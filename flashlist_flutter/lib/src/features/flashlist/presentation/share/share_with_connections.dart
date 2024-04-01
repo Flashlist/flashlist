@@ -52,8 +52,8 @@ class ShareWithConnections extends ConsumerWidget {
                     connection.username,
                     flashlist.title,
                   ),
-                  confirmAction: 'Share',
-                  cancelAction: 'Cancel',
+                  confirmAction: localizationsOf(context).share,
+                  cancelAction: localizationsOf(context).cancel,
                 );
 
                 if (wantsToShare == true) {

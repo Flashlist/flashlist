@@ -35,8 +35,8 @@ class FlashlistMenu extends ConsumerWidget {
         context: context,
         title: '${localizationsOf(context).delete} ${flashlist.title}?',
         content: localizationsOf(context).thisCannotBeUndone,
-        confirmAction: Icons.delete,
-        cancelAction: Icons.cancel,
+        confirmAction: localizationsOf(context).delete,
+        cancelAction: localizationsOf(context).cancel,
       );
 
       if (wantsToDelete == true) {
@@ -49,8 +49,8 @@ class FlashlistMenu extends ConsumerWidget {
         context: context,
         title: '${localizationsOf(context).leaveList} ${flashlist.title}?',
         content: localizationsOf(context).youHaveToBeReinvited,
-        confirmAction: Icons.delete,
-        cancelAction: Icons.cancel,
+        confirmAction: localizationsOf(context).leave,
+        cancelAction: localizationsOf(context).cancel,
       );
 
       if (wantsToLeave == true) {
@@ -70,6 +70,7 @@ class FlashlistMenu extends ConsumerWidget {
     return SizedBox(
       width: Sizes.p42,
       child: PopupMenuButton(
+        iconColor: Colors.white,
         itemBuilder: (BuildContext context) {
           if (isAuthenticatedUserOwner) {
             return <PopupMenuEntry>[

@@ -37,14 +37,13 @@ class FlashlistItemWidget extends StatelessWidget {
         child: Container(
           height: 35,
           padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
-          child: Row(
-            children: [
-              Text(item.orderNr.toString()),
-              const Spacer(),
-              Text(item.name),
-              const Spacer(),
-              const SizedBox(),
-            ],
+          child: Center(
+            child: Text(
+              item.name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
         ),
       ),
