@@ -59,6 +59,7 @@ class FlashlistCard extends HookConsumerWidget {
                 FlashlistBody(flashlist: flashlist),
                 gapH12,
                 IconButton(
+                  color: Colors.white,
                   onPressed: toggleIsAdding,
                   icon: isAdding
                       ? const Icon(Icons.remove_circle_outline)
