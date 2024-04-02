@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/features/home/presentation/notification_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(),
-        actions: const [Icon(Icons.notifications)],
+        actions: const [NotificationBadge()],
       ),
       drawer: const SideDrawer(),
       floatingActionButton: editModeController.isEditMode
