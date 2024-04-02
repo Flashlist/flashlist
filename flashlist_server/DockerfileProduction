@@ -2,10 +2,11 @@ FROM dart:3.2.5 AS build
 
 # Resolve app dependencies.
 WORKDIR /app
-COPY pubspec.* ./
-COPY lib /app
-COPY config /app
-COPY bin /app
+# COPY pubspec.* ./
+# COPY lib /app
+# COPY config /app
+# COPY bin /app
+COPY . .
 
 RUN dart pub get
 
