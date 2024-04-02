@@ -6,7 +6,7 @@ WORKDIR /app
 # COPY lib /app
 # COPY config /app
 # COPY bin /app
-COPY . .
+COPY . /app
 
 RUN dart pub get
 
