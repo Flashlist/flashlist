@@ -7,7 +7,7 @@
 # Configuration for the main API server.
 apiServer:
   port: 8080
-  publicHost: api.examplepod.com
+  publicHost: api.flashlistapp.com
   publicPort: 443
   publicScheme: https
 
