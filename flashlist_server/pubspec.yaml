@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
+  mailer: ^6.1.0
   serverpod: 1.2.6
   serverpod_auth_server: 1.2.6
 
