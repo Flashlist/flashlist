@@ -1,0 +1,97 @@
+version: '3'
+services:
+  postgresql:
+    image: postgres
+    volumes:
+      - /data/postgres:/var/lib/postgresql/data
+      - /data/postgres:/data/postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.postgresql.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.postgresql.tls=true"
+      - "traefik.tcp.services.postgresql.loadbalancer.server.port=5432"
+      - "traefik.tcp.routers.postgresql.entrypoints=dbsecure"
+      - "traefik.tcp.routers.postgresql.tls.certresolver=lets-encrypt"
+      - "traefik.tcp.routers.postgresql.service=postgresql"
+      - "traefik.http.routers.postgresql.tls.domains[0].sans=db.run4planet.net"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ff15xEt3K-M98i33t8iQJuHDghRHJ3k8
+      - PGDATA=/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - web
+
+  redis:
+    image: redis:6.2.6
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass "replace_with_pass"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    labels:
+      - "traefik.enable=true"
+      # routers
+      - "traefik.tcp.routers.redis.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.redis.entryPoints=redis"
+      - "traefik.tcp.routers.redis.service=redis"
+      # services (needed for TCP)
+      - "traefik.tcp.services.redis.loadbalancer.server.port=6379"
+    volumes:
+      - /data/redis:/redis/data
+
+    networks:
+      - web
+
+  flashlist-api:
+    image: ghcr.io/mkoehne/serverpod-vps-server:latest
+    container_name: flashlist-api
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - web
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vpsapi.entrypoints=web"
+      - "traefik.http.routers.vpsapi.rule=Host(`api.example.com`)"
+      - "traefik.http.middlewares.vpsapi-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.vpsapi.middlewares=vpsapi-https-redirect"
+      - "traefik.http.routers.vpsapi-secure.entrypoints=websecure"
+      - "traefik.http.routers.vpsapi-secure.rule=Host(`pod.example.com`)"
+      - "traefik.http.routers.vpsapi-secure.tls=true"
+      - "traefik.http.routers.vpsapi-secure.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.vpsapi-secure.service=vpsapi"
+      - "traefik.http.services.vpsapi.loadbalancer.server.port=8080"
+      - "traefik.docker.network=web"
+
+      - "traefik.http.routers.vpsinsights.entrypoints=web"
+      - "traefik.http.routers.vpsinsights.rule=Host(`insights.example.com`)"
+      - "traefik.http.middlewares.vpsinsights-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.vpsinsights.middlewares=vpsinsights-https-redirect"
+      - "traefik.http.routers.vpsinsights-secure.entrypoints=websecure"
+      - "traefik.http.routers.vpsinsights-secure.rule=Host(`insights.example.com`)"
+      - "traefik.http.routers.vpsinsights-secure.tls=true"
+      - "traefik.http.routers.vpsinsights-secure.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.vpsinsights-secure.service=vpsinsights"
+      - "traefik.http.services.vpsinsights.loadbalancer.server.port=8081"
+
+      - "traefik.http.routers.vpsapp.entrypoints=web"
+      - "traefik.http.routers.vpsapp.rule=Host(`api.flashlistapp.com`)"
+      - "traefik.http.middlewares.vpsapp-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.vpsapp.middlewares=vpsapp-https-redirect"
+      - "traefik.http.routers.vpsapp-secure.entrypoints=websecure"
+      - "traefik.http.routers.vpsapp-secure.rule=Host(`api.flashlistapp.com`)"
+      - "traefik.http.routers.vpsapp-secure.tls=true"
+      - "traefik.http.routers.vpsapp-secure.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.vpsapp-secure.service=vpsapp"
+      - "traefik.http.services.vpsapp.loadbalancer.server.port=8082"
+
+networks:
+  web:
+    external: true
