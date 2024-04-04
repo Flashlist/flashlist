@@ -1,4 +1,4 @@
-FROM dart:3.2.5 AS build
+FROM --platform=$BUILDPLATFORM dart:3.2.5 AS build 
 
 # Resolve app dependencies.
 WORKDIR /app
