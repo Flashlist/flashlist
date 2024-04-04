@@ -7,9 +7,12 @@ part of 'settings_controller.dart';
 // **************************************************************************
 
 String _$settingsControllerHash() =>
-    r'aec6d42d98a4c49c2fd2178049a5893e21f023ef';
+    r'bc8d5c23a6267c8e1fa59d1f4776311ec51fb0a6';
 
-/// See also [SettingsController].
+/// Settings Controller
+/// Holds every method meant to mutate the state of the app settings
+///
+/// Copied from [SettingsController].
 @ProviderFor(SettingsController)
 final settingsControllerProvider =
     AutoDisposeNotifierProvider<SettingsController, SettingsState>.internal(
