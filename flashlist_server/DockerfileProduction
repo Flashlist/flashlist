@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM dart:3.2.5 AS build
 
 # Resolve app dependencies.
 WORKDIR /app
-COPY . /app
+COPY /flashlist_server /app
 
 RUN dart pub get
 RUN dart compile exe bin/main.dart -o bin/main
