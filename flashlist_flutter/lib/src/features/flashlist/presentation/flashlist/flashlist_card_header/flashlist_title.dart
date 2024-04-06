@@ -58,7 +58,7 @@ class FlashlistTitle extends ConsumerWidget {
           )
         : Text(
             flashlist.title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: Sizes.p24,
               fontWeight: FontWeight.bold,
