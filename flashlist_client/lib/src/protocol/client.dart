@@ -58,8 +58,9 @@ class EndpointAppUser extends _i1.EndpointRef {
         {'requestId': requestId},
       );
 
+  /// When no parameter is passed it will return all requests for the current user.
   _i2.Future<List<_i4.UserRequest?>> getRequestForUserByParameter(
-          String parameter) =>
+          String? parameter) =>
       caller.callServerEndpoint<List<_i4.UserRequest?>>(
         'appUser',
         'getRequestForUserByParameter',

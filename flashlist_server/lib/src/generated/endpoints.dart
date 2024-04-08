@@ -121,8 +121,8 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'parameter': _i1.ParameterDescription(
               name: 'parameter',
-              type: _i1.getType<String>(),
-              nullable: false,
+              type: _i1.getType<String?>(),
+              nullable: true,
             )
           },
           call: (
