@@ -7,9 +7,13 @@ part of 'local_storage_helper.dart';
 // **************************************************************************
 
 String _$localStorageHelperHash() =>
-    r'17f07c574442210354641e731e71a04edf7e186a';
+    r'48758c3d36a3545c19290bf6c1a38b9881af6256';
 
-/// See also [LocalStorageHelper].
+/// State Notifier class for the local storage
+/// Holds [recentColors] = List of 8 colors that the user has recently used
+/// Soon: Holds [listCollapseStates] = Map of list id and its collapse state
+///
+/// Copied from [LocalStorageHelper].
 @ProviderFor(LocalStorageHelper)
 final localStorageHelperProvider =
     AutoDisposeNotifierProvider<LocalStorageHelper, LocalStorageState>.internal(

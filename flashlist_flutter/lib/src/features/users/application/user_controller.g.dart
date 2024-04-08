@@ -49,7 +49,7 @@ final connectionsProvider = AutoDisposeFutureProvider<List<AppUser?>>.internal(
 );
 
 typedef ConnectionsRef = AutoDisposeFutureProviderRef<List<AppUser?>>;
-String _$pendingRequestsHash() => r'1d5392682a8a81947ac0df2944f142ed0374111d';
+String _$pendingRequestsHash() => r'0fe904444e893ecd58e8f66adac764191c9354bd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -83,7 +83,7 @@ class PendingRequestsFamily extends Family<AsyncValue<List<UserRequest?>>> {
 
   /// See also [pendingRequests].
   PendingRequestsProvider call(
-    String parameter,
+    String? parameter,
   ) {
     return PendingRequestsProvider(
       parameter,
@@ -119,7 +119,7 @@ class PendingRequestsProvider
     extends AutoDisposeFutureProvider<List<UserRequest?>> {
   /// See also [pendingRequests].
   PendingRequestsProvider(
-    String parameter,
+    String? parameter,
   ) : this._internal(
           (ref) => pendingRequests(
             ref as PendingRequestsRef,
@@ -147,7 +147,7 @@ class PendingRequestsProvider
     required this.parameter,
   }) : super.internal();
 
-  final String parameter;
+  final String? parameter;
 
   @override
   Override overrideWith(
@@ -188,7 +188,7 @@ class PendingRequestsProvider
 
 mixin PendingRequestsRef on AutoDisposeFutureProviderRef<List<UserRequest?>> {
   /// The parameter `parameter` of this provider.
-  String get parameter;
+  String? get parameter;
 }
 
 class _PendingRequestsProviderElement
@@ -197,7 +197,7 @@ class _PendingRequestsProviderElement
   _PendingRequestsProviderElement(super.provider);
 
   @override
-  String get parameter => (origin as PendingRequestsProvider).parameter;
+  String? get parameter => (origin as PendingRequestsProvider).parameter;
 }
 
 String _$userByIdHash() => r'f2f634bb62b227c4331275c4f5f9adaed16777dc';
