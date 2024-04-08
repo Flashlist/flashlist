@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,29 +13,32 @@ class ThemeBrightness extends ConsumerWidget {
     final currentBrightness = AdaptiveTheme.of(context).mode;
 
     return ListTile(
-      leading: const Text('Theme brightness'),
+      leading: Text(
+        localizationsOf(context).brightness,
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
       title: SegmentedButton(
         showSelectedIcon: false,
-        segments: const [
+        segments: [
           ButtonSegment<String>(
-            label: Text('Light'),
+            label: Text(localizationsOf(context).light),
             value: 'light',
           ),
           ButtonSegment<String>(
-            label: Text('Dark'),
+            label: Text(localizationsOf(context).dark),
             value: 'dark',
           ),
           ButtonSegment<String>(
-            label: Text('System'),
+            label: Text(localizationsOf(context).system),
             value: 'system',
           ),
         ],
         selected: {
-          currentBrightness == AdaptiveThemeMode.light
-              ? 'light'
+          currentBrightness == AdaptiveThemeMode.system
+              ? 'system'
               : currentBrightness == AdaptiveThemeMode.dark
                   ? 'dark'
-                  : 'system'
+                  : 'light'
         },
         onSelectionChanged: (value) {
           value.first == 'system'
@@ -42,9 +46,10 @@ class ThemeBrightness extends ConsumerWidget {
                   .read(settingsControllerProvider.notifier)
                   .setBrightness(context, null, true)
               : ref.read(settingsControllerProvider.notifier).setBrightness(
-                  context,
-                  value.first == 'light' ? Brightness.light : Brightness.dark,
-                  false);
+                    context,
+                    value.first == 'light' ? Brightness.light : Brightness.dark,
+                    false,
+                  );
         },
       ),
     );
