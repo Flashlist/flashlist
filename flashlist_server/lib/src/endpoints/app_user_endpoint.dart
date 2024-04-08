@@ -36,9 +36,10 @@ class AppUserEndpoint extends Endpoint {
     return await UserRequest.db.findById(session, requestId);
   }
 
+  /// When no parameter is passed it will return all requests for the current user.
   Future<List<UserRequest?>> getRequestForUserByParameter(
     Session session,
-    String parameter,
+    String? parameter,
   ) async {
     try {
       final currentUser = await userHelper.getAuthenticatedUser(session);
@@ -46,12 +47,17 @@ class AppUserEndpoint extends Endpoint {
         throw Exception('Current user not found');
       }
 
-      return await UserRequest.db.find(
-        session,
-        where: (request) =>
-            request.userId2.equals(currentUser.userId) &
-            request.type.equals(parameter),
-      );
+      if (parameter == null) {
+        return await UserRequest.db.find(session,
+            where: (request) => request.userId2.equals(currentUser.userId));
+      } else {
+        return await UserRequest.db.find(
+          session,
+          where: (request) =>
+              request.userId2.equals(currentUser.userId) &
+              request.type.equals(parameter),
+        );
+      }
     } catch (e) {
       print('Failed to get requests for user: $e');
       rethrow;
