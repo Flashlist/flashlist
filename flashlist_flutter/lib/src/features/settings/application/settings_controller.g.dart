@@ -6,6 +6,21 @@ part of 'settings_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$appPackageInfoHash() => r'f68e0449eca755182143d16ee3ba36b99ff3be0d';
+
+/// See also [appPackageInfo].
+@ProviderFor(appPackageInfo)
+final appPackageInfoProvider = AutoDisposeFutureProvider<PackageInfo>.internal(
+  appPackageInfo,
+  name: r'appPackageInfoProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$appPackageInfoHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AppPackageInfoRef = AutoDisposeFutureProviderRef<PackageInfo>;
 String _$settingsControllerHash() =>
     r'bc8d5c23a6267c8e1fa59d1f4776311ec51fb0a6';
 

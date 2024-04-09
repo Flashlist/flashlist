@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:flashlist_flutter/src/features/settings/domain/settings_state.dart';
@@ -28,4 +29,9 @@ class SettingsController extends _$SettingsController {
       AdaptiveTheme.of(context).setSystem();
     }
   }
+}
+
+@riverpod
+Future<PackageInfo> appPackageInfo(AppPackageInfoRef ref) async {
+  return await PackageInfo.fromPlatform();
 }
