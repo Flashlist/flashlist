@@ -19,13 +19,9 @@ class ConnectionsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(localizationsOf(context).connectionsAndRequests)),
-        actions: const [
-          SizedBox(
-            width: Sizes.p20,
-          ),
-        ],
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(localizationsOf(context).connectionsAndRequests),
       ),
       body: SingleChildScrollView(
         child: Padding(

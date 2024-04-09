@@ -13,11 +13,11 @@ class ThemeBrightness extends ConsumerWidget {
     final currentBrightness = AdaptiveTheme.of(context).mode;
 
     return ListTile(
-      leading: Text(
+      title: Text(
         localizationsOf(context).brightness,
         style: Theme.of(context).textTheme.titleMedium,
       ),
-      title: SegmentedButton(
+      subtitle: SegmentedButton(
         showSelectedIcon: false,
         segments: [
           ButtonSegment<String>(
