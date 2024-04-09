@@ -15,7 +15,11 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(localizationsOf(context).profile),
+      ),
       body: Center(
         child: AsyncValueWidget(
           value: ref.watch(currentUserProvider),
