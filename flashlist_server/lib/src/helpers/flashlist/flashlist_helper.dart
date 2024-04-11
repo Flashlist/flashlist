@@ -161,6 +161,7 @@ class FlashlistHelper {
         flashlistToUpdate!.copyWith(
           title: update.title,
           color: update.color,
+          updatedAt: DateTime.now(),
         ),
       );
     } catch (e) {
