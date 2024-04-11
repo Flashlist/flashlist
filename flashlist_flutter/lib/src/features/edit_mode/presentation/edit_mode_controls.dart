@@ -31,11 +31,13 @@ class EditModeControls extends ConsumerWidget {
     void onConfirm() {
       final colorStringValue = colorPicker.color.toColor().value.toString();
 
-      flashlistController.updateFlashlist(UpdateFlashlist(
-        id: editModePanel.flashlistInEditMode,
-        title: textEditingController.text,
-        color: colorStringValue,
-      ));
+      flashlistController.updateFlashlist(
+        UpdateFlashlist(
+          id: editModePanel.flashlistInEditMode,
+          title: textEditingController.text,
+          color: colorStringValue,
+        ),
+      );
 
       ref.read(localStorageHelperProvider.notifier).addColor(colorStringValue);
 

@@ -20,6 +20,9 @@ abstract class Flashlist extends _i1.TableRow {
     required this.color,
     this.items,
     this.authors,
+    this.isCollapsed,
+    required this.createdAt,
+    this.updatedAt,
   }) : super(id);
 
   factory Flashlist({
@@ -29,6 +32,9 @@ abstract class Flashlist extends _i1.TableRow {
     required String color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    required DateTime createdAt,
+    DateTime? updatedAt,
   }) = _FlashlistImpl;
 
   factory Flashlist.fromJson(
@@ -46,6 +52,12 @@ abstract class Flashlist extends _i1.TableRow {
           .deserialize<List<_i2.FlashlistItem?>?>(jsonSerialization['items']),
       authors: serializationManager
           .deserialize<List<_i2.AppUser?>?>(jsonSerialization['authors']),
+      isCollapsed: serializationManager
+          .deserialize<bool?>(jsonSerialization['isCollapsed']),
+      createdAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['createdAt']),
+      updatedAt: serializationManager
+          .deserialize<DateTime?>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -63,6 +75,12 @@ abstract class Flashlist extends _i1.TableRow {
 
   List<_i2.AppUser?>? authors;
 
+  bool? isCollapsed;
+
+  DateTime createdAt;
+
+  DateTime? updatedAt;
+
   @override
   _i1.Table get table => t;
 
@@ -73,6 +91,9 @@ abstract class Flashlist extends _i1.TableRow {
     String? color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -85,6 +106,9 @@ abstract class Flashlist extends _i1.TableRow {
         'items': items?.toJson(valueToJson: (v) => v?.toJson()),
       if (authors != null)
         'authors': authors?.toJson(valueToJson: (v) => v?.toJson()),
+      if (isCollapsed != null) 'isCollapsed': isCollapsed,
+      'createdAt': createdAt.toJson(),
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
     };
   }
 
@@ -96,6 +120,8 @@ abstract class Flashlist extends _i1.TableRow {
       'uuid': uuid,
       'title': title,
       'color': color,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -110,6 +136,9 @@ abstract class Flashlist extends _i1.TableRow {
         'items': items?.toJson(valueToJson: (v) => v?.allToJson()),
       if (authors != null)
         'authors': authors?.toJson(valueToJson: (v) => v?.allToJson()),
+      if (isCollapsed != null) 'isCollapsed': isCollapsed,
+      'createdAt': createdAt.toJson(),
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
     };
   }
 
@@ -131,6 +160,12 @@ abstract class Flashlist extends _i1.TableRow {
         return;
       case 'color':
         color = value;
+        return;
+      case 'createdAt':
+        createdAt = value;
+        return;
+      case 'updatedAt':
+        updatedAt = value;
         return;
       default:
         throw UnimplementedError();
@@ -289,6 +324,9 @@ class _FlashlistImpl extends Flashlist {
     required String color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    required DateTime createdAt,
+    DateTime? updatedAt,
   }) : super._(
           id: id,
           uuid: uuid,
@@ -296,6 +334,9 @@ class _FlashlistImpl extends Flashlist {
           color: color,
           items: items,
           authors: authors,
+          isCollapsed: isCollapsed,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
@@ -306,6 +347,9 @@ class _FlashlistImpl extends Flashlist {
     String? color,
     Object? items = _Undefined,
     Object? authors = _Undefined,
+    Object? isCollapsed = _Undefined,
+    DateTime? createdAt,
+    Object? updatedAt = _Undefined,
   }) {
     return Flashlist(
       id: id is int? ? id : this.id,
@@ -314,6 +358,9 @@ class _FlashlistImpl extends Flashlist {
       color: color ?? this.color,
       items: items is List<_i2.FlashlistItem?>? ? items : this.items?.clone(),
       authors: authors is List<_i2.AppUser?>? ? authors : this.authors?.clone(),
+      isCollapsed: isCollapsed is bool? ? isCollapsed : this.isCollapsed,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
     );
   }
 }
@@ -332,6 +379,14 @@ class FlashlistTable extends _i1.Table {
       'color',
       this,
     );
+    createdAt = _i1.ColumnDateTime(
+      'createdAt',
+      this,
+    );
+    updatedAt = _i1.ColumnDateTime(
+      'updatedAt',
+      this,
+    );
   }
 
   late final _i1.ColumnString uuid;
@@ -340,12 +395,18 @@ class FlashlistTable extends _i1.Table {
 
   late final _i1.ColumnString color;
 
+  late final _i1.ColumnDateTime createdAt;
+
+  late final _i1.ColumnDateTime updatedAt;
+
   @override
   List<_i1.Column> get columns => [
         id,
         uuid,
         title,
         color,
+        createdAt,
+        updatedAt,
       ];
 }
 

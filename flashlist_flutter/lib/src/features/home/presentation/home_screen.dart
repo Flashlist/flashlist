@@ -39,6 +39,8 @@ class HomeScreen extends ConsumerWidget {
                     title: localizationsOf(context).newFlashlist,
                     color: const Color(0xFF2bb673).value.toString(),
                     authors: [],
+                    createdAt: DateTime.now(),
+                    updatedAt: null,
                   ),
                 );
               },

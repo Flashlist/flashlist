@@ -19,6 +19,9 @@ abstract class Flashlist extends _i1.SerializableEntity {
     required this.color,
     this.items,
     this.authors,
+    this.isCollapsed,
+    required this.createdAt,
+    this.updatedAt,
   });
 
   factory Flashlist({
@@ -28,6 +31,9 @@ abstract class Flashlist extends _i1.SerializableEntity {
     required String color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    required DateTime createdAt,
+    DateTime? updatedAt,
   }) = _FlashlistImpl;
 
   factory Flashlist.fromJson(
@@ -45,6 +51,12 @@ abstract class Flashlist extends _i1.SerializableEntity {
           .deserialize<List<_i2.FlashlistItem?>?>(jsonSerialization['items']),
       authors: serializationManager
           .deserialize<List<_i2.AppUser?>?>(jsonSerialization['authors']),
+      isCollapsed: serializationManager
+          .deserialize<bool?>(jsonSerialization['isCollapsed']),
+      createdAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['createdAt']),
+      updatedAt: serializationManager
+          .deserialize<DateTime?>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -63,6 +75,12 @@ abstract class Flashlist extends _i1.SerializableEntity {
 
   List<_i2.AppUser?>? authors;
 
+  bool? isCollapsed;
+
+  DateTime createdAt;
+
+  DateTime? updatedAt;
+
   Flashlist copyWith({
     int? id,
     String? uuid,
@@ -70,6 +88,9 @@ abstract class Flashlist extends _i1.SerializableEntity {
     String? color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -82,6 +103,9 @@ abstract class Flashlist extends _i1.SerializableEntity {
         'items': items?.toJson(valueToJson: (v) => v?.toJson()),
       if (authors != null)
         'authors': authors?.toJson(valueToJson: (v) => v?.toJson()),
+      if (isCollapsed != null) 'isCollapsed': isCollapsed,
+      'createdAt': createdAt.toJson(),
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
     };
   }
 }
@@ -96,6 +120,9 @@ class _FlashlistImpl extends Flashlist {
     required String color,
     List<_i2.FlashlistItem?>? items,
     List<_i2.AppUser?>? authors,
+    bool? isCollapsed,
+    required DateTime createdAt,
+    DateTime? updatedAt,
   }) : super._(
           id: id,
           uuid: uuid,
@@ -103,6 +130,9 @@ class _FlashlistImpl extends Flashlist {
           color: color,
           items: items,
           authors: authors,
+          isCollapsed: isCollapsed,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
@@ -113,6 +143,9 @@ class _FlashlistImpl extends Flashlist {
     String? color,
     Object? items = _Undefined,
     Object? authors = _Undefined,
+    Object? isCollapsed = _Undefined,
+    DateTime? createdAt,
+    Object? updatedAt = _Undefined,
   }) {
     return Flashlist(
       id: id is int? ? id : this.id,
@@ -121,6 +154,9 @@ class _FlashlistImpl extends Flashlist {
       color: color ?? this.color,
       items: items is List<_i2.FlashlistItem?>? ? items : this.items?.clone(),
       authors: authors is List<_i2.AppUser?>? ? authors : this.authors?.clone(),
+      isCollapsed: isCollapsed is bool? ? isCollapsed : this.isCollapsed,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
     );
   }
 }
