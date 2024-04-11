@@ -38,9 +38,7 @@ class HexInput extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: 2,
-          ),
+          gapW4,
           Container(
             width: Sizes.p42,
             decoration: BoxDecoration(
