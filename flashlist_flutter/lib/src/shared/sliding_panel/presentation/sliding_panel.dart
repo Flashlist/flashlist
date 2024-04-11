@@ -31,6 +31,14 @@ class SlidingPanel extends StatelessWidget {
       child: Container(
         height: 38,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 1),
+            ),
+          ],
           color: withBackground ? Colors.white : Colors.transparent,
           borderRadius: const BorderRadius.all(
             Radius.circular(6),
