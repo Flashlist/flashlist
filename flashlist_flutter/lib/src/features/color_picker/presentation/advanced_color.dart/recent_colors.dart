@@ -35,6 +35,7 @@ class RecentColors extends ConsumerWidget {
                   .takeInt(int.parse(colors[index]));
             },
             child: Container(
+              margin: const EdgeInsets.only(right: 2),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: colorSchemeOf(context).onBackground,
@@ -44,7 +45,7 @@ class RecentColors extends ConsumerWidget {
                   Radius.circular(6),
                 ),
               ),
-              width: (mediaQueryOf(context).size.width - 28) / 8,
+              width: (mediaQueryOf(context).size.width - Sizes.p42) / 8,
               height: Sizes.p40,
             ),
           );

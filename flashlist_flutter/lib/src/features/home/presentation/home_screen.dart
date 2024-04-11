@@ -30,7 +30,9 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: editModeController.isEditMode
           ? null
           : FloatingActionButton(
-              backgroundColor: Theme.of(context).colorScheme.onBackground,
+              backgroundColor: isDarkThemeOf(context)
+                  ? colorSchemeOf(context).onBackground
+                  : colorSchemeOf(context).onBackground.withOpacity(0.8),
               shape: const CircleBorder(),
               onPressed: () {
                 flashlistController.createFlashlist(
