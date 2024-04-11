@@ -32,6 +32,18 @@
             "columnType": 0,
             "isNullable": false,
             "dartType": "String"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          },
+          {
+            "name": "updatedAt",
+            "columnType": 4,
+            "isNullable": true,
+            "dartType": "DateTime?"
           }
         ],
         "foreignKeys": [],
