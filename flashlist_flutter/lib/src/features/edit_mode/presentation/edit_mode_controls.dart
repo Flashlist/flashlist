@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -52,23 +53,30 @@ class EditModeControls extends ConsumerWidget {
     return Row(
       children: [
         // Confirm
-        FloatingActionButton(
-          backgroundColor: colorSchemeOf(context).onBackground,
-          shape: const CircleBorder(),
-          onPressed: onConfirm,
-          child: Icon(
-            Icons.check,
-            color: colorSchemeOf(context).background,
+        SizedBox(
+          width: Sizes.p40,
+          child: FloatingActionButton(
+            backgroundColor: colorSchemeOf(context).onBackground,
+            shape: const CircleBorder(),
+            onPressed: onConfirm,
+            child: Icon(
+              Icons.check,
+              color: colorSchemeOf(context).background,
+            ),
           ),
         ),
+        gapW4,
         // Cancel
-        FloatingActionButton(
-          backgroundColor: colorSchemeOf(context).onBackground,
-          shape: const CircleBorder(),
-          onPressed: onCancel,
-          child: Icon(
-            Icons.close,
-            color: colorSchemeOf(context).background,
+        SizedBox(
+          width: Sizes.p40,
+          child: FloatingActionButton(
+            backgroundColor: colorSchemeOf(context).onBackground,
+            shape: const CircleBorder(),
+            onPressed: onCancel,
+            child: Icon(
+              Icons.close,
+              color: colorSchemeOf(context).background,
+            ),
           ),
         ),
       ],
