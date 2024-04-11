@@ -6,3 +6,6 @@ fields:
     color: String
     items: List<FlashlistItem?>?, !persist
     authors: List<AppUser?>?, !persist
+    isCollapsed: bool?, !persist
+    createdAt: DateTime
+    updatedAt: DateTime?
