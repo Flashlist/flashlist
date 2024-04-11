@@ -46,9 +46,6 @@ class SlidingPanelAnimatorState
 
   @override
   Widget build(BuildContext context) {
-    // TODO: test if passing isOpen as a parameter is better than using ref.watch
-    // final isOpen = ref.watch(editModeControllerProvider).isEditMode;
-
     var isOpen = widget.isOpen;
 
     if (isOpen) {
