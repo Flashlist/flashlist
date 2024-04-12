@@ -36,18 +36,20 @@ void run(List<String> args) async {
       sendValidationEmail: (session, email, validationCode) async {
         // Send the validation email to the user.
         // Return `true` if the email was successfully sent, otherwise `false`.
-        try {
-          return await sendEmailFromFlashlist(
-            session.server.passwords['emailUsername']!,
-            session.server.passwords['emailPassword']!,
-            email,
-            'Flashlist Email Validation',
-            'Your validation code is: $validationCode',
-          );
-        } catch (e) {
-          print(e);
-          return false;
-        }
+        print(validationCode);
+        return true;
+        // try {
+        //   return await sendEmailFromFlashlist(
+        //     session.server.passwords['emailUsername']!,
+        //     session.server.passwords['emailPassword']!,
+        //     email,
+        //     'Flashlist Email Validation',
+        //     'Your validation code is: $validationCode',
+        //   );
+        // } catch (e) {
+        //   print(e);
+        //   return false;
+        // }
       },
       sendPasswordResetEmail: (session, userInfo, validationCode) async {
         // Send the password reset email to the user.
