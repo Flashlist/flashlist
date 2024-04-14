@@ -14,14 +14,14 @@ apiServer:
 # Configuration for the Insights server.
 insightsServer:
   port: 8081
-  publicHost: insights.examplepod.com
+  publicHost: insights.flashlistapp.com
   publicPort: 443
   publicScheme: https
 
 # Configuration for the web server.
 webServer:
   port: 8082
-  publicHost: app.examplepod.com
+  publicHost: app.flashlistapp.com
   publicPort: 443
   publicScheme: https
 
