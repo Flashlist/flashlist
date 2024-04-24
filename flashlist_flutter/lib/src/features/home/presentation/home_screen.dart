@@ -1,4 +1,5 @@
 import 'package:flashlist_flutter/src/features/home/presentation/notification_badge.dart';
+import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,6 +19,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(serverpodHelperProvider);
     final editModeController = ref.watch(editModePanelControllerProvider);
     final flashlistController = ref.watch(flashlistControllerProvider);
 
