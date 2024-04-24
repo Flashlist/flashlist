@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_server/module.dart' as auth;
 
@@ -40,8 +42,8 @@ void run(List<String> args) async {
         // return true;
         try {
           return await sendEmailFromFlashlist(
-            session.server.passwords['productionEmailUsername']!,
-            session.server.passwords['productionEmailPassword']!,
+            Platform.environment['PRODUCTION_EMAIL_ADDRESS']!,
+            Platform.environment['PRODUCTION_EMAIL_PASSWORD']!,
             email,
             'Flashlist Email Validation',
             'Your validation code is: $validationCode',
