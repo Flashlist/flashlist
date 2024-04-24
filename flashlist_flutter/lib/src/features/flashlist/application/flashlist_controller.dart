@@ -112,6 +112,11 @@ Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
     await client.closeStreamingConnection();
   });
 
+  ref.onResume(() async {
+    client.flashlist.resetStream();
+    await client.openStreamingConnection();
+  });
+
   var streamItems = <Flashlist>[];
 
   await for (final message in client.flashlist.stream) {
