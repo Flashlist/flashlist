@@ -40,8 +40,8 @@ void run(List<String> args) async {
         // return true;
         try {
           return await sendEmailFromFlashlist(
-            session.server.passwords['emailUsername']!,
-            session.server.passwords['emailPassword']!,
+            session.server.passwords['productionEmailUsername']!,
+            session.server.passwords['productionEmailPassword']!,
             email,
             'Flashlist Email Validation',
             'Your validation code is: $validationCode',
