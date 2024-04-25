@@ -14,7 +14,7 @@ class AppVersionInfo extends ConsumerWidget {
         value: ref.watch(appPackageInfoProvider),
         data: (packageInfo) {
           return ListTile(
-            title: Text(localizationsOf(context).appVersion),
+            title: Text(context.localizations.appVersion),
             subtitle: Text(packageInfo.version),
           );
         });

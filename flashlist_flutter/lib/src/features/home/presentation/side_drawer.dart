@@ -22,28 +22,28 @@ class SideDrawer extends ConsumerWidget {
           ),
           ListTile(
             leading: const Icon(Icons.person),
-            title: Text(localizationsOf(context).profile),
+            title: Text(context.localizations.profile),
             onTap: () {
               context.goNamed(AppRoute.profile.name);
             },
           ),
           ListTile(
             leading: const Icon(Icons.people),
-            title: Text(localizationsOf(context).connectionsAndRequests),
+            title: Text(context.localizations.connectionsAndRequests),
             onTap: () {
               context.goNamed(AppRoute.connections.name);
             },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: Text(localizationsOf(context).settings),
+            title: Text(context.localizations.settings),
             onTap: () {
               context.goNamed(AppRoute.settings.name);
             },
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
-            title: Text(localizationsOf(context).signOut),
+            title: Text(context.localizations.signOut),
             onTap: () {
               ref.read(authenticationControllerProvider).signOut();
               context.pop();

@@ -33,10 +33,10 @@ class FlashlistMenu extends ConsumerWidget {
     void deleteFlashlist() async {
       final wantsToDelete = await showConfirmDialog(
         context: context,
-        title: '${localizationsOf(context).delete} ${flashlist.title}?',
-        content: localizationsOf(context).thisCannotBeUndone,
-        confirmAction: localizationsOf(context).delete,
-        cancelAction: localizationsOf(context).cancel,
+        title: '${context.localizations.delete} ${flashlist.title}?',
+        content: context.localizations.thisCannotBeUndone,
+        confirmAction: context.localizations.delete,
+        cancelAction: context.localizations.cancel,
       );
 
       if (wantsToDelete == true) {
@@ -47,10 +47,10 @@ class FlashlistMenu extends ConsumerWidget {
     void leaveFlashlist() async {
       final wantsToLeave = await showConfirmDialog(
         context: context,
-        title: '${localizationsOf(context).leaveList} ${flashlist.title}?',
-        content: localizationsOf(context).youHaveToBeReinvited,
-        confirmAction: localizationsOf(context).leave,
-        cancelAction: localizationsOf(context).cancel,
+        title: '${context.localizations.leaveList} ${flashlist.title}?',
+        content: context.localizations.youHaveToBeReinvited,
+        confirmAction: context.localizations.leave,
+        cancelAction: context.localizations.cancel,
       );
 
       if (wantsToLeave == true) {
@@ -76,7 +76,7 @@ class FlashlistMenu extends ConsumerWidget {
             return <PopupMenuEntry>[
               PopupMenuItem(
                 onTap: launchEditModeForFlashlist,
-                child: Text(localizationsOf(context).edit),
+                child: Text(context.localizations.edit),
               ),
               PopupMenuItem(
                 onTap: () {
@@ -94,12 +94,12 @@ class FlashlistMenu extends ConsumerWidget {
                     },
                   );
                 },
-                child: Text(localizationsOf(context).share),
+                child: Text(context.localizations.share),
               ),
               PopupMenuItem(
                 onTap: deleteFlashlist,
                 child: Text(
-                  localizationsOf(context).delete,
+                  context.localizations.delete,
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
@@ -108,7 +108,7 @@ class FlashlistMenu extends ConsumerWidget {
             return <PopupMenuEntry>[
               PopupMenuItem(
                 onTap: leaveFlashlist,
-                child: Text(localizationsOf(context).leaveList),
+                child: Text(context.localizations.leaveList),
               ),
             ];
           }

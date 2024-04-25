@@ -40,7 +40,7 @@ class ShareViaEmail extends ConsumerWidget {
               Expanded(
                 child: TextField(
                   decoration: InputDecoration(
-                    labelText: localizationsOf(context).email,
+                    labelText: context.localizations.email,
                     border: const OutlineInputBorder(),
                   ),
                   controller: emailController,
@@ -50,7 +50,7 @@ class ShareViaEmail extends ConsumerWidget {
               const SizedBox(width: 20),
               ElevatedButton(
                 onPressed: submitInvitation,
-                child: Text(localizationsOf(context).send),
+                child: Text(context.localizations.send),
               ),
             ],
           ),
@@ -62,7 +62,7 @@ class ShareViaEmail extends ConsumerWidget {
               border: Border.all(color: Colors.grey),
             ),
             child: Text(
-              localizationsOf(context).inviteUsersViaEmailMessage,
+              context.localizations.inviteUsersViaEmailMessage,
               style: const TextStyle(fontSize: Sizes.p16),
             ),
           ),

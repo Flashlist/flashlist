@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
                 flashlistController.createFlashlist(
                   Flashlist(
                     uuid: const Uuid().v4(),
-                    title: localizationsOf(context).newFlashlist,
+                    title: context.localizations.newFlashlist,
                     color: const Color(0xFF2bb673).value.toString(),
                     authors: [],
                     createdAt: DateTime.now(),

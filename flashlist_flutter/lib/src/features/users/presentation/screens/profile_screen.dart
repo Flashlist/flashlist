@@ -18,7 +18,7 @@ class ProfileScreen extends ConsumerWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         centerTitle: true,
-        title: Text(localizationsOf(context).profile),
+        title: Text(context.localizations.profile),
       ),
       body: Center(
         child: AsyncValueWidget(
@@ -26,7 +26,7 @@ class ProfileScreen extends ConsumerWidget {
           data: (user) {
             if (user == null) {
               return Center(
-                child: Text(localizationsOf(context).noUserData),
+                child: Text(context.localizations.noUserData),
               );
             }
 
@@ -47,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${localizationsOf(context).name}: ',
+                      '${context.localizations.name}: ',
                       style: textThemeOf(context).titleMedium,
                     ),
                     Text(user.username),
@@ -57,7 +57,7 @@ class ProfileScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${localizationsOf(context).email}: ',
+                      '${context.localizations.email}: ',
                       style: textThemeOf(context).titleMedium,
                     ),
                     Text(user.email),
