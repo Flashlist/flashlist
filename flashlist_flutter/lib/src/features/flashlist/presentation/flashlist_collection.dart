@@ -28,7 +28,7 @@ class FlashlistCollection extends HookConsumerWidget {
       data: (flashlists) {
         if (flashlists.isEmpty) {
           return Center(
-            child: Text(localizationsOf(context).noFlashlists),
+            child: Text(context.localizations.noFlashlists),
           );
         }
 

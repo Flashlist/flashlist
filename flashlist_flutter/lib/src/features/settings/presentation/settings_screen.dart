@@ -16,7 +16,7 @@ class SettingsScreen extends ConsumerWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         centerTitle: true,
-        title: Text(localizationsOf(context).settings),
+        title: Text(context.localizations.settings),
       ),
       body: ListView(
         shrinkWrap: true,

@@ -18,10 +18,8 @@ class ConnectionRequestInput extends ConsumerWidget {
     final userController = ref.watch(userControllerProvider);
 
     void showSnackBar() {
-      showContextSnackBar(
-        context,
-        message: localizationsOf(context).requestSentMessage,
-      );
+      context.showContextSnackBar(context,
+          message: context.localizations.requestSentMessage);
     }
 
     return Column(
@@ -31,7 +29,7 @@ class ConnectionRequestInput extends ConsumerWidget {
           children: [
             Expanded(
               child: Text(
-                localizationsOf(context).connectWithOtherUsersViaEmail,
+                context.localizations.connectWithOtherUsersViaEmail,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 textAlign: TextAlign.start,
@@ -48,7 +46,7 @@ class ConnectionRequestInput extends ConsumerWidget {
               child: TextField(
                 controller: emailTextController,
                 decoration: InputDecoration(
-                  labelText: localizationsOf(context).email,
+                  labelText: context.localizations.email,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
                   ),

@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/routing/app_router.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NotificationBadge extends ConsumerWidget {
   const NotificationBadge({super.key});

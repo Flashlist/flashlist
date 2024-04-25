@@ -21,25 +21,27 @@ bool isDarkThemeOf(context) {
   return brightnessOf(context) == Brightness.dark;
 }
 
-AppLocalizations localizationsOf(context) {
-  return AppLocalizations.of(context)!;
-}
-
 MediaQueryData mediaQueryOf(context) {
   return MediaQuery.of(context);
 }
 
-void showContextSnackBar(
-  context, {
-  required String message,
-  SnackBarAction? action,
-}) {
-  ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      action: action,
-      backgroundColor: colorSchemeOf(context).primary,
-      content: Text(message),
-    ),
-  );
+extension ShowSnackBar on BuildContext {
+  void showContextSnackBar(
+    context, {
+    required String message,
+    SnackBarAction? action,
+  }) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        action: action,
+        backgroundColor: colorSchemeOf(context).primary,
+        content: Text(message),
+      ),
+    );
+  }
+}
+
+extension Localizations on BuildContext {
+  AppLocalizations get localizations => AppLocalizations.of(this)!;
 }

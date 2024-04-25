@@ -23,13 +23,13 @@ class ShareModal extends ConsumerWidget {
         child: Column(
           children: [
             Text(
-              '${localizationsOf(context).share} ${flashlist.title}',
+              '${context.localizations.share} ${flashlist.title}',
               style: const TextStyle(fontSize: Sizes.p20),
             ),
             TabBar(
               tabs: [
-                Tab(text: localizationsOf(context).withConnections),
-                Tab(text: localizationsOf(context).viaEmail),
+                Tab(text: context.localizations.withConnections),
+                Tab(text: context.localizations.viaEmail),
               ],
             ),
             Expanded(

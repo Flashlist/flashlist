@@ -14,22 +14,22 @@ class ThemeBrightness extends ConsumerWidget {
 
     return ListTile(
       title: Text(
-        localizationsOf(context).brightness,
+        context.localizations.brightness,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       subtitle: SegmentedButton(
         showSelectedIcon: false,
         segments: [
           ButtonSegment<String>(
-            label: Text(localizationsOf(context).light),
+            label: Text(context.localizations.light),
             value: 'light',
           ),
           ButtonSegment<String>(
-            label: Text(localizationsOf(context).dark),
+            label: Text(context.localizations.dark),
             value: 'dark',
           ),
           ButtonSegment<String>(
-            label: Text(localizationsOf(context).system),
+            label: Text(context.localizations.system),
             value: 'system',
           ),
         ],

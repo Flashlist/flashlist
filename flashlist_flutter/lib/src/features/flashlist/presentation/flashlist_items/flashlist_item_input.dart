@@ -61,7 +61,7 @@ class FlashlistItemInput extends ConsumerWidget {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return localizationsOf(context).pleaseEnterText;
+                      return context.localizations.pleaseEnterText;
                     }
                     return null;
                   },

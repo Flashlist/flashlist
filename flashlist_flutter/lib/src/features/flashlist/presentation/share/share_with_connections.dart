@@ -45,15 +45,14 @@ class ShareWithConnections extends ConsumerWidget {
               onTap: () async {
                 final wantsToShare = await showConfirmDialog(
                   context: context,
-                  title: localizationsOf(context)
+                  title: context.localizations
                       .inviteNamedUser(connection.username),
-                  content:
-                      localizationsOf(context).wantToInviteNamedUserMessage(
+                  content: context.localizations.wantToInviteNamedUserMessage(
                     connection.username,
                     flashlist.title,
                   ),
-                  confirmAction: localizationsOf(context).share,
-                  cancelAction: localizationsOf(context).cancel,
+                  confirmAction: context.localizations.share,
+                  cancelAction: context.localizations.cancel,
                 );
 
                 if (wantsToShare == true) {

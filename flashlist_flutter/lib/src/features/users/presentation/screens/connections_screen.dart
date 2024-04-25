@@ -21,7 +21,7 @@ class ConnectionsScreen extends ConsumerWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         centerTitle: true,
-        title: Text(localizationsOf(context).connectionsAndRequests),
+        title: Text(context.localizations.connectionsAndRequests),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -32,7 +32,7 @@ class ConnectionsScreen extends ConsumerWidget {
               gapH16,
               // * Pending requests to connect
               AsyncValueListWithTitle(
-                title: localizationsOf(context).pendingConnectionRequests,
+                title: context.localizations.pendingConnectionRequests,
                 value: ref.watch(pendingRequestsProvider('connection')),
                 listItemBuilder: (UserRequest? request) {
                   return ConnectionRequestRow(request!);
@@ -41,7 +41,7 @@ class ConnectionsScreen extends ConsumerWidget {
               gapH20,
               // * List of connections
               AsyncValueListWithTitle(
-                title: localizationsOf(context).connections,
+                title: context.localizations.connections,
                 value: ref.watch(connectionsProvider),
                 listItemBuilder: (AppUser? connection) {
                   return UserAvatarRow(username: connection!.username);
@@ -52,7 +52,7 @@ class ConnectionsScreen extends ConsumerWidget {
               // TODO: think about a nice way to display list invites
               // What info should be displayed?
               AsyncValueListWithTitle(
-                title: localizationsOf(context).pendingFlashlistRequests,
+                title: context.localizations.pendingFlashlistRequests,
                 value: ref.watch(pendingRequestsProvider('join_flashlist')),
                 listItemBuilder: (UserRequest? request) {
                   return request != null
