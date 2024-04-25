@@ -49,5 +49,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "pleaseEnterText": "Please enter some text"
 }

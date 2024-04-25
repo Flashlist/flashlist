@@ -1,6 +1,7 @@
 import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,34 +21,58 @@ class FlashlistItemInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final flashlistItemInputTextController = TextEditingController();
+    String flashlistItemTitle = '';
+    final flashlistItemFormKey = GlobalKey<FormState>();
 
     final currentOrderNr =
         flashlist.items != null ? flashlist.items!.length + 1 : 1;
+
+    void submit() {
+      final isValid = flashlistItemFormKey.currentState!.validate();
+
+      if (!isValid) {
+        return;
+      }
+
+      flashlistItemFormKey.currentState!.save();
+
+      ref.read(flashlistControllerProvider).createFlashlistItem(
+            FlashlistItem(
+              parentId: flashlist.id!,
+              name: flashlistItemTitle,
+              orderNr: currentOrderNr,
+            ),
+          );
+    }
 
     return isAdding
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
             child: Card(
-              child: TextField(
+              child: Form(
+                key: flashlistItemFormKey,
+                child: TextFormField(
                   textInputAction: TextInputAction.send,
-                  controller: flashlistItemInputTextController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
                     labelText: '#$currentOrderNr',
                   ),
-                  onEditingComplete: () {
-                    ref.read(flashlistControllerProvider).createFlashlistItem(
-                          FlashlistItem(
-                            parentId: flashlist.id!,
-                            name: flashlistItemInputTextController.text,
-                            orderNr: currentOrderNr,
-                          ),
-                        );
-                    flashlistItemInputTextController.clear();
-                  }),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return localizationsOf(context).pleaseEnterText;
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    flashlistItemTitle = newValue!;
+                  },
+                  onFieldSubmitted: (_) {
+                    submit();
+                  },
+                ),
+              ),
             ),
           )
         : const SizedBox();

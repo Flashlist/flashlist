@@ -50,5 +50,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "pleaseEnterText": "Bitte Text eingeben"
 }
