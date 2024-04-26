@@ -1,5 +1,3 @@
-import 'package:flashlist_flutter/src/features/home/presentation/notification_badge.dart';
-import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,8 +7,10 @@ import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_p
 import 'package:flashlist_flutter/src/features/edit_mode/presentation/edit_mode_overlay.dart';
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_collection.dart';
+import 'package:flashlist_flutter/src/features/home/presentation/notification_badge.dart';
 import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
+import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
 class HomeScreen extends ConsumerWidget {
   /// HomeScreen is the default screen when the user is authenticated
