@@ -30,8 +30,8 @@
     "requestSentMessage": "Anfrage gesendet! Wenn ein Account mit dieser E-mail existiert, wird er benachrichtigt.",
     "send": "Senden",
     "inviteUsersViaEmailMessage": "Wenn ein Benutzer mit ger angegebenen Email existiert, erhält er deine Einladung.",
-    "withConnections": "Mit Verbindungen",
-    "viaEmail": "Via Email",
+    "editors": "Editors",
+    "noEditorsMessage": "Diese Liste hat keine Editoren, geh zum Einlade menu um jemanden einzuladen.",
     "inviteNamedUser": "{name} einladen",
     "@inviteNamedUser": {
         "placeholders": {
@@ -51,5 +51,14 @@
             }
         }
     },
-    "pleaseEnterText": "Bitte Text eingeben"
+    "pleaseEnterText": "Bitte Text eingeben",
+    "remove": "Entfernen",
+    "removeNamedUser": "{name} entfernen",
+    "@removeNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }

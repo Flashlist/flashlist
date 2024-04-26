@@ -29,8 +29,8 @@
     "requestSentMessage": "Request sent! If an account with this email exists, they will receive a notification.",
     "send": "Send",
     "inviteUsersViaEmailMessage": "If a user with the provided email exists, they will receive your invitation.",
-    "withConnections": "With Connections",
-    "viaEmail": "Via Email",
+    "editors": "Editors",
+    "noEditorsMessage": "This list has no editors yet, go to the share menu to invite someone.",
     "inviteNamedUser": "Invite {name}",
     "@inviteNamedUser": {
         "placeholders": {
@@ -50,5 +50,14 @@
             }
         }
     },
-    "pleaseEnterText": "Please enter some text"
+    "pleaseEnterText": "Please enter some text",
+    "remove": "Remove",
+    "removeNamedUser": "Remove {name}",
+    "@removeNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }
