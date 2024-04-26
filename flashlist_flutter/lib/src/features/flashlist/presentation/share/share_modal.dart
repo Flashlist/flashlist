@@ -1,10 +1,10 @@
+import 'package:flashlist_flutter/src/features/flashlist/presentation/share/share_with_connections.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
-import 'package:flashlist_flutter/src/features/flashlist/presentation/share/share_via_email.dart';
-import 'package:flashlist_flutter/src/features/flashlist/presentation/share/share_with_connections.dart';
+import 'package:flashlist_flutter/src/features/flashlist/presentation/share/flashlist_authors.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
 /// A modal to share a flashlist with connections or via email
@@ -28,15 +28,15 @@ class ShareModal extends ConsumerWidget {
             ),
             TabBar(
               tabs: [
-                Tab(text: context.localizations.withConnections),
-                Tab(text: context.localizations.viaEmail),
+                Tab(text: context.localizations.share),
+                Tab(text: context.localizations.editors),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
                   ShareWithConnections(flashlist),
-                  ShareViaEmail(flashlist),
+                  FlashlistAuthors(flashlist),
                 ],
               ),
             ),
