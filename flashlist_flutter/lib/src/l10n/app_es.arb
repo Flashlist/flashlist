@@ -29,8 +29,8 @@
     "requestSentMessage": "Solicitud enviada. Si existe una cuenta con este correo electrónico, recibirán una notificación.",
     "send": "Enviar",
     "inviteUsersViaEmailMessage": "Si existe un usuario con el correo electrónico proporcionado, recibirán tu invitación.",
-    "withConnections": "Con conexiones",
-    "viaEmail": "Por correo",
+    "editors": "Editores",
+    "noEditorsMessage": "Esta lista aún no tiene editores, ve al menú de compartir para invitar a alguien.",
     "inviteNamedUser": "Invitar a {name}",
     "@inviteNamedUser": {
         "placeholders": {
@@ -50,5 +50,14 @@
             }
         }
     },
-    "pleaseEnterText": "Por favor, introduce un texto."
+    "pleaseEnterText": "Por favor, introduce un texto.",
+    "remove": "Eliminar",
+    "removeNamedUser": "Eliminar {name}",
+    "@removeNamedUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }

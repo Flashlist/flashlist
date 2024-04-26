@@ -7,6 +7,11 @@ import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
+/// ShareViaEmail allows the user to share a flashlist via email
+/// by entering the email address of the recipient
+/// and sending an invitation to the recipient
+/// Currently the user doesn't get any feedback if a user with the
+/// searched email address does exist or not.
 class ShareViaEmail extends ConsumerWidget {
   const ShareViaEmail(this.flashlist, {super.key});
 

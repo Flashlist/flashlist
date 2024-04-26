@@ -1,16 +1,17 @@
-import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
-import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
-import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
 import 'package:flashlist_flutter/src/constants/app_sizes.dart';
+import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
 import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/features/users/presentation/avatar_placeholder.dart';
 import 'package:flashlist_flutter/src/shared/async_value_widget.dart';
+import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
+import 'package:flashlist_flutter/src/utils/context_helper.dart';
 
+/// ShareWithConnections allows the user to share a flashlist with their connections
 class ShareWithConnections extends ConsumerWidget {
   const ShareWithConnections(this.flashlist, {super.key});
 
@@ -33,9 +34,17 @@ class ShareWithConnections extends ConsumerWidget {
       value: ref.watch(connectionsProvider),
       data: (connections) {
         return ListView.builder(
+          shrinkWrap: true,
           itemCount: connections.length,
           itemBuilder: (context, index) {
+            // TODO: think about just disabling the connection if it's already an author
             final connection = connections[index];
+            final authorIds =
+                Set.from(flashlist.authors!.map((c) => c?.userId));
+            if (authorIds.contains(connection?.userId)) {
+              return const SizedBox.shrink();
+            }
+
             return ListTile(
               leading: AvatarPlaceholder(
                 radius: Sizes.p20,
