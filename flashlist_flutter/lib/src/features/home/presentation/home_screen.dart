@@ -23,6 +23,8 @@ class HomeScreen extends ConsumerWidget {
     final editModeController = ref.watch(editModePanelControllerProvider);
     final flashlistController = ref.watch(flashlistControllerProvider);
 
+    final ScrollController scrollController = ScrollController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(),
@@ -47,11 +49,19 @@ class HomeScreen extends ConsumerWidget {
                     updatedAt: null,
                   ),
                 );
+
+                scrollController.animateTo(
+                  scrollController.position.maxScrollExtent + 300,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );
+
+                // * It might be cool to enter edit mode automatically after creating list.
               },
               child: const AddFlashlistIcon(),
             ),
-      body: const EditModeOverlay(
-        child: FlashlistCollection(),
+      body: EditModeOverlay(
+        child: FlashlistCollection(scrollController),
       ),
     );
   }
