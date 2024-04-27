@@ -10,7 +10,9 @@ import 'package:flashlist_flutter/src/utils/context_helper.dart';
 /// An independent Widget reading the [flashlistForUserProvider] (Stream)
 /// and displaying the flashlists in a list.
 class FlashlistCollection extends HookConsumerWidget {
-  const FlashlistCollection({super.key});
+  const FlashlistCollection(this.scrollController, {super.key});
+
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,6 +35,7 @@ class FlashlistCollection extends HookConsumerWidget {
         }
 
         return ListView.builder(
+          controller: scrollController,
           itemCount: flashlists.length,
           itemBuilder: (context, index) {
             final flashlist = flashlists[index];
