@@ -38,6 +38,7 @@ class FlashlistCollection extends HookConsumerWidget {
           controller: scrollController,
           itemCount: flashlists.length,
           itemBuilder: (context, index) {
+            flashlists.sort((a, b) => a!.createdAt.compareTo(b!.createdAt));
             final flashlist = flashlists[index];
             return FlashlistCard(
               flashlist: flashlist!,
