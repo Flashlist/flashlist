@@ -1,4 +1,4 @@
-package com.example.flashlist_flutter
+package com.flashlistapp
 
 import io.flutter.embedding.android.FlutterActivity
 
