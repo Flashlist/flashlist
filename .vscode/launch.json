@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flashlist_client",
+            "cwd": "flashlist_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flashlist_flutter",
+            "cwd": "flashlist_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flashlist_flutter (profile mode)",
+            "cwd": "flashlist_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flashlist_flutter (release mode)",
+            "cwd": "flashlist_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flashlist_server",
+            "cwd": "flashlist_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
