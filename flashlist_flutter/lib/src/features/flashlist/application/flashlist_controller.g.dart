@@ -172,7 +172,25 @@ class _FlashlistByIdProviderElement
   int get flashlistId => (origin as FlashlistByIdProvider).flashlistId;
 }
 
-String _$flashlistsForUserHash() => r'f23c4ff104af17434fa8285ccabbc474e0079248';
+String _$streamingConnectionHandlerHash() =>
+    r'b366deb15be36c2b8670b70dd6db3e75023632bc';
+
+/// See also [streamingConnectionHandler].
+@ProviderFor(streamingConnectionHandler)
+final streamingConnectionHandlerProvider =
+    AutoDisposeProvider<StreamingConnectionHandler>.internal(
+  streamingConnectionHandler,
+  name: r'streamingConnectionHandlerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$streamingConnectionHandlerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef StreamingConnectionHandlerRef
+    = AutoDisposeProviderRef<StreamingConnectionHandler>;
+String _$flashlistsForUserHash() => r'2be1c7027cb25192dbab0023353f057293fa585a';
 
 /// See also [flashlistsForUser].
 @ProviderFor(flashlistsForUser)
