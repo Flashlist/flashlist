@@ -71,6 +71,9 @@ void handleFlashlistStreamMessage(
   /// [FlashlistBatch] is a message that contains a collection of [Flashlist]
   /// entities. It is sent when the user first connects to the WebSocket.
   if (message is FlashlistBatch) {
+    if (streamItems.isNotEmpty) {
+      streamItems.clear();
+    }
     streamItems.addAll(message.collection);
   }
 

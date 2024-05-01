@@ -101,24 +101,30 @@ Future<Flashlist?> flashlistById(
 }
 
 @riverpod
+StreamingConnectionHandler streamingConnectionHandler(
+  StreamingConnectionHandlerRef ref,
+) {
+  return StreamingConnectionHandler(
+    client: ref.watch(clientProvider),
+    listener: (connectionState) {},
+  );
+}
+
+@riverpod
 Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
   final client = ref.watch(clientProvider);
+  final streamingConnectionHandler =
+      ref.watch(streamingConnectionHandlerProvider);
 
   client.flashlist.resetStream();
 
-  await client.openStreamingConnection();
+  streamingConnectionHandler.connect();
 
-  ref.onDispose(() async {
-    await client.closeStreamingConnection();
-  });
-
-  ref.onResume(() async {
-    client.flashlist.resetStream();
-    await client.openStreamingConnection();
+  ref.onDispose(() {
+    streamingConnectionHandler.dispose();
   });
 
   var streamItems = <Flashlist>[];
-
   await for (final message in client.flashlist.stream) {
     handleFlashlistStreamMessage(ref, streamItems, message);
     yield streamItems;
