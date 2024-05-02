@@ -23,10 +23,10 @@ Future<bool> sendEmailFromFlashlist(
   try {
     final sendReport = await send(message, smtpServer);
     print(sendReport);
-    print('Message sent: ' + sendReport.toString());
+    print('Message sent: $sendReport');
     return true;
   } catch (e) {
-    print('Message not sent: ' + e.toString());
+    print('Message not sent: $e');
     return false;
   }
 }
