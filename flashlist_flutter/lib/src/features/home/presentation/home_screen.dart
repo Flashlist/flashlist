@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
@@ -12,7 +13,7 @@ import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dar
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends HookConsumerWidget {
   /// HomeScreen is the default screen when the user is authenticated
   /// Holds no [state], only UI.
   const HomeScreen({super.key});
@@ -25,13 +26,18 @@ class HomeScreen extends ConsumerWidget {
 
     final ScrollController scrollController = ScrollController();
 
+    /// A ValueNotifier to keep track of which flashlist is being populated
+    /// When [isAdding.value] is equal to a flashlist id,
+    /// A TextField will be displayed to add a new item to that flashlist
+    final isAdding = useState<int>(0);
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(),
         actions: const [NotificationBadge()],
       ),
       drawer: const SideDrawer(),
-      floatingActionButton: editModeController.isEditMode
+      floatingActionButton: editModeController.isEditMode || isAdding.value != 0
           ? null
           : FloatingActionButton(
               backgroundColor: isDarkThemeOf(context)
@@ -61,7 +67,10 @@ class HomeScreen extends ConsumerWidget {
               child: const AddFlashlistIcon(),
             ),
       body: EditModeOverlay(
-        child: FlashlistCollection(scrollController),
+        child: FlashlistCollection(
+          scrollController: scrollController,
+          isAdding: isAdding,
+        ),
       ),
     );
   }
