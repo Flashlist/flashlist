@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_flutter/src/features/flashlist/application/flashlist_controller.dart';
@@ -10,20 +9,20 @@ import 'package:flashlist_flutter/src/utils/context_helper.dart';
 /// An independent Widget reading the [flashlistForUserProvider] (Stream)
 /// and displaying the flashlists in a list.
 class FlashlistCollection extends HookConsumerWidget {
-  const FlashlistCollection(this.scrollController, {super.key});
+  const FlashlistCollection({
+    super.key,
+    required this.scrollController,
+    required this.isAdding,
+  });
 
   final ScrollController scrollController;
+  final ValueNotifier<int> isAdding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     /// A StreamProvider to get the flashlists for the current user
     /// The flashlists will be updated in real-time
     final flashlistsForUser = ref.watch(flashlistsForUserProvider);
-
-    /// A ValueNotifier to keep track of which flashlist is being populated
-    /// When [isAdding.value] is equal to a flashlist id,
-    /// A TextField will be displayed to add a new item to that flashlist
-    final isAdding = useState<int>(0);
 
     return AsyncValueWidget(
       value: flashlistsForUser,
