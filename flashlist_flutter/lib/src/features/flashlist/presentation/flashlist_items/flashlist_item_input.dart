@@ -5,6 +5,12 @@ import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// A provider for the form key
+/// Has to be outside of FlashlistItemInput to prevent it from being recreated
+final globalFormKeyProvider = Provider<GlobalKey<FormState>>((ref) {
+  return GlobalKey<FormState>();
+});
+
 /// A widget to input a new flashlist item
 /// Requires [flashlist] and [isAdding]
 /// Only visible when [isAdding] is true
@@ -21,8 +27,8 @@ class FlashlistItemInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final flashlistItemFormKey = ref.watch(globalFormKeyProvider);
     String flashlistItemTitle = '';
-    final flashlistItemFormKey = GlobalKey<FormState>();
 
     final currentOrderNr =
         flashlist.items != null ? flashlist.items!.length + 1 : 1;
@@ -43,6 +49,8 @@ class FlashlistItemInput extends ConsumerWidget {
               orderNr: currentOrderNr,
             ),
           );
+
+      flashlistItemFormKey.currentState!.reset();
     }
 
     return isAdding
