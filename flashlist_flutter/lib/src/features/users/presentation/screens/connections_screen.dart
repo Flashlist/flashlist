@@ -1,3 +1,4 @@
+import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -44,7 +45,29 @@ class ConnectionsScreen extends ConsumerWidget {
                 title: context.localizations.connections,
                 value: ref.watch(connectionsProvider),
                 listItemBuilder: (AppUser? connection) {
-                  return UserAvatarRow(username: connection!.username);
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      UserAvatarRow(username: connection!.username),
+                      IconButton(
+                          icon: const Icon(Icons.remove_circle_outline),
+                          onPressed: () async {
+                            final wantsToRemove = await showConfirmDialog(
+                              context: context,
+                              title: context.localizations
+                                  .removeConnection(connection.username),
+                              confirmAction: context.localizations.share,
+                              cancelAction: context.localizations.cancel,
+                            );
+
+                            if (wantsToRemove == true) {
+                              ref
+                                  .read(userControllerProvider)
+                                  .removeConnection(connection.userId);
+                            }
+                          })
+                    ],
+                  );
                 },
               ),
               gapH20,

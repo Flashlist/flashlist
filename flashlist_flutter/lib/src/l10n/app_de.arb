@@ -60,5 +60,13 @@
                 "type": "String"
             }
         }
+    },
+    "removeConnection": "Verbindung mit {name} entfernen",
+    "@removeConnection": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
     }
 }

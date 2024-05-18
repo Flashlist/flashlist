@@ -9,6 +9,7 @@ appUser:
   - sendConnectionRequestByEmail:
   - acceptConnectionRequest:
   - getConnections:
+  - removeConnection:
 flashlist:
   - getFlashlistById:
   - getUserAccessLevelForFlashlist:

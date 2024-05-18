@@ -201,6 +201,24 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['appUser'] as _i2.AppUserEndpoint)
                   .getConnections(session),
         ),
+        'removeConnection': _i1.MethodConnector(
+          name: 'removeConnection',
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).removeConnection(
+            session,
+            params['userId'],
+          ),
+        ),
       },
     );
     connectors['flashlist'] = _i1.EndpointConnector(

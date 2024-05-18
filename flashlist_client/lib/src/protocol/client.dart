@@ -94,6 +94,13 @@ class EndpointAppUser extends _i1.EndpointRef {
         'getConnections',
         {},
       );
+
+  _i2.Future<void> removeConnection(int userId) =>
+      caller.callServerEndpoint<void>(
+        'appUser',
+        'removeConnection',
+        {'userId': userId},
+      );
 }
 
 /// {@category Endpoint}
