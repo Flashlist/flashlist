@@ -42,6 +42,11 @@ class UserController {
     return await client.appUser.getConnections();
   }
 
+  Future<void> removeConnection(int userId) async {
+    final client = ref.read(clientProvider);
+    await client.appUser.removeConnection(userId);
+  }
+
   Future<List<UserRequest?>> getPendingRequestsByParameter(
     String? parameter,
   ) async {

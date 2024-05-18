@@ -173,7 +173,7 @@ class _FlashlistByIdProviderElement
 }
 
 String _$streamingConnectionHandlerHash() =>
-    r'b366deb15be36c2b8670b70dd6db3e75023632bc';
+    r'706a2c52689a60fa2268df06f15b53700d7e18b2';
 
 /// See also [streamingConnectionHandler].
 @ProviderFor(streamingConnectionHandler)
@@ -190,7 +190,7 @@ final streamingConnectionHandlerProvider =
 
 typedef StreamingConnectionHandlerRef
     = AutoDisposeProviderRef<StreamingConnectionHandler>;
-String _$flashlistsForUserHash() => r'2be1c7027cb25192dbab0023353f057293fa585a';
+String _$flashlistsForUserHash() => r'85bb36982788c9b5adf6727c1d8f33c4e407730e';
 
 /// See also [flashlistsForUser].
 @ProviderFor(flashlistsForUser)
