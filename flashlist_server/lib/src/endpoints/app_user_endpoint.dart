@@ -240,4 +240,30 @@ class AppUserEndpoint extends Endpoint {
       rethrow;
     }
   }
+
+  Future<void> removeConnection(Session session, int userId) async {
+    try {
+      final currentUser = await userHelper.getAuthenticatedUser(session);
+  
+
+      final connection = await UserRelation.db.findFirstRow(
+        session,
+        where: (relation) {
+          return (relation.userId1.equals(currentUser!.userId) &
+                  relation.userId2.equals(userId)) |
+              (relation.userId1.equals(userId) &
+                  relation.userId2.equals(currentUser.userId));
+        },
+      );
+
+      if (connection == null) {
+        throw Exception('Connection not found');
+      }
+
+      await UserRelation.db.deleteRow(session, connection);
+    } catch (e) {
+      print('Failed to remove connection: $e');
+      rethrow;
+    }
+  }
 }
