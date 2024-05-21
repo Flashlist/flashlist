@@ -19,27 +19,24 @@ class ConnectionsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        centerTitle: true,
-        title: Text(context.localizations.connectionsAndRequests),
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
           child: Column(
             children: [
-              gapH20, const ConnectionRequestInput(),
+              const ConnectionRequestInput(),
               gapH16,
-              // * Pending requests to connect
-              AsyncValueListWithTitle(
-                title: context.localizations.pendingConnectionRequests,
-                value: ref.watch(pendingRequestsProvider('connection')),
-                listItemBuilder: (UserRequest? request) {
-                  return ConnectionRequestRow(request!);
-                },
+              Container(
+                padding: const EdgeInsets.all(Sizes.p16),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: colorSchemeOf(context).secondaryContainer,
+                  borderRadius: BorderRadius.circular(Sizes.p24),
+                ),
+                child: Text(context.localizations.connectViaEmailMessage),
               ),
-              gapH20,
+              gapH8,
               // * List of connections
               AsyncValueListWithTitle(
                 title: context.localizations.connections,
@@ -50,7 +47,7 @@ class ConnectionsScreen extends ConsumerWidget {
                     children: [
                       UserAvatarRow(username: connection!.username),
                       IconButton(
-                          icon: const Icon(Icons.remove_circle_outline),
+                          icon: const Icon(Icons.person_remove),
                           onPressed: () async {
                             final wantsToRemove = await showConfirmDialog(
                               context: context,
@@ -68,6 +65,14 @@ class ConnectionsScreen extends ConsumerWidget {
                           })
                     ],
                   );
+                },
+              ),
+              // * Pending requests to connect
+              AsyncValueListWithTitle(
+                title: context.localizations.pendingConnectionRequests,
+                value: ref.watch(pendingRequestsProvider('connection')),
+                listItemBuilder: (UserRequest? request) {
+                  return ConnectionRequestRow(request!);
                 },
               ),
               gapH20,
