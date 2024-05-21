@@ -25,16 +25,10 @@ class ConnectionRequestInput extends ConsumerWidget {
     return Column(
       children: [
         Row(
-          mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
-              child: Text(
-                context.localizations.connectWithOtherUsersViaEmail,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 18),
-              ),
+            Text(
+              context.localizations.connect,
+              style: const TextStyle(fontSize: Sizes.p16),
             ),
           ],
         ),
@@ -45,25 +39,41 @@ class ConnectionRequestInput extends ConsumerWidget {
             Expanded(
               child: TextField(
                 controller: emailTextController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: context.localizations.email,
+                  label: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      gapW16,
+                      const Icon(Icons.person_add),
+                      gapW16,
+                      Text(context.localizations.email),
+                    ],
+                  ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(24),
                   ),
                 ),
+                onEditingComplete: () async {
+                  await userController.sendConnectionRequestByEmail(
+                    emailTextController.text,
+                  );
+                  showSnackBar();
+                  emailTextController.clear();
+                },
               ),
             ),
-            gapW12,
-            IconButton(
-              onPressed: () async {
-                await userController.sendConnectionRequestByEmail(
-                  emailTextController.text,
-                );
-                showSnackBar();
-                emailTextController.clear();
-              },
-              icon: const Icon(Icons.send),
-            ),
+            // gapW12,
+            // IconButton(
+            //   onPressed: () async {
+            //     await userController.sendConnectionRequestByEmail(
+            //       emailTextController.text,
+            //     );
+            //     showSnackBar();
+            //     emailTextController.clear();
+            //   },
+            //   icon: const Icon(Icons.send),
+            // ),
           ],
         ),
       ],

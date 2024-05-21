@@ -1,7 +1,8 @@
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// A Async List with a [title].
+/// A Async List with Divider above the [title].
 /// [value] is an [AsyncValue] that holds a list of [T] (generic type).
 /// [itemBuilder] is a function that builds a widget for each item in the list.
 ///
@@ -43,10 +44,11 @@ class AsyncValueListWithTitle<T> extends StatelessWidget {
         // List with Title
         return Column(
           children: [
+            if (data.isNotEmpty) const Divider(),
             if (title != null)
               Row(
                 children: [
-                  Text(title!),
+                  Text(title!, style: const TextStyle(fontSize: Sizes.p16)),
                 ],
               ),
             SizedBox(
@@ -55,6 +57,7 @@ class AsyncValueListWithTitle<T> extends StatelessWidget {
             ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 final item = data[index];
                 return Padding(
@@ -69,7 +72,7 @@ class AsyncValueListWithTitle<T> extends StatelessWidget {
       error: (e, st) => Center(
         child: Text(e.toString()),
       ),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const SizedBox(),
     );
   }
 }
