@@ -23,7 +23,7 @@
     "thisCannotBeUndone": "This cannot be undone.",
     "youHaveToBeReinvited": "You will have to be reinvited to join.",
     "connect": "Connect",
-    "connectViaEmailMessage": "'You can connect with another users via their email address. When they accept the request, they will appear in your connections list and in the share dialog of your flashlists.'",
+    "connectViaEmailMessage": "You can connect with another users via their email address. When they accept the request, they will appear in your connections list and in the share dialog of your flashlists.",
     "connections": "Connections",
     "pendingConnectionRequests": "Pending Connection Requests",
     "pendingFlashlistRequests": "Pending Flashlist Requests",
