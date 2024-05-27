@@ -1,9 +1,8 @@
-import 'package:flashlist_flutter/src/constants/app_sizes.dart';
-import 'package:flashlist_flutter/src/utils/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
+import 'package:flashlist_flutter/src/constants/app_sizes.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_controller.dart';
 import 'package:flashlist_flutter/src/features/edit_mode/application/edit_mode_panel_controller.dart';
 
@@ -40,8 +39,8 @@ class FlashlistTitle extends ConsumerWidget {
               onSubmitted: (value) {
                 textEditingController.text = value;
               },
-              style: TextStyle(
-                color: colorSchemeOf(context).onBackground,
+              style: const TextStyle(
+                color: Colors.white,
                 fontSize: Sizes.p24,
                 fontWeight: FontWeight.bold,
               ),
