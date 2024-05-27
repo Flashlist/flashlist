@@ -10,8 +10,15 @@ final lightTheme = ThemeData(
     textTheme.apply(bodyColor: Colors.black),
   ),
   useMaterial3: true,
-  colorSchemeSeed: Colors.blue,
-  brightness: Brightness.light,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.blue,
+    brightness: Brightness.light,
+    background:
+        const Color(0xFFF0F0F0), // Change this to your desired background color
+  ),
+  appBarTheme: const AppBarTheme(
+    color: Color(0xFFF0F0F0),
+  ),
   cardTheme: cardTheme.copyWith(
     margin: const EdgeInsets.all(Sizes.p4),
   ),

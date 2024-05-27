@@ -50,18 +50,20 @@ class EditModeControls extends ConsumerWidget {
       editModeController.toggleEditMode(null);
     }
 
+    print(IconTheme.of(context).color);
+
     return Row(
       children: [
         // Confirm
         SizedBox(
           width: Sizes.p40,
           child: FloatingActionButton(
-            backgroundColor: colorSchemeOf(context).onBackground,
+            backgroundColor: Colors.white,
             shape: const CircleBorder(),
             onPressed: onConfirm,
-            child: Icon(
+            child: const Icon(
               Icons.check,
-              color: colorSchemeOf(context).background,
+              color: Color(0xdd000000),
             ),
           ),
         ),
@@ -70,12 +72,12 @@ class EditModeControls extends ConsumerWidget {
         SizedBox(
           width: Sizes.p40,
           child: FloatingActionButton(
-            backgroundColor: colorSchemeOf(context).onBackground,
+            backgroundColor: Colors.white,
             shape: const CircleBorder(),
             onPressed: onCancel,
-            child: Icon(
+            child: const Icon(
               Icons.close,
-              color: colorSchemeOf(context).background,
+              color: Color(0xdd000000),
             ),
           ),
         ),
