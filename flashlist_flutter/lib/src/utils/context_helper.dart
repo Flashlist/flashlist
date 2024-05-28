@@ -26,14 +26,12 @@ MediaQueryData mediaQueryOf(context) {
 }
 
 extension ShowSnackBar on BuildContext {
-  void showContextSnackBar(
-    context, {
-    required String message,
-    SnackBarAction? action,
-  }) {
+  void showContextSnackBar(context,
+      {required String message, SnackBarAction? action, Duration? duration}) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: duration ?? const Duration(seconds: 5),
         action: action,
         backgroundColor: colorSchemeOf(context).primary,
         content: Text(message),
