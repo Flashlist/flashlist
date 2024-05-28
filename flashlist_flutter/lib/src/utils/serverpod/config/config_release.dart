@@ -1,1 +1,0 @@
-const serverUrl = "https://api.flashlistapp.com/";

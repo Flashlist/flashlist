@@ -1,16 +1,17 @@
+import 'dart:io';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
 
-import './config/config_debug.dart' if (dart.library.io) './config/config_release.dart';
-
 part 'serverpod_helper.g.dart';
 
 @riverpod
 Client client(ClientRef ref) => Client(
-      serverUrl,
+      // "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
+      "https://api.flashlistapp.com/",
       authenticationKeyManager: FlutterAuthenticationKeyManager(),
     )..connectivityMonitor = FlutterConnectivityMonitor();
 
