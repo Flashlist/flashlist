@@ -125,13 +125,17 @@ void handleFlashlistStreamMessage(
     final flashListToUpdate =
         getFlashlistByFromStream(streamItems, message.parentId);
 
-    final itemToUpdate = flashListToUpdate!.items!
-        .firstWhere((currentItem) => currentItem!.id == message.id);
+    final itemToUpdate = flashListToUpdate!.items!.firstWhere(
+      (currentItem) => currentItem!.id == message.id,
+      orElse: () => null,
+    );
 
-    flashListToUpdate.items!
-        .removeWhere((currentItem) => currentItem!.id == message.id);
+    if (itemToUpdate != null) {
+      flashListToUpdate.items!
+          .removeWhere((currentItem) => currentItem!.id == message.id);
 
-    updateOrderNrForSiblings(flashListToUpdate.items!, itemToUpdate!, null);
+      updateOrderNrForSiblings(flashListToUpdate.items!, itemToUpdate, null);
+    }
   }
 
   /// [ReOrderFlashlistItem] is a message that contains the [id] of a [FlashlistItem]
