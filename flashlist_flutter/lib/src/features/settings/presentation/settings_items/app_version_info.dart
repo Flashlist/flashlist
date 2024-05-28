@@ -11,6 +11,7 @@ class AppVersionInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueWidget(
+        withLoadingIndicator: false,
         value: ref.watch(appPackageInfoProvider),
         data: (packageInfo) {
           return ListTile(

@@ -13,6 +13,7 @@ class NotificationBadge extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueWidget(
+        withLoadingIndicator: false,
         value: ref.watch(pendingRequestsProvider(null)),
         data: (pendingRequests) {
           return Stack(
