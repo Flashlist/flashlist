@@ -23,6 +23,7 @@ class ConnectionRequestRow extends ConsumerWidget {
       children: [
         if (request.data == null)
           AsyncValueWidget(
+            withLoadingIndicator: false,
             value: ref.watch(userByIdProvider(request.userId1)),
             data: (user) => UserAvatarRow(username: user!.username),
           ),
