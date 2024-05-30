@@ -59,6 +59,54 @@ class FlashlistItemHelper {
     }
   }
 
+  Future<FlashlistItem> insertFlashlistItem(
+    Session session,
+    FlashlistItem item,
+  ) async {
+    try {
+      // Get all items with the same parentId
+      final flashlistItems = await FlashlistItem.db.find(session,
+          where: (currentItem) => currentItem.parentId.equals(item.parentId));
+
+      // Sort the items by orderNr
+      flashlistItems.sort((a, b) => a.orderNr.compareTo(b.orderNr));
+
+      // Find the position for the new item
+      int position = flashlistItems
+          .indexWhere((currentItem) => currentItem.orderNr >= item.orderNr);
+
+      // If no position was found, the new item should be last
+      if (position == -1) {
+        position = flashlistItems.length;
+      }
+
+      // Update the orderNr of the new item and all items that come after it
+      for (int i = position; i < flashlistItems.length; i++) {
+        if (flashlistItems[i].orderNr >= item.orderNr) {
+          await FlashlistItem.db.updateRow(
+            session,
+            flashlistItems[i].copyWith(orderNr: flashlistItems[i].orderNr + 1),
+          );
+
+          // Re-fetch the updated item from the database
+          await FlashlistItem.db.findFirstRow(session,
+              where: (currentItem) =>
+                  currentItem.id.equals(flashlistItems[i].id));
+        }
+      }
+
+// Insert the new item with the original orderNr
+      final newFlashlistItem = await FlashlistItem.db.insertRow(
+        session,
+        item,
+      );
+
+      return newFlashlistItem;
+    } catch (e) {
+      throw Exception('Failed to insert flashlist item: $e');
+    }
+  }
+
   /// Returns all items where [parentId] == [flashlistId].
   /// Also sorts them
   Future<List<FlashlistItem?>> getFlashlistItemsByFlashlistId(
@@ -86,50 +134,55 @@ class FlashlistItemHelper {
     FlashlistItem flashlistItem,
     int? newOrderNr,
   ) async {
-    final flashlistItems = await FlashlistItem.db.find(session,
-        where: (currentItem) =>
-            currentItem.parentId.equals(flashlistItem.parentId));
+    try {
+      final flashlistItems = await FlashlistItem.db.find(session,
+          where: (currentItem) =>
+              currentItem.parentId.equals(flashlistItem.parentId));
 
-    if (newOrderNr == null) {
-      // Item is being deleted, reduce orderNr for all siblings coming after
-      for (var currentItem in flashlistItems) {
-        if (currentItem.orderNr >= flashlistItem.orderNr &&
-            currentItem.id != flashlistItem.id) {
-          await FlashlistItem.db.updateRow(
-            session,
-            currentItem.copyWith(orderNr: currentItem.orderNr - 1),
-          );
-        }
-      }
-    } else {
-      // Item is being moved
-      int oldOrderNr = flashlistItem.orderNr;
-      for (var currentItem in flashlistItems) {
-        if (currentItem.id != flashlistItem.id) {
-          if (oldOrderNr < newOrderNr &&
-              currentItem.orderNr > oldOrderNr &&
-              currentItem.orderNr <= newOrderNr) {
-            // Item is moving down the list, decrease the orderNr of every following item by 1
+      if (newOrderNr == null) {
+        // Item is being deleted, reduce orderNr for all siblings coming after
+        for (var currentItem in flashlistItems) {
+          if (currentItem.orderNr >= flashlistItem.orderNr &&
+              currentItem.id != flashlistItem.id) {
             await FlashlistItem.db.updateRow(
               session,
               currentItem.copyWith(orderNr: currentItem.orderNr - 1),
             );
-          } else if (oldOrderNr > newOrderNr &&
-              currentItem.orderNr < oldOrderNr &&
-              currentItem.orderNr >= newOrderNr) {
-            // Item is moving up the list, increase the orderNr of every preceding item by 1
-            await FlashlistItem.db.updateRow(
-              session,
-              currentItem.copyWith(orderNr: currentItem.orderNr + 1),
-            );
           }
         }
+      } else {
+        // Item is being moved
+        int oldOrderNr = flashlistItem.orderNr;
+        for (var currentItem in flashlistItems) {
+          if (currentItem.id != flashlistItem.id) {
+            if (oldOrderNr < newOrderNr &&
+                currentItem.orderNr > oldOrderNr &&
+                currentItem.orderNr <= newOrderNr) {
+              // Item is moving down the list, decrease the orderNr of every following item by 1
+              await FlashlistItem.db.updateRow(
+                session,
+                currentItem.copyWith(orderNr: currentItem.orderNr - 1),
+              );
+            } else if (oldOrderNr > newOrderNr &&
+                currentItem.orderNr < oldOrderNr &&
+                currentItem.orderNr >= newOrderNr) {
+              // Item is moving up the list, increase the orderNr of every preceding item by 1
+              await FlashlistItem.db.updateRow(
+                session,
+                currentItem.copyWith(orderNr: currentItem.orderNr + 1),
+              );
+            }
+          }
+        }
+        // Finally, update the orderNr of the moved item
+        await FlashlistItem.db.updateRow(
+          session,
+          flashlistItem.copyWith(orderNr: newOrderNr),
+        );
       }
-      // Finally, update the orderNr of the moved item
-      await FlashlistItem.db.updateRow(
-        session,
-        flashlistItem.copyWith(orderNr: newOrderNr),
-      );
+    } catch (e) {
+      print(e);
+      throw Exception('Failed to update order numbers: $e');
     }
   }
 }
