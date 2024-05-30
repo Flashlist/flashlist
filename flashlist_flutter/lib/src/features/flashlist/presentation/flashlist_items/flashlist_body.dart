@@ -24,16 +24,10 @@ class FlashlistBody extends ConsumerStatefulWidget {
 
 class FlashlistBodyState extends ConsumerState<FlashlistBody>
     with FlashlistItemDeletionHandler, FlashlistItemReorderHandler {
-  late List<FlashlistItem?> flashlistItems;
-
   @override
   void initState() {
     super.initState();
-    flashlistItems = widget.flashlist.items!;
   }
-
-  @override
-  List<FlashlistItem?> getFlashlistItems() => flashlistItems;
 
   @override
   void deleteItemOnRemote(int itemId, int parentId) {
@@ -48,7 +42,7 @@ class FlashlistBodyState extends ConsumerState<FlashlistBody>
   @override
   Widget build(BuildContext context) {
     final bodyItems =
-        buildReorderableItems(flashlistItems, handleDebouncedDeletion);
+        buildReorderableItems(widget.flashlist.items, handleDebouncedDeletion);
 
     Widget proxyDecorator(
       Widget child,
@@ -61,7 +55,7 @@ class FlashlistBodyState extends ConsumerState<FlashlistBody>
     // If the flashlist has no items, display a placeholder
     // TODO: Add a nice placeholder or empty card
     // * maybe something informing the user how to edit and add items
-    if (flashlistItems.isEmpty) {
+    if (widget.flashlist.items == null || widget.flashlist.items!.isEmpty) {
       return const Text('No items placeholder');
     }
 
