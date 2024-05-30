@@ -11,7 +11,7 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import '../protocol.dart' as _i2;
 
-abstract class Flashlist extends _i1.SerializableEntity {
+abstract class Flashlist implements _i1.SerializableModel {
   Flashlist._({
     this.id,
     required this.uuid,
@@ -36,27 +36,28 @@ abstract class Flashlist extends _i1.SerializableEntity {
     DateTime? updatedAt,
   }) = _FlashlistImpl;
 
-  factory Flashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Flashlist.fromJson(Map<String, dynamic> jsonSerialization) {
     return Flashlist(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      uuid: serializationManager.deserialize<String>(jsonSerialization['uuid']),
-      title:
-          serializationManager.deserialize<String>(jsonSerialization['title']),
-      color:
-          serializationManager.deserialize<String>(jsonSerialization['color']),
-      items: serializationManager
-          .deserialize<List<_i2.FlashlistItem?>?>(jsonSerialization['items']),
-      authors: serializationManager
-          .deserialize<List<_i2.AppUser?>?>(jsonSerialization['authors']),
-      isCollapsed: serializationManager
-          .deserialize<bool?>(jsonSerialization['isCollapsed']),
-      createdAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime?>(jsonSerialization['updatedAt']),
+      id: jsonSerialization['id'] as int?,
+      uuid: jsonSerialization['uuid'] as String,
+      title: jsonSerialization['title'] as String,
+      color: jsonSerialization['color'] as String,
+      items: (jsonSerialization['items'] as List?)
+          ?.map((e) => e == null
+              ? null
+              : _i2.FlashlistItem.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      authors: (jsonSerialization['authors'] as List?)
+          ?.map((e) => e == null
+              ? null
+              : _i2.AppUser.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      isCollapsed: jsonSerialization['isCollapsed'] as bool?,
+      createdAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      updatedAt: jsonSerialization['updatedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
     );
   }
 
@@ -107,6 +108,11 @@ abstract class Flashlist extends _i1.SerializableEntity {
       'createdAt': createdAt.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

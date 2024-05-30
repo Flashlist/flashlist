@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class LeaveFlashlist extends _i1.SerializableEntity {
+abstract class LeaveFlashlist
+    implements _i1.SerializableModel, _i1.ProtocolSerialization {
   LeaveFlashlist._({
     required this.userId,
     required this.flashlistId,
@@ -21,15 +22,10 @@ abstract class LeaveFlashlist extends _i1.SerializableEntity {
     required int flashlistId,
   }) = _LeaveFlashlistImpl;
 
-  factory LeaveFlashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory LeaveFlashlist.fromJson(Map<String, dynamic> jsonSerialization) {
     return LeaveFlashlist(
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      flashlistId: serializationManager
-          .deserialize<int>(jsonSerialization['flashlistId']),
+      userId: jsonSerialization['userId'] as int,
+      flashlistId: jsonSerialization['flashlistId'] as int,
     );
   }
 
@@ -50,11 +46,16 @@ abstract class LeaveFlashlist extends _i1.SerializableEntity {
   }
 
   @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       'userId': userId,
       'flashlistId': flashlistId,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

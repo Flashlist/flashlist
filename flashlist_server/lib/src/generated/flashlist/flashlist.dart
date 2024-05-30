@@ -12,7 +12,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../protocol.dart' as _i2;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Flashlist extends _i1.TableRow {
+abstract class Flashlist extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Flashlist._({
     int? id,
     required this.uuid,
@@ -37,27 +38,28 @@ abstract class Flashlist extends _i1.TableRow {
     DateTime? updatedAt,
   }) = _FlashlistImpl;
 
-  factory Flashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Flashlist.fromJson(Map<String, dynamic> jsonSerialization) {
     return Flashlist(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      uuid: serializationManager.deserialize<String>(jsonSerialization['uuid']),
-      title:
-          serializationManager.deserialize<String>(jsonSerialization['title']),
-      color:
-          serializationManager.deserialize<String>(jsonSerialization['color']),
-      items: serializationManager
-          .deserialize<List<_i2.FlashlistItem?>?>(jsonSerialization['items']),
-      authors: serializationManager
-          .deserialize<List<_i2.AppUser?>?>(jsonSerialization['authors']),
-      isCollapsed: serializationManager
-          .deserialize<bool?>(jsonSerialization['isCollapsed']),
-      createdAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime?>(jsonSerialization['updatedAt']),
+      id: jsonSerialization['id'] as int?,
+      uuid: jsonSerialization['uuid'] as String,
+      title: jsonSerialization['title'] as String,
+      color: jsonSerialization['color'] as String,
+      items: (jsonSerialization['items'] as List?)
+          ?.map((e) => e == null
+              ? null
+              : _i2.FlashlistItem.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      authors: (jsonSerialization['authors'] as List?)
+          ?.map((e) => e == null
+              ? null
+              : _i2.AppUser.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      isCollapsed: jsonSerialization['isCollapsed'] as bool?,
+      createdAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      updatedAt: jsonSerialization['updatedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
     );
   }
 
@@ -113,180 +115,20 @@ abstract class Flashlist extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'uuid': uuid,
-      'title': title,
-      'color': color,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'uuid': uuid,
       'title': title,
       'color': color,
       if (items != null)
-        'items': items?.toJson(valueToJson: (v) => v?.allToJson()),
+        'items': items?.toJson(valueToJson: (v) => v?.toJsonForProtocol()),
       if (authors != null)
-        'authors': authors?.toJson(valueToJson: (v) => v?.allToJson()),
+        'authors': authors?.toJson(valueToJson: (v) => v?.toJsonForProtocol()),
       if (isCollapsed != null) 'isCollapsed': isCollapsed,
       'createdAt': createdAt.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'uuid':
-        uuid = value;
-        return;
-      case 'title':
-        title = value;
-        return;
-      case 'color':
-        color = value;
-        return;
-      case 'createdAt':
-        createdAt = value;
-        return;
-      case 'updatedAt':
-        updatedAt = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Flashlist>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<FlashlistTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Flashlist>(
-      where: where != null ? where(Flashlist.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Flashlist?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<FlashlistTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Flashlist>(
-      where: where != null ? where(Flashlist.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Flashlist?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Flashlist>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<FlashlistTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Flashlist>(
-      where: where(Flashlist.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Flashlist row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Flashlist row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Flashlist row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<FlashlistTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Flashlist>(
-      where: where != null ? where(Flashlist.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static FlashlistInclude include() {
@@ -311,6 +153,11 @@ abstract class Flashlist extends _i1.TableRow {
       orderByList: orderByList?.call(Flashlist.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -410,9 +257,6 @@ class FlashlistTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use FlashlistTable.t instead.')
-FlashlistTable tFlashlist = FlashlistTable();
-
 class FlashlistInclude extends _i1.IncludeObject {
   FlashlistInclude._();
 
@@ -456,7 +300,7 @@ class FlashlistRepository {
     _i1.OrderByListBuilder<FlashlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Flashlist>(
+    return session.db.find<Flashlist>(
       where: where?.call(Flashlist.t),
       orderBy: orderBy?.call(Flashlist.t),
       orderByList: orderByList?.call(Flashlist.t),
@@ -476,7 +320,7 @@ class FlashlistRepository {
     _i1.OrderByListBuilder<FlashlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Flashlist>(
+    return session.db.findFirstRow<Flashlist>(
       where: where?.call(Flashlist.t),
       orderBy: orderBy?.call(Flashlist.t),
       orderByList: orderByList?.call(Flashlist.t),
@@ -491,7 +335,7 @@ class FlashlistRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Flashlist>(
+    return session.db.findById<Flashlist>(
       id,
       transaction: transaction,
     );
@@ -502,7 +346,7 @@ class FlashlistRepository {
     List<Flashlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Flashlist>(
+    return session.db.insert<Flashlist>(
       rows,
       transaction: transaction,
     );
@@ -513,7 +357,7 @@ class FlashlistRepository {
     Flashlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Flashlist>(
+    return session.db.insertRow<Flashlist>(
       row,
       transaction: transaction,
     );
@@ -525,7 +369,7 @@ class FlashlistRepository {
     _i1.ColumnSelections<FlashlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Flashlist>(
+    return session.db.update<Flashlist>(
       rows,
       columns: columns?.call(Flashlist.t),
       transaction: transaction,
@@ -538,41 +382,41 @@ class FlashlistRepository {
     _i1.ColumnSelections<FlashlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Flashlist>(
+    return session.db.updateRow<Flashlist>(
       row,
       columns: columns?.call(Flashlist.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Flashlist>> delete(
     _i1.Session session,
     List<Flashlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Flashlist>(
+    return session.db.delete<Flashlist>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Flashlist> deleteRow(
     _i1.Session session,
     Flashlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Flashlist>(
+    return session.db.deleteRow<Flashlist>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Flashlist>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<FlashlistTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Flashlist>(
+    return session.db.deleteWhere<Flashlist>(
       where: where(Flashlist.t),
       transaction: transaction,
     );
@@ -584,7 +428,7 @@ class FlashlistRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Flashlist>(
+    return session.db.count<Flashlist>(
       where: where?.call(Flashlist.t),
       limit: limit,
       transaction: transaction,

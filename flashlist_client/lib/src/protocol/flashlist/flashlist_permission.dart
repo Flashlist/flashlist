@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class FlashlistPermission extends _i1.SerializableEntity {
+abstract class FlashlistPermission implements _i1.SerializableModel {
   FlashlistPermission._({
     this.id,
     required this.userId,
@@ -25,18 +25,12 @@ abstract class FlashlistPermission extends _i1.SerializableEntity {
     required String accessLevel,
   }) = _FlashlistPermissionImpl;
 
-  factory FlashlistPermission.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory FlashlistPermission.fromJson(Map<String, dynamic> jsonSerialization) {
     return FlashlistPermission(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      flashlistId: serializationManager
-          .deserialize<int>(jsonSerialization['flashlistId']),
-      accessLevel: serializationManager
-          .deserialize<String>(jsonSerialization['accessLevel']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
+      flashlistId: jsonSerialization['flashlistId'] as int,
+      accessLevel: jsonSerialization['accessLevel'] as String,
     );
   }
 
@@ -65,6 +59,11 @@ abstract class FlashlistPermission extends _i1.SerializableEntity {
       'flashlistId': flashlistId,
       'accessLevel': accessLevel,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

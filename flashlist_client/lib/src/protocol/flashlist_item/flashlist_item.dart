@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class FlashlistItem extends _i1.SerializableEntity {
+abstract class FlashlistItem implements _i1.SerializableModel {
   FlashlistItem._({
     this.id,
     required this.name,
@@ -25,17 +25,12 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
     required int orderNr,
   }) = _FlashlistItemImpl;
 
-  factory FlashlistItem.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory FlashlistItem.fromJson(Map<String, dynamic> jsonSerialization) {
     return FlashlistItem(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      name: serializationManager.deserialize<String>(jsonSerialization['name']),
-      parentId:
-          serializationManager.deserialize<int>(jsonSerialization['parentId']),
-      orderNr:
-          serializationManager.deserialize<int>(jsonSerialization['orderNr']),
+      id: jsonSerialization['id'] as int?,
+      name: jsonSerialization['name'] as String,
+      parentId: jsonSerialization['parentId'] as int,
+      orderNr: jsonSerialization['orderNr'] as int,
     );
   }
 
@@ -64,6 +59,11 @@ abstract class FlashlistItem extends _i1.SerializableEntity {
       'parentId': parentId,
       'orderNr': orderNr,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

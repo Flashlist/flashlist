@@ -11,7 +11,7 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/app_user_endpoint.dart' as _i2;
 import '../endpoints/flashlist_endpoint.dart' as _i3;
-import 'package:serverpod_auth_server/module.dart' as _i4;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i4;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override

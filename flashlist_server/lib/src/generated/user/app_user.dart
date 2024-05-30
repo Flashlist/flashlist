@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class AppUser extends _i1.TableRow {
+abstract class AppUser extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   AppUser._({
     int? id,
     required this.userId,
@@ -27,20 +28,13 @@ abstract class AppUser extends _i1.TableRow {
     String? imageSrc,
   }) = _AppUserImpl;
 
-  factory AppUser.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory AppUser.fromJson(Map<String, dynamic> jsonSerialization) {
     return AppUser(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      username: serializationManager
-          .deserialize<String>(jsonSerialization['username']),
-      email:
-          serializationManager.deserialize<String>(jsonSerialization['email']),
-      imageSrc: serializationManager
-          .deserialize<String?>(jsonSerialization['imageSrc']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
+      username: jsonSerialization['username'] as String,
+      email: jsonSerialization['email'] as String,
+      imageSrc: jsonSerialization['imageSrc'] as String?,
     );
   }
 
@@ -78,19 +72,7 @@ abstract class AppUser extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'userId': userId,
-      'username': username,
-      'email': email,
-      'imageSrc': imageSrc,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'userId': userId,
@@ -98,150 +80,6 @@ abstract class AppUser extends _i1.TableRow {
       'email': email,
       if (imageSrc != null) 'imageSrc': imageSrc,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'userId':
-        userId = value;
-        return;
-      case 'username':
-        username = value;
-        return;
-      case 'email':
-        email = value;
-        return;
-      case 'imageSrc':
-        imageSrc = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<AppUser>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<AppUserTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<AppUser>(
-      where: where != null ? where(AppUser.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<AppUser?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<AppUserTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<AppUser>(
-      where: where != null ? where(AppUser.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<AppUser?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<AppUser>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<AppUserTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<AppUser>(
-      where: where(AppUser.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    AppUser row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    AppUser row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    AppUser row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<AppUserTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<AppUser>(
-      where: where != null ? where(AppUser.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static AppUserInclude include() {
@@ -266,6 +104,11 @@ abstract class AppUser extends _i1.TableRow {
       orderByList: orderByList?.call(AppUser.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -342,9 +185,6 @@ class AppUserTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use AppUserTable.t instead.')
-AppUserTable tAppUser = AppUserTable();
-
 class AppUserInclude extends _i1.IncludeObject {
   AppUserInclude._();
 
@@ -388,7 +228,7 @@ class AppUserRepository {
     _i1.OrderByListBuilder<AppUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<AppUser>(
+    return session.db.find<AppUser>(
       where: where?.call(AppUser.t),
       orderBy: orderBy?.call(AppUser.t),
       orderByList: orderByList?.call(AppUser.t),
@@ -408,7 +248,7 @@ class AppUserRepository {
     _i1.OrderByListBuilder<AppUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<AppUser>(
+    return session.db.findFirstRow<AppUser>(
       where: where?.call(AppUser.t),
       orderBy: orderBy?.call(AppUser.t),
       orderByList: orderByList?.call(AppUser.t),
@@ -423,7 +263,7 @@ class AppUserRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<AppUser>(
+    return session.db.findById<AppUser>(
       id,
       transaction: transaction,
     );
@@ -434,7 +274,7 @@ class AppUserRepository {
     List<AppUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<AppUser>(
+    return session.db.insert<AppUser>(
       rows,
       transaction: transaction,
     );
@@ -445,7 +285,7 @@ class AppUserRepository {
     AppUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<AppUser>(
+    return session.db.insertRow<AppUser>(
       row,
       transaction: transaction,
     );
@@ -457,7 +297,7 @@ class AppUserRepository {
     _i1.ColumnSelections<AppUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<AppUser>(
+    return session.db.update<AppUser>(
       rows,
       columns: columns?.call(AppUser.t),
       transaction: transaction,
@@ -470,41 +310,41 @@ class AppUserRepository {
     _i1.ColumnSelections<AppUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<AppUser>(
+    return session.db.updateRow<AppUser>(
       row,
       columns: columns?.call(AppUser.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<AppUser>> delete(
     _i1.Session session,
     List<AppUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<AppUser>(
+    return session.db.delete<AppUser>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<AppUser> deleteRow(
     _i1.Session session,
     AppUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<AppUser>(
+    return session.db.deleteRow<AppUser>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<AppUser>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<AppUserTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<AppUser>(
+    return session.db.deleteWhere<AppUser>(
       where: where(AppUser.t),
       transaction: transaction,
     );
@@ -516,7 +356,7 @@ class AppUserRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<AppUser>(
+    return session.db.count<AppUser>(
       where: where?.call(AppUser.t),
       limit: limit,
       transaction: transaction,

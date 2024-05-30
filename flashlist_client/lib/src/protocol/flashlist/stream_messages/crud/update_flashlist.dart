@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class UpdateFlashlist extends _i1.SerializableEntity {
+abstract class UpdateFlashlist implements _i1.SerializableModel {
   UpdateFlashlist._({
     required this.id,
     this.title,
@@ -23,16 +23,11 @@ abstract class UpdateFlashlist extends _i1.SerializableEntity {
     String? color,
   }) = _UpdateFlashlistImpl;
 
-  factory UpdateFlashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory UpdateFlashlist.fromJson(Map<String, dynamic> jsonSerialization) {
     return UpdateFlashlist(
-      id: serializationManager.deserialize<int>(jsonSerialization['id']),
-      title:
-          serializationManager.deserialize<String?>(jsonSerialization['title']),
-      color:
-          serializationManager.deserialize<String?>(jsonSerialization['color']),
+      id: jsonSerialization['id'] as int,
+      title: jsonSerialization['title'] as String?,
+      color: jsonSerialization['color'] as String?,
     );
   }
 
@@ -54,6 +49,11 @@ abstract class UpdateFlashlist extends _i1.SerializableEntity {
       if (title != null) 'title': title,
       if (color != null) 'color': color,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

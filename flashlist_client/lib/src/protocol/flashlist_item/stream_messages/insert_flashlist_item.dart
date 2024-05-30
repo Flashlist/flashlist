@@ -11,19 +11,16 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import '../../protocol.dart' as _i2;
 
-abstract class InsertFlashlistItem extends _i1.SerializableEntity {
+abstract class InsertFlashlistItem implements _i1.SerializableModel {
   InsertFlashlistItem._({required this.item});
 
   factory InsertFlashlistItem({required _i2.FlashlistItem item}) =
       _InsertFlashlistItemImpl;
 
-  factory InsertFlashlistItem.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory InsertFlashlistItem.fromJson(Map<String, dynamic> jsonSerialization) {
     return InsertFlashlistItem(
-        item: serializationManager
-            .deserialize<_i2.FlashlistItem>(jsonSerialization['item']));
+        item: _i2.FlashlistItem.fromJson(
+            (jsonSerialization['item'] as Map<String, dynamic>)));
   }
 
   _i2.FlashlistItem item;
@@ -32,6 +29,11 @@ abstract class InsertFlashlistItem extends _i1.SerializableEntity {
   @override
   Map<String, dynamic> toJson() {
     return {'item': item.toJson()};
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
