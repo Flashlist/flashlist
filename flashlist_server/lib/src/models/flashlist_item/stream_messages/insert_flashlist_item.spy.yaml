@@ -1,0 +1,3 @@
+class: InsertFlashlistItem
+fields:
+    item: FlashlistItem
