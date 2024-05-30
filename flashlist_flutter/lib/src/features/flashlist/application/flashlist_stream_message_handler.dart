@@ -59,14 +59,14 @@ void updateOrderNrForSiblings(
 
 /// A function to handle the stream of flashlist messages
 /// accepts a nullable [list] of flashlists and a [message]
-/// that extends [SerializableEntity].
+/// that extends [SerializableModel].
 ///
 /// It will check for the type of the [message] and manipulate
 /// the list [streamItems] accordingly.
 void handleFlashlistStreamMessage(
   Ref ref,
   List<Flashlist?> streamItems,
-  SerializableEntity message,
+  SerializableModel message,
 ) async {
   /// [FlashlistBatch] is a message that contains a collection of [Flashlist]
   /// entities. It is sent when the user first connects to the WebSocket.
