@@ -27,14 +27,15 @@ import 'flashlist/stream_messages/crud/flashlist_batch.dart' as _i13;
 import 'flashlist/stream_messages/crud/update_flashlist.dart' as _i14;
 import 'flashlist_item/flashlist_item.dart' as _i15;
 import 'flashlist_item/stream_messages/delete_flashlist_item.dart' as _i16;
-import 'flashlist_item/stream_messages/re_order_flashlist_item.dart' as _i17;
-import 'user/app_user.dart' as _i18;
-import 'user/notification.dart' as _i19;
-import 'user/user_relation.dart' as _i20;
-import 'user/user_request.dart' as _i21;
-import 'protocol.dart' as _i22;
-import 'package:flashlist_server/src/generated/user/user_request.dart' as _i23;
-import 'package:flashlist_server/src/generated/user/app_user.dart' as _i24;
+import 'flashlist_item/stream_messages/insert_flashlist_item.dart' as _i17;
+import 'flashlist_item/stream_messages/re_order_flashlist_item.dart' as _i18;
+import 'user/app_user.dart' as _i19;
+import 'user/notification.dart' as _i20;
+import 'user/user_relation.dart' as _i21;
+import 'user/user_request.dart' as _i22;
+import 'protocol.dart' as _i23;
+import 'package:flashlist_server/src/generated/user/user_request.dart' as _i24;
+import 'package:flashlist_server/src/generated/user/app_user.dart' as _i25;
 export 'flashlist/flashlist.dart';
 export 'flashlist/flashlist_permission.dart';
 export 'flashlist/stream_messages/authors/accept_invite_to_flashlist.dart';
@@ -48,6 +49,7 @@ export 'flashlist/stream_messages/crud/flashlist_batch.dart';
 export 'flashlist/stream_messages/crud/update_flashlist.dart';
 export 'flashlist_item/flashlist_item.dart';
 export 'flashlist_item/stream_messages/delete_flashlist_item.dart';
+export 'flashlist_item/stream_messages/insert_flashlist_item.dart';
 export 'flashlist_item/stream_messages/re_order_flashlist_item.dart';
 export 'user/app_user.dart';
 export 'user/notification.dart';
@@ -622,20 +624,23 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i16.DeleteFlashlistItem) {
       return _i16.DeleteFlashlistItem.fromJson(data, this) as T;
     }
-    if (t == _i17.ReOrderFlashlistItem) {
-      return _i17.ReOrderFlashlistItem.fromJson(data, this) as T;
+    if (t == _i17.InsertFlashlistItem) {
+      return _i17.InsertFlashlistItem.fromJson(data, this) as T;
     }
-    if (t == _i18.AppUser) {
-      return _i18.AppUser.fromJson(data, this) as T;
+    if (t == _i18.ReOrderFlashlistItem) {
+      return _i18.ReOrderFlashlistItem.fromJson(data, this) as T;
     }
-    if (t == _i19.Notification) {
-      return _i19.Notification.fromJson(data, this) as T;
+    if (t == _i19.AppUser) {
+      return _i19.AppUser.fromJson(data, this) as T;
     }
-    if (t == _i20.UserRelation) {
-      return _i20.UserRelation.fromJson(data, this) as T;
+    if (t == _i20.Notification) {
+      return _i20.Notification.fromJson(data, this) as T;
     }
-    if (t == _i21.UserRequest) {
-      return _i21.UserRequest.fromJson(data, this) as T;
+    if (t == _i21.UserRelation) {
+      return _i21.UserRelation.fromJson(data, this) as T;
+    }
+    if (t == _i22.UserRequest) {
+      return _i22.UserRequest.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i4.Flashlist?>()) {
       return (data != null ? _i4.Flashlist.fromJson(data, this) : null) as T;
@@ -693,48 +698,53 @@ class Protocol extends _i1.SerializationManagerServer {
           ? _i16.DeleteFlashlistItem.fromJson(data, this)
           : null) as T;
     }
-    if (t == _i1.getType<_i17.ReOrderFlashlistItem?>()) {
+    if (t == _i1.getType<_i17.InsertFlashlistItem?>()) {
       return (data != null
-          ? _i17.ReOrderFlashlistItem.fromJson(data, this)
+          ? _i17.InsertFlashlistItem.fromJson(data, this)
           : null) as T;
     }
-    if (t == _i1.getType<_i18.AppUser?>()) {
-      return (data != null ? _i18.AppUser.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i18.ReOrderFlashlistItem?>()) {
+      return (data != null
+          ? _i18.ReOrderFlashlistItem.fromJson(data, this)
+          : null) as T;
     }
-    if (t == _i1.getType<_i19.Notification?>()) {
-      return (data != null ? _i19.Notification.fromJson(data, this) : null)
+    if (t == _i1.getType<_i19.AppUser?>()) {
+      return (data != null ? _i19.AppUser.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i20.Notification?>()) {
+      return (data != null ? _i20.Notification.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i20.UserRelation?>()) {
-      return (data != null ? _i20.UserRelation.fromJson(data, this) : null)
+    if (t == _i1.getType<_i21.UserRelation?>()) {
+      return (data != null ? _i21.UserRelation.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i21.UserRequest?>()) {
-      return (data != null ? _i21.UserRequest.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i22.UserRequest?>()) {
+      return (data != null ? _i22.UserRequest.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<List<_i22.FlashlistItem?>?>()) {
+    if (t == _i1.getType<List<_i23.FlashlistItem?>?>()) {
       return (data != null
           ? (data as List)
-              .map((e) => deserialize<_i22.FlashlistItem?>(e))
+              .map((e) => deserialize<_i23.FlashlistItem?>(e))
               .toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i22.AppUser?>?>()) {
+    if (t == _i1.getType<List<_i23.AppUser?>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i22.AppUser?>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i23.AppUser?>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i22.Flashlist>) {
-      return (data as List).map((e) => deserialize<_i22.Flashlist>(e)).toList()
+    if (t == List<_i23.Flashlist>) {
+      return (data as List).map((e) => deserialize<_i23.Flashlist>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i23.UserRequest?>) {
+    if (t == List<_i24.UserRequest?>) {
       return (data as List)
-          .map((e) => deserialize<_i23.UserRequest?>(e))
+          .map((e) => deserialize<_i24.UserRequest?>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i24.AppUser>) {
-      return (data as List).map((e) => deserialize<_i24.AppUser>(e)).toList()
+    if (t == List<_i25.AppUser>) {
+      return (data as List).map((e) => deserialize<_i25.AppUser>(e)).toList()
           as dynamic;
     }
     try {
@@ -792,19 +802,22 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i16.DeleteFlashlistItem) {
       return 'DeleteFlashlistItem';
     }
-    if (data is _i17.ReOrderFlashlistItem) {
+    if (data is _i17.InsertFlashlistItem) {
+      return 'InsertFlashlistItem';
+    }
+    if (data is _i18.ReOrderFlashlistItem) {
       return 'ReOrderFlashlistItem';
     }
-    if (data is _i18.AppUser) {
+    if (data is _i19.AppUser) {
       return 'AppUser';
     }
-    if (data is _i19.Notification) {
+    if (data is _i20.Notification) {
       return 'Notification';
     }
-    if (data is _i20.UserRelation) {
+    if (data is _i21.UserRelation) {
       return 'UserRelation';
     }
-    if (data is _i21.UserRequest) {
+    if (data is _i22.UserRequest) {
       return 'UserRequest';
     }
     return super.getClassNameForObject(data);
@@ -855,20 +868,23 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'DeleteFlashlistItem') {
       return deserialize<_i16.DeleteFlashlistItem>(data['data']);
     }
+    if (data['className'] == 'InsertFlashlistItem') {
+      return deserialize<_i17.InsertFlashlistItem>(data['data']);
+    }
     if (data['className'] == 'ReOrderFlashlistItem') {
-      return deserialize<_i17.ReOrderFlashlistItem>(data['data']);
+      return deserialize<_i18.ReOrderFlashlistItem>(data['data']);
     }
     if (data['className'] == 'AppUser') {
-      return deserialize<_i18.AppUser>(data['data']);
+      return deserialize<_i19.AppUser>(data['data']);
     }
     if (data['className'] == 'Notification') {
-      return deserialize<_i19.Notification>(data['data']);
+      return deserialize<_i20.Notification>(data['data']);
     }
     if (data['className'] == 'UserRelation') {
-      return deserialize<_i20.UserRelation>(data['data']);
+      return deserialize<_i21.UserRelation>(data['data']);
     }
     if (data['className'] == 'UserRequest') {
-      return deserialize<_i21.UserRequest>(data['data']);
+      return deserialize<_i22.UserRequest>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -894,14 +910,14 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i5.FlashlistPermission.t;
       case _i15.FlashlistItem:
         return _i15.FlashlistItem.t;
-      case _i18.AppUser:
-        return _i18.AppUser.t;
-      case _i19.Notification:
-        return _i19.Notification.t;
-      case _i20.UserRelation:
-        return _i20.UserRelation.t;
-      case _i21.UserRequest:
-        return _i21.UserRequest.t;
+      case _i19.AppUser:
+        return _i19.AppUser.t;
+      case _i20.Notification:
+        return _i20.Notification.t;
+      case _i21.UserRelation:
+        return _i21.UserRelation.t;
+      case _i22.UserRequest:
+        return _i22.UserRequest.t;
     }
     return null;
   }

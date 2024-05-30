@@ -134,8 +134,32 @@ void handleFlashlistStreamMessage(
       flashListToUpdate.items!
           .removeWhere((currentItem) => currentItem!.id == message.id);
 
+      // Check if the item still exists in the list before trying to remove it again
+      if (flashListToUpdate.items!
+          .any((currentItem) => currentItem!.id == message.id)) {
+        flashListToUpdate.items!
+            .removeWhere((currentItem) => currentItem!.id == message.id);
+      }
+
       updateOrderNrForSiblings(flashListToUpdate.items!, itemToUpdate, null);
     }
+  }
+
+  if (message is InsertFlashlistItem) {
+    final flashlistToUpdate =
+        getFlashlistByFromStream(streamItems, message.item.parentId);
+
+    if (flashlistToUpdate!.items == null) {
+      flashlistToUpdate.items = <FlashlistItem>[message.item];
+    } else {
+      flashlistToUpdate.items!.insert(message.item.orderNr - 1, message.item);
+    }
+
+    updateOrderNrForSiblings(
+      flashlistToUpdate.items!,
+      message.item,
+      message.item.orderNr,
+    );
   }
 
   /// [ReOrderFlashlistItem] is a message that contains the [id] of a [FlashlistItem]

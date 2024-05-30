@@ -14,14 +14,16 @@ import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_
 /// Provides [buildProxyDecorator] to build a proxy decorator for the ReorderableListView
 /// Expects [getFlashlistItems] to be implemented by the consuming class
 mixin FlashlistItemReorderHandler on ConsumerState<FlashlistBody> {
-  List<FlashlistItem?> getFlashlistItems();
-
   /// Takes a list of FlashlistItems and a function to handle the deletion of a FlashlistItem
   /// And Wraps the FlashlistItems in ReorderableDelayedDragStartListener
   List<ReorderableDelayedDragStartListener> buildReorderableItems(
-    List<FlashlistItem?> flashlistItems,
+    List<FlashlistItem?>? flashlistItems,
     Function(BuildContext, FlashlistItem) handleFlashlistItemDeletion,
   ) {
+    if (flashlistItems == null) {
+      return [];
+    }
+
     return [
       for (final item in flashlistItems)
         ReorderableDelayedDragStartListener(
@@ -64,7 +66,7 @@ mixin FlashlistItemReorderHandler on ConsumerState<FlashlistBody> {
 
   /// Handles the reordering of FlashlistItems
   void handleFlashlistItemReorder(int oldIndex, int newIndex) {
-    final flashlistItems = getFlashlistItems();
+    final flashlistItems = widget.flashlist.items!;
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }

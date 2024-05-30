@@ -144,6 +144,18 @@ class FlashlistEndpoint extends Endpoint {
       );
     }
 
+    /// Reinsert FlashlistItem
+    /// Post message to [listChannel]
+    if (message is InsertFlashlistItem) {
+      final cloneFromDeletedItem =
+          await flashlistItemHelper.insertFlashlistItem(session, message.item);
+
+      session.messages.postMessage(
+        _parseChannelNameForList(message.item.parentId),
+        InsertFlashlistItem(item: cloneFromDeletedItem),
+      );
+    }
+
     /// Changes [orderNr] of given item
     /// Adjust siblings
     /// Post message to [listChannel]

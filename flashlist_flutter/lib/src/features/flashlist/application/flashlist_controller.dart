@@ -49,6 +49,11 @@ class FlashlistController {
     await client.flashlist.sendStreamMessage(itemToDelete);
   }
 
+  Future<void> insertFlashlistItem(InsertFlashlistItem insertItem) async {
+    final client = ref.read(clientProvider);
+    await client.flashlist.sendStreamMessage(insertItem);
+  }
+
   Future<void> reOrderFlashlistItems(ReOrderFlashlistItem reOrder) async {
     final client = ref.read(clientProvider);
     await client.flashlist.sendStreamMessage(reOrder);
