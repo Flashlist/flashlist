@@ -37,35 +37,42 @@ class HomeScreen extends HookConsumerWidget {
         actions: const [NotificationBadge()],
       ),
       drawer: const SideDrawer(),
-      floatingActionButton: editModeController.isEditMode || isAdding.value != 0
-          ? null
-          : FloatingActionButton(
-              backgroundColor: isDarkThemeOf(context)
-                  ? colorSchemeOf(context).onBackground
-                  : colorSchemeOf(context).onBackground.withOpacity(0.8),
-              shape: const CircleBorder(),
-              onPressed: () {
-                flashlistController.createFlashlist(
-                  Flashlist(
-                    uuid: const Uuid().v4(),
-                    title: context.localizations.newFlashlist,
-                    color: const Color(0xFF2bb673).value.toString(),
-                    authors: [],
-                    createdAt: DateTime.now(),
-                    updatedAt: null,
-                  ),
-                );
+      floatingActionButton: AnimatedSwitcher(
+        transitionBuilder: (child, animation) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+        duration: const Duration(milliseconds: 300),
+        child: editModeController.isEditMode || isAdding.value != 0
+            ? null
+            : FloatingActionButton(
+                backgroundColor: isDarkThemeOf(context)
+                    ? colorSchemeOf(context).onBackground
+                    : colorSchemeOf(context).onBackground.withOpacity(0.8),
+                shape: const CircleBorder(),
+                onPressed: () {
+                  flashlistController.createFlashlist(
+                    Flashlist(
+                      uuid: const Uuid().v4(),
+                      title: context.localizations.newFlashlist,
+                      color: const Color(0xFF2bb673).value.toString(),
+                      authors: [],
+                      createdAt: DateTime.now(),
+                      updatedAt: null,
+                    ),
+                  );
 
-                scrollController.animateTo(
-                  scrollController.position.maxScrollExtent + 300,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );
+                  scrollController.animateTo(
+                    scrollController.position.maxScrollExtent + 300,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
 
-                // * It might be cool to enter edit mode automatically after creating list.
-              },
-              child: const AddFlashlistIcon(),
-            ),
+                  // * It might be cool to enter edit mode automatically after creating list.
+                },
+                child: const AddFlashlistIcon(),
+              ),
+      ),
       body: EditModeOverlay(
         child: FlashlistCollection(
           scrollController: scrollController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_client/flashlist_client.dart';
@@ -40,41 +41,43 @@ class FlashlistCard extends HookConsumerWidget {
         ? colorPicker.color.toColor()
         : Color(int.parse(flashlist.color));
 
-    return Column(
-      children: [
-        AnimatedContainer(
-          margin: const EdgeInsets.all(Sizes.p8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: flashlistColor,
-          ),
-          duration: Duration.zero,
-          child: SizedBox(
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 300),
+      child: Column(
+        children: [
+          AnimatedContainer(
             width: double.infinity,
-            child: Column(
-              children: [
-                gapH8,
-                FlashlistCardHeader(flashlist: flashlist),
-                gapH12,
-                FlashlistBody(flashlist: flashlist),
-                gapH12,
-                IconButton(
-                  color: Colors.white,
-                  onPressed: toggleIsAdding,
-                  icon: isAdding
-                      ? const Icon(Icons.remove_circle_outline)
-                      : const Icon(Icons.add_circle_outline),
-                ),
-                gapH8,
-              ],
+            margin: const EdgeInsets.all(Sizes.p8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: flashlistColor,
+            ),
+            duration: Duration.zero,
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  gapH8,
+                  FlashlistCardHeader(flashlist: flashlist),
+                  gapH12,
+                  FlashlistBody(flashlist: flashlist),
+                  gapH12,
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: toggleIsAdding,
+                    icon: isAdding
+                        ? const Icon(Icons.remove_circle_outline)
+                        : const Icon(Icons.add_circle_outline),
+                  ),
+                  gapH8,
+                ],
+              ),
             ),
           ),
-        ),
-        // Only visible when isAdding is true
-        FlashlistItemInput(flashlist: flashlist, isAdding: isAdding),
-
-        gapH8,
-      ],
+          // Only visible when isAdding is true
+          FlashlistItemInput(flashlist: flashlist, isAdding: isAdding),
+        ],
+      ),
     );
   }
 }
