@@ -53,10 +53,14 @@ class FlashlistItemInput extends ConsumerWidget {
       flashlistItemFormKey.currentState!.reset();
     }
 
-    return isAdding
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
-            child: Card(
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 300),
+      child: isAdding
+          ? AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              padding: isAdding
+                  ? const EdgeInsets.symmetric(horizontal: Sizes.p8)
+                  : const EdgeInsets.all(0),
               child: Form(
                 key: flashlistItemFormKey,
                 child: TextFormField(
@@ -83,8 +87,8 @@ class FlashlistItemInput extends ConsumerWidget {
                   },
                 ),
               ),
-            ),
-          )
-        : const SizedBox();
+            )
+          : const SizedBox(),
+    );
   }
 }
