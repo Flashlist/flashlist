@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class UserRelation extends _i1.SerializableEntity {
+abstract class UserRelation implements _i1.SerializableModel {
   UserRelation._({
     this.id,
     required this.userId1,
@@ -27,19 +27,14 @@ abstract class UserRelation extends _i1.SerializableEntity {
     required String type,
   }) = _UserRelationImpl;
 
-  factory UserRelation.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory UserRelation.fromJson(Map<String, dynamic> jsonSerialization) {
     return UserRelation(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId1:
-          serializationManager.deserialize<int>(jsonSerialization['userId1']),
-      userId2:
-          serializationManager.deserialize<int>(jsonSerialization['userId2']),
-      timestamp: serializationManager
-          .deserialize<DateTime>(jsonSerialization['timestamp']),
-      type: serializationManager.deserialize<String>(jsonSerialization['type']),
+      id: jsonSerialization['id'] as int?,
+      userId1: jsonSerialization['userId1'] as int,
+      userId2: jsonSerialization['userId2'] as int,
+      timestamp:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['timestamp']),
+      type: jsonSerialization['type'] as String,
     );
   }
 
@@ -72,6 +67,11 @@ abstract class UserRelation extends _i1.SerializableEntity {
       'timestamp': timestamp.toJson(),
       'type': type,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

@@ -5,7 +5,8 @@ import 'package:serverpod/serverpod.dart';
 /// that are shared among endpoints.
 class UserHelper {
   Future<int?> getAuthenticatedUserId(Session session) async {
-    return await session.auth.authenticatedUserId;
+    final auth = await session.authenticated;
+    return auth?.userId;
   }
 
   Future<AppUser?> getAuthenticatedUser(Session session) async {

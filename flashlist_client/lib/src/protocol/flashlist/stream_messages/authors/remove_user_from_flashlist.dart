@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class RemoveUserFromFlashlist extends _i1.SerializableEntity {
+abstract class RemoveUserFromFlashlist implements _i1.SerializableModel {
   RemoveUserFromFlashlist._({
     required this.userId,
     required this.flashlistId,
@@ -22,14 +22,10 @@ abstract class RemoveUserFromFlashlist extends _i1.SerializableEntity {
   }) = _RemoveUserFromFlashlistImpl;
 
   factory RemoveUserFromFlashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+      Map<String, dynamic> jsonSerialization) {
     return RemoveUserFromFlashlist(
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      flashlistId: serializationManager
-          .deserialize<int>(jsonSerialization['flashlistId']),
+      userId: jsonSerialization['userId'] as int,
+      flashlistId: jsonSerialization['flashlistId'] as int,
     );
   }
 
@@ -47,6 +43,11 @@ abstract class RemoveUserFromFlashlist extends _i1.SerializableEntity {
       'userId': userId,
       'flashlistId': flashlistId,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

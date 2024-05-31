@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class DeleteFlashlistItem extends _i1.SerializableEntity {
+abstract class DeleteFlashlistItem implements _i1.SerializableModel {
   DeleteFlashlistItem._({
     required this.id,
     required this.parentId,
@@ -21,14 +21,10 @@ abstract class DeleteFlashlistItem extends _i1.SerializableEntity {
     required int parentId,
   }) = _DeleteFlashlistItemImpl;
 
-  factory DeleteFlashlistItem.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory DeleteFlashlistItem.fromJson(Map<String, dynamic> jsonSerialization) {
     return DeleteFlashlistItem(
-      id: serializationManager.deserialize<int>(jsonSerialization['id']),
-      parentId:
-          serializationManager.deserialize<int>(jsonSerialization['parentId']),
+      id: jsonSerialization['id'] as int,
+      parentId: jsonSerialization['parentId'] as int,
     );
   }
 
@@ -46,6 +42,11 @@ abstract class DeleteFlashlistItem extends _i1.SerializableEntity {
       'id': id,
       'parentId': parentId,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

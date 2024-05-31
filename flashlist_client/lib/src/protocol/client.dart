@@ -13,7 +13,7 @@ import 'dart:async' as _i2;
 import 'package:flashlist_client/src/protocol/user/app_user.dart' as _i3;
 import 'package:flashlist_client/src/protocol/user/user_request.dart' as _i4;
 import 'package:flashlist_client/src/protocol/flashlist/flashlist.dart' as _i5;
-import 'package:serverpod_auth_client/module.dart' as _i6;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
 import 'protocol.dart' as _i7;
 
 /// {@category Endpoint}
@@ -140,6 +140,12 @@ class Client extends _i1.ServerpodClient {
     _i1.AuthenticationKeyManager? authenticationKeyManager,
     Duration? streamingConnectionTimeout,
     Duration? connectionTimeout,
+    Function(
+      _i1.MethodCallContext,
+      Object,
+      StackTrace,
+    )? onFailedCall,
+    Function(_i1.MethodCallContext)? onSucceededCall,
   }) : super(
           host,
           _i7.Protocol(),
@@ -147,6 +153,8 @@ class Client extends _i1.ServerpodClient {
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
+          onFailedCall: onFailedCall,
+          onSucceededCall: onSucceededCall,
         ) {
     appUser = EndpointAppUser(this);
     flashlist = EndpointFlashlist(this);

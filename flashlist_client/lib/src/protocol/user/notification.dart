@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Notification extends _i1.SerializableEntity {
+abstract class Notification implements _i1.SerializableModel {
   Notification._({
     this.id,
     required this.userId,
@@ -29,21 +29,15 @@ abstract class Notification extends _i1.SerializableEntity {
     required DateTime timestamp,
   }) = _NotificationImpl;
 
-  factory Notification.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Notification.fromJson(Map<String, dynamic> jsonSerialization) {
     return Notification(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      requestId:
-          serializationManager.deserialize<int>(jsonSerialization['requestId']),
-      type: serializationManager.deserialize<String>(jsonSerialization['type']),
-      isRead:
-          serializationManager.deserialize<bool>(jsonSerialization['isRead']),
-      timestamp: serializationManager
-          .deserialize<DateTime>(jsonSerialization['timestamp']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
+      requestId: jsonSerialization['requestId'] as int,
+      type: jsonSerialization['type'] as String,
+      isRead: jsonSerialization['isRead'] as bool,
+      timestamp:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['timestamp']),
     );
   }
 
@@ -80,6 +74,11 @@ abstract class Notification extends _i1.SerializableEntity {
       'isRead': isRead,
       'timestamp': timestamp.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

@@ -11,7 +11,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Notification extends _i1.TableRow {
+abstract class Notification extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Notification._({
     int? id,
     required this.userId,
@@ -30,21 +31,15 @@ abstract class Notification extends _i1.TableRow {
     required DateTime timestamp,
   }) = _NotificationImpl;
 
-  factory Notification.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Notification.fromJson(Map<String, dynamic> jsonSerialization) {
     return Notification(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      requestId:
-          serializationManager.deserialize<int>(jsonSerialization['requestId']),
-      type: serializationManager.deserialize<String>(jsonSerialization['type']),
-      isRead:
-          serializationManager.deserialize<bool>(jsonSerialization['isRead']),
-      timestamp: serializationManager
-          .deserialize<DateTime>(jsonSerialization['timestamp']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
+      requestId: jsonSerialization['requestId'] as int,
+      type: jsonSerialization['type'] as String,
+      isRead: jsonSerialization['isRead'] as bool,
+      timestamp:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['timestamp']),
     );
   }
 
@@ -86,20 +81,7 @@ abstract class Notification extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'userId': userId,
-      'requestId': requestId,
-      'type': type,
-      'isRead': isRead,
-      'timestamp': timestamp,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'userId': userId,
@@ -108,153 +90,6 @@ abstract class Notification extends _i1.TableRow {
       'isRead': isRead,
       'timestamp': timestamp.toJson(),
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'userId':
-        userId = value;
-        return;
-      case 'requestId':
-        requestId = value;
-        return;
-      case 'type':
-        type = value;
-        return;
-      case 'isRead':
-        isRead = value;
-        return;
-      case 'timestamp':
-        timestamp = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Notification>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<NotificationTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Notification>(
-      where: where != null ? where(Notification.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Notification?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<NotificationTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Notification>(
-      where: where != null ? where(Notification.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Notification?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Notification>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<NotificationTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Notification>(
-      where: where(Notification.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Notification row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Notification row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Notification row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<NotificationTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Notification>(
-      where: where != null ? where(Notification.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static NotificationInclude include() {
@@ -279,6 +114,11 @@ abstract class Notification extends _i1.TableRow {
       orderByList: orderByList?.call(Notification.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -367,9 +207,6 @@ class NotificationTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use NotificationTable.t instead.')
-NotificationTable tNotification = NotificationTable();
-
 class NotificationInclude extends _i1.IncludeObject {
   NotificationInclude._();
 
@@ -413,7 +250,7 @@ class NotificationRepository {
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Notification>(
+    return session.db.find<Notification>(
       where: where?.call(Notification.t),
       orderBy: orderBy?.call(Notification.t),
       orderByList: orderByList?.call(Notification.t),
@@ -433,7 +270,7 @@ class NotificationRepository {
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Notification>(
+    return session.db.findFirstRow<Notification>(
       where: where?.call(Notification.t),
       orderBy: orderBy?.call(Notification.t),
       orderByList: orderByList?.call(Notification.t),
@@ -448,7 +285,7 @@ class NotificationRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Notification>(
+    return session.db.findById<Notification>(
       id,
       transaction: transaction,
     );
@@ -459,7 +296,7 @@ class NotificationRepository {
     List<Notification> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Notification>(
+    return session.db.insert<Notification>(
       rows,
       transaction: transaction,
     );
@@ -470,7 +307,7 @@ class NotificationRepository {
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Notification>(
+    return session.db.insertRow<Notification>(
       row,
       transaction: transaction,
     );
@@ -482,7 +319,7 @@ class NotificationRepository {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Notification>(
+    return session.db.update<Notification>(
       rows,
       columns: columns?.call(Notification.t),
       transaction: transaction,
@@ -495,41 +332,41 @@ class NotificationRepository {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Notification>(
+    return session.db.updateRow<Notification>(
       row,
       columns: columns?.call(Notification.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Notification>> delete(
     _i1.Session session,
     List<Notification> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Notification>(
+    return session.db.delete<Notification>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Notification> deleteRow(
     _i1.Session session,
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Notification>(
+    return session.db.deleteRow<Notification>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Notification>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<NotificationTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Notification>(
+    return session.db.deleteWhere<Notification>(
       where: where(Notification.t),
       transaction: transaction,
     );
@@ -541,7 +378,7 @@ class NotificationRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Notification>(
+    return session.db.count<Notification>(
       where: where?.call(Notification.t),
       limit: limit,
       transaction: transaction,

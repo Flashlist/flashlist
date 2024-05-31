@@ -70,7 +70,7 @@ class FlashlistEndpoint extends Endpoint {
   @override
   Future<void> handleStreamMessage(
     StreamingSession session,
-    SerializableEntity message,
+    SerializableModel message,
   ) async {
     /// Add Flashlist to db
     /// Post list to [userChannel]

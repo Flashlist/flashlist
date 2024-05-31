@@ -11,7 +11,7 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'package:serverpod_auth_server/module.dart' as _i3;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'flashlist/flashlist.dart' as _i4;
 import 'flashlist/flashlist_permission.dart' as _i5;
 import 'flashlist/stream_messages/authors/accept_invite_to_flashlist.dart'
@@ -61,8 +61,6 @@ class Protocol extends _i1.SerializationManagerServer {
 
   factory Protocol() => _instance;
 
-  static final Map<Type, _i1.constructor> customConstructors = {};
-
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
@@ -74,7 +72,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'flashlist_id_seq\'::regclass)',
@@ -136,14 +134,14 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'flashlist_app_user_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'userId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -203,7 +201,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault:
@@ -217,13 +215,13 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'parentId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'orderNr',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -265,20 +263,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'flashlist_notification_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'userId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'requestId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -348,20 +346,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'flashlist_permission_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'userId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'flashlistId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -419,7 +417,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault:
@@ -427,13 +425,13 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'userId1',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'userId2',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -497,20 +495,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'flashlist_user_request_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'userId1',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'userId2',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -522,7 +520,7 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'data',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: true,
           dartType: 'int?',
         ),
@@ -582,145 +580,126 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (customConstructors.containsKey(t)) {
-      return customConstructors[t]!(data, this) as T;
-    }
     if (t == _i4.Flashlist) {
-      return _i4.Flashlist.fromJson(data, this) as T;
+      return _i4.Flashlist.fromJson(data) as T;
     }
     if (t == _i5.FlashlistPermission) {
-      return _i5.FlashlistPermission.fromJson(data, this) as T;
+      return _i5.FlashlistPermission.fromJson(data) as T;
     }
     if (t == _i6.AcceptInviteToFlashlist) {
-      return _i6.AcceptInviteToFlashlist.fromJson(data, this) as T;
+      return _i6.AcceptInviteToFlashlist.fromJson(data) as T;
     }
     if (t == _i7.AddUserToFlashlist) {
-      return _i7.AddUserToFlashlist.fromJson(data, this) as T;
+      return _i7.AddUserToFlashlist.fromJson(data) as T;
     }
     if (t == _i8.InviteUserToFlashlist) {
-      return _i8.InviteUserToFlashlist.fromJson(data, this) as T;
+      return _i8.InviteUserToFlashlist.fromJson(data) as T;
     }
     if (t == _i9.JoinFlashlist) {
-      return _i9.JoinFlashlist.fromJson(data, this) as T;
+      return _i9.JoinFlashlist.fromJson(data) as T;
     }
     if (t == _i10.LeaveFlashlist) {
-      return _i10.LeaveFlashlist.fromJson(data, this) as T;
+      return _i10.LeaveFlashlist.fromJson(data) as T;
     }
     if (t == _i11.RemoveUserFromFlashlist) {
-      return _i11.RemoveUserFromFlashlist.fromJson(data, this) as T;
+      return _i11.RemoveUserFromFlashlist.fromJson(data) as T;
     }
     if (t == _i12.DeleteFlashlist) {
-      return _i12.DeleteFlashlist.fromJson(data, this) as T;
+      return _i12.DeleteFlashlist.fromJson(data) as T;
     }
     if (t == _i13.FlashlistBatch) {
-      return _i13.FlashlistBatch.fromJson(data, this) as T;
+      return _i13.FlashlistBatch.fromJson(data) as T;
     }
     if (t == _i14.UpdateFlashlist) {
-      return _i14.UpdateFlashlist.fromJson(data, this) as T;
+      return _i14.UpdateFlashlist.fromJson(data) as T;
     }
     if (t == _i15.FlashlistItem) {
-      return _i15.FlashlistItem.fromJson(data, this) as T;
+      return _i15.FlashlistItem.fromJson(data) as T;
     }
     if (t == _i16.DeleteFlashlistItem) {
-      return _i16.DeleteFlashlistItem.fromJson(data, this) as T;
+      return _i16.DeleteFlashlistItem.fromJson(data) as T;
     }
     if (t == _i17.InsertFlashlistItem) {
-      return _i17.InsertFlashlistItem.fromJson(data, this) as T;
+      return _i17.InsertFlashlistItem.fromJson(data) as T;
     }
     if (t == _i18.ReOrderFlashlistItem) {
-      return _i18.ReOrderFlashlistItem.fromJson(data, this) as T;
+      return _i18.ReOrderFlashlistItem.fromJson(data) as T;
     }
     if (t == _i19.AppUser) {
-      return _i19.AppUser.fromJson(data, this) as T;
+      return _i19.AppUser.fromJson(data) as T;
     }
     if (t == _i20.Notification) {
-      return _i20.Notification.fromJson(data, this) as T;
+      return _i20.Notification.fromJson(data) as T;
     }
     if (t == _i21.UserRelation) {
-      return _i21.UserRelation.fromJson(data, this) as T;
+      return _i21.UserRelation.fromJson(data) as T;
     }
     if (t == _i22.UserRequest) {
-      return _i22.UserRequest.fromJson(data, this) as T;
+      return _i22.UserRequest.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Flashlist?>()) {
-      return (data != null ? _i4.Flashlist.fromJson(data, this) : null) as T;
+      return (data != null ? _i4.Flashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i5.FlashlistPermission?>()) {
-      return (data != null
-          ? _i5.FlashlistPermission.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i5.FlashlistPermission.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i6.AcceptInviteToFlashlist?>()) {
-      return (data != null
-          ? _i6.AcceptInviteToFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i6.AcceptInviteToFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i7.AddUserToFlashlist?>()) {
-      return (data != null ? _i7.AddUserToFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i7.AddUserToFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i8.InviteUserToFlashlist?>()) {
-      return (data != null
-          ? _i8.InviteUserToFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i8.InviteUserToFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i9.JoinFlashlist?>()) {
-      return (data != null ? _i9.JoinFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i9.JoinFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i10.LeaveFlashlist?>()) {
-      return (data != null ? _i10.LeaveFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i10.LeaveFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i11.RemoveUserFromFlashlist?>()) {
-      return (data != null
-          ? _i11.RemoveUserFromFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i11.RemoveUserFromFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i12.DeleteFlashlist?>()) {
-      return (data != null ? _i12.DeleteFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i12.DeleteFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i13.FlashlistBatch?>()) {
-      return (data != null ? _i13.FlashlistBatch.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i13.FlashlistBatch.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i14.UpdateFlashlist?>()) {
-      return (data != null ? _i14.UpdateFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i14.UpdateFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i15.FlashlistItem?>()) {
-      return (data != null ? _i15.FlashlistItem.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i15.FlashlistItem.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i16.DeleteFlashlistItem?>()) {
-      return (data != null
-          ? _i16.DeleteFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i16.DeleteFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i17.InsertFlashlistItem?>()) {
-      return (data != null
-          ? _i17.InsertFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i17.InsertFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i18.ReOrderFlashlistItem?>()) {
-      return (data != null
-          ? _i18.ReOrderFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i18.ReOrderFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i19.AppUser?>()) {
-      return (data != null ? _i19.AppUser.fromJson(data, this) : null) as T;
+      return (data != null ? _i19.AppUser.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i20.Notification?>()) {
-      return (data != null ? _i20.Notification.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i20.Notification.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i21.UserRelation?>()) {
-      return (data != null ? _i21.UserRelation.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i21.UserRelation.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i22.UserRequest?>()) {
-      return (data != null ? _i22.UserRequest.fromJson(data, this) : null) as T;
+      return (data != null ? _i22.UserRequest.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<List<_i23.FlashlistItem?>?>()) {
       return (data != null
@@ -749,10 +728,10 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
       return _i2.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 

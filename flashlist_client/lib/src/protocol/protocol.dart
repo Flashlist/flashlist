@@ -34,7 +34,7 @@ import 'user/user_request.dart' as _i20;
 import 'protocol.dart' as _i21;
 import 'package:flashlist_client/src/protocol/user/user_request.dart' as _i22;
 import 'package:flashlist_client/src/protocol/user/app_user.dart' as _i23;
-import 'package:serverpod_auth_client/module.dart' as _i24;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i24;
 export 'flashlist/flashlist.dart';
 export 'flashlist/flashlist_permission.dart';
 export 'flashlist/stream_messages/authors/accept_invite_to_flashlist.dart';
@@ -61,8 +61,6 @@ class Protocol extends _i1.SerializationManager {
 
   factory Protocol() => _instance;
 
-  static final Map<Type, _i1.constructor> customConstructors = {};
-
   static final Protocol _instance = Protocol._();
 
   @override
@@ -71,145 +69,126 @@ class Protocol extends _i1.SerializationManager {
     Type? t,
   ]) {
     t ??= T;
-    if (customConstructors.containsKey(t)) {
-      return customConstructors[t]!(data, this) as T;
-    }
     if (t == _i2.Flashlist) {
-      return _i2.Flashlist.fromJson(data, this) as T;
+      return _i2.Flashlist.fromJson(data) as T;
     }
     if (t == _i3.FlashlistPermission) {
-      return _i3.FlashlistPermission.fromJson(data, this) as T;
+      return _i3.FlashlistPermission.fromJson(data) as T;
     }
     if (t == _i4.AcceptInviteToFlashlist) {
-      return _i4.AcceptInviteToFlashlist.fromJson(data, this) as T;
+      return _i4.AcceptInviteToFlashlist.fromJson(data) as T;
     }
     if (t == _i5.AddUserToFlashlist) {
-      return _i5.AddUserToFlashlist.fromJson(data, this) as T;
+      return _i5.AddUserToFlashlist.fromJson(data) as T;
     }
     if (t == _i6.InviteUserToFlashlist) {
-      return _i6.InviteUserToFlashlist.fromJson(data, this) as T;
+      return _i6.InviteUserToFlashlist.fromJson(data) as T;
     }
     if (t == _i7.JoinFlashlist) {
-      return _i7.JoinFlashlist.fromJson(data, this) as T;
+      return _i7.JoinFlashlist.fromJson(data) as T;
     }
     if (t == _i8.LeaveFlashlist) {
-      return _i8.LeaveFlashlist.fromJson(data, this) as T;
+      return _i8.LeaveFlashlist.fromJson(data) as T;
     }
     if (t == _i9.RemoveUserFromFlashlist) {
-      return _i9.RemoveUserFromFlashlist.fromJson(data, this) as T;
+      return _i9.RemoveUserFromFlashlist.fromJson(data) as T;
     }
     if (t == _i10.DeleteFlashlist) {
-      return _i10.DeleteFlashlist.fromJson(data, this) as T;
+      return _i10.DeleteFlashlist.fromJson(data) as T;
     }
     if (t == _i11.FlashlistBatch) {
-      return _i11.FlashlistBatch.fromJson(data, this) as T;
+      return _i11.FlashlistBatch.fromJson(data) as T;
     }
     if (t == _i12.UpdateFlashlist) {
-      return _i12.UpdateFlashlist.fromJson(data, this) as T;
+      return _i12.UpdateFlashlist.fromJson(data) as T;
     }
     if (t == _i13.FlashlistItem) {
-      return _i13.FlashlistItem.fromJson(data, this) as T;
+      return _i13.FlashlistItem.fromJson(data) as T;
     }
     if (t == _i14.DeleteFlashlistItem) {
-      return _i14.DeleteFlashlistItem.fromJson(data, this) as T;
+      return _i14.DeleteFlashlistItem.fromJson(data) as T;
     }
     if (t == _i15.InsertFlashlistItem) {
-      return _i15.InsertFlashlistItem.fromJson(data, this) as T;
+      return _i15.InsertFlashlistItem.fromJson(data) as T;
     }
     if (t == _i16.ReOrderFlashlistItem) {
-      return _i16.ReOrderFlashlistItem.fromJson(data, this) as T;
+      return _i16.ReOrderFlashlistItem.fromJson(data) as T;
     }
     if (t == _i17.AppUser) {
-      return _i17.AppUser.fromJson(data, this) as T;
+      return _i17.AppUser.fromJson(data) as T;
     }
     if (t == _i18.Notification) {
-      return _i18.Notification.fromJson(data, this) as T;
+      return _i18.Notification.fromJson(data) as T;
     }
     if (t == _i19.UserRelation) {
-      return _i19.UserRelation.fromJson(data, this) as T;
+      return _i19.UserRelation.fromJson(data) as T;
     }
     if (t == _i20.UserRequest) {
-      return _i20.UserRequest.fromJson(data, this) as T;
+      return _i20.UserRequest.fromJson(data) as T;
     }
     if (t == _i1.getType<_i2.Flashlist?>()) {
-      return (data != null ? _i2.Flashlist.fromJson(data, this) : null) as T;
+      return (data != null ? _i2.Flashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i3.FlashlistPermission?>()) {
-      return (data != null
-          ? _i3.FlashlistPermission.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i3.FlashlistPermission.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i4.AcceptInviteToFlashlist?>()) {
-      return (data != null
-          ? _i4.AcceptInviteToFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i4.AcceptInviteToFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i5.AddUserToFlashlist?>()) {
-      return (data != null ? _i5.AddUserToFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i5.AddUserToFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i6.InviteUserToFlashlist?>()) {
-      return (data != null
-          ? _i6.InviteUserToFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i6.InviteUserToFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i7.JoinFlashlist?>()) {
-      return (data != null ? _i7.JoinFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i7.JoinFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i8.LeaveFlashlist?>()) {
-      return (data != null ? _i8.LeaveFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i8.LeaveFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i9.RemoveUserFromFlashlist?>()) {
-      return (data != null
-          ? _i9.RemoveUserFromFlashlist.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i9.RemoveUserFromFlashlist.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i10.DeleteFlashlist?>()) {
-      return (data != null ? _i10.DeleteFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i10.DeleteFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i11.FlashlistBatch?>()) {
-      return (data != null ? _i11.FlashlistBatch.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i11.FlashlistBatch.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i12.UpdateFlashlist?>()) {
-      return (data != null ? _i12.UpdateFlashlist.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i12.UpdateFlashlist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i13.FlashlistItem?>()) {
-      return (data != null ? _i13.FlashlistItem.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i13.FlashlistItem.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i14.DeleteFlashlistItem?>()) {
-      return (data != null
-          ? _i14.DeleteFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i14.DeleteFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i15.InsertFlashlistItem?>()) {
-      return (data != null
-          ? _i15.InsertFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i15.InsertFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i16.ReOrderFlashlistItem?>()) {
-      return (data != null
-          ? _i16.ReOrderFlashlistItem.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i16.ReOrderFlashlistItem.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i17.AppUser?>()) {
-      return (data != null ? _i17.AppUser.fromJson(data, this) : null) as T;
+      return (data != null ? _i17.AppUser.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i18.Notification?>()) {
-      return (data != null ? _i18.Notification.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i18.Notification.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i19.UserRelation?>()) {
-      return (data != null ? _i19.UserRelation.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i19.UserRelation.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i20.UserRequest?>()) {
-      return (data != null ? _i20.UserRequest.fromJson(data, this) : null) as T;
+      return (data != null ? _i20.UserRequest.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<List<_i21.FlashlistItem?>?>()) {
       return (data != null
@@ -238,7 +217,7 @@ class Protocol extends _i1.SerializationManager {
     }
     try {
       return _i24.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 

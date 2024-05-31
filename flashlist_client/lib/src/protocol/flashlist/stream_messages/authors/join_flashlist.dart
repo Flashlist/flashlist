@@ -11,7 +11,7 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import '../../../protocol.dart' as _i2;
 
-abstract class JoinFlashlist extends _i1.SerializableEntity {
+abstract class JoinFlashlist implements _i1.SerializableModel {
   JoinFlashlist._({
     required this.user,
     required this.flashlistId,
@@ -24,17 +24,12 @@ abstract class JoinFlashlist extends _i1.SerializableEntity {
     required String accessLevel,
   }) = _JoinFlashlistImpl;
 
-  factory JoinFlashlist.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory JoinFlashlist.fromJson(Map<String, dynamic> jsonSerialization) {
     return JoinFlashlist(
-      user: serializationManager
-          .deserialize<_i2.AppUser>(jsonSerialization['user']),
-      flashlistId: serializationManager
-          .deserialize<int>(jsonSerialization['flashlistId']),
-      accessLevel: serializationManager
-          .deserialize<String>(jsonSerialization['accessLevel']),
+      user: _i2.AppUser.fromJson(
+          (jsonSerialization['user'] as Map<String, dynamic>)),
+      flashlistId: jsonSerialization['flashlistId'] as int,
+      accessLevel: jsonSerialization['accessLevel'] as String,
     );
   }
 
@@ -56,6 +51,11 @@ abstract class JoinFlashlist extends _i1.SerializableEntity {
       'flashlistId': flashlistId,
       'accessLevel': accessLevel,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

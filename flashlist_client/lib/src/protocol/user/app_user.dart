@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class AppUser extends _i1.SerializableEntity {
+abstract class AppUser implements _i1.SerializableModel {
   AppUser._({
     this.id,
     required this.userId,
@@ -27,20 +27,13 @@ abstract class AppUser extends _i1.SerializableEntity {
     String? imageSrc,
   }) = _AppUserImpl;
 
-  factory AppUser.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory AppUser.fromJson(Map<String, dynamic> jsonSerialization) {
     return AppUser(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      username: serializationManager
-          .deserialize<String>(jsonSerialization['username']),
-      email:
-          serializationManager.deserialize<String>(jsonSerialization['email']),
-      imageSrc: serializationManager
-          .deserialize<String?>(jsonSerialization['imageSrc']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
+      username: jsonSerialization['username'] as String,
+      email: jsonSerialization['email'] as String,
+      imageSrc: jsonSerialization['imageSrc'] as String?,
     );
   }
 
@@ -73,6 +66,11 @@ abstract class AppUser extends _i1.SerializableEntity {
       'email': email,
       if (imageSrc != null) 'imageSrc': imageSrc,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

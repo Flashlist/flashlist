@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class ReOrderFlashlistItem extends _i1.SerializableEntity {
+abstract class ReOrderFlashlistItem implements _i1.SerializableModel {
   ReOrderFlashlistItem._({
     required this.id,
     required this.parentId,
@@ -26,17 +26,12 @@ abstract class ReOrderFlashlistItem extends _i1.SerializableEntity {
   }) = _ReOrderFlashlistItemImpl;
 
   factory ReOrderFlashlistItem.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+      Map<String, dynamic> jsonSerialization) {
     return ReOrderFlashlistItem(
-      id: serializationManager.deserialize<int>(jsonSerialization['id']),
-      parentId:
-          serializationManager.deserialize<int>(jsonSerialization['parentId']),
-      oldOrderNr: serializationManager
-          .deserialize<int>(jsonSerialization['oldOrderNr']),
-      newOrderNr: serializationManager
-          .deserialize<int?>(jsonSerialization['newOrderNr']),
+      id: jsonSerialization['id'] as int,
+      parentId: jsonSerialization['parentId'] as int,
+      oldOrderNr: jsonSerialization['oldOrderNr'] as int,
+      newOrderNr: jsonSerialization['newOrderNr'] as int?,
     );
   }
 
@@ -62,6 +57,11 @@ abstract class ReOrderFlashlistItem extends _i1.SerializableEntity {
       'oldOrderNr': oldOrderNr,
       if (newOrderNr != null) 'newOrderNr': newOrderNr,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

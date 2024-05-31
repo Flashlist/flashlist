@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class UserRequest extends _i1.SerializableEntity {
+abstract class UserRequest implements _i1.SerializableModel {
   UserRequest._({
     this.id,
     required this.userId1,
@@ -29,20 +29,15 @@ abstract class UserRequest extends _i1.SerializableEntity {
     required DateTime timestamp,
   }) = _UserRequestImpl;
 
-  factory UserRequest.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory UserRequest.fromJson(Map<String, dynamic> jsonSerialization) {
     return UserRequest(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId1:
-          serializationManager.deserialize<int>(jsonSerialization['userId1']),
-      userId2:
-          serializationManager.deserialize<int>(jsonSerialization['userId2']),
-      type: serializationManager.deserialize<String>(jsonSerialization['type']),
-      data: serializationManager.deserialize<int?>(jsonSerialization['data']),
-      timestamp: serializationManager
-          .deserialize<DateTime>(jsonSerialization['timestamp']),
+      id: jsonSerialization['id'] as int?,
+      userId1: jsonSerialization['userId1'] as int,
+      userId2: jsonSerialization['userId2'] as int,
+      type: jsonSerialization['type'] as String,
+      data: jsonSerialization['data'] as int?,
+      timestamp:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['timestamp']),
     );
   }
 
@@ -79,6 +74,11 @@ abstract class UserRequest extends _i1.SerializableEntity {
       if (data != null) 'data': data,
       'timestamp': timestamp.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
