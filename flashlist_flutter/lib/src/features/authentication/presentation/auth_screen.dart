@@ -15,14 +15,20 @@ class AuthScreen extends ConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SignInWithEmailButton(
-              caller: client.modules.auth,
-              onSignedIn: () {},
-            )
-          ],
+        child: Dialog(
+          child: Container(
+            width: 260,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SignInWithEmailButton(
+                  caller: client.modules.auth,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
