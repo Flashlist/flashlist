@@ -49,19 +49,6 @@ dart bin/main.dart
 
 
 ## Flutter Setup
-
-The Flutter App by default points to the production server. To connect it to the local Database follow the above steps and then navigate to `/flashlist/flashlist_flutter/lib/src/utils/serverpod/serverpod_helper.dart` and UNCOMMENT this line
-
-```dart
-// "http://${Platform.isAndroid ? "10.0.2.2" : "localhost"}:8080/",
-```
-
-and in turn COMMENT OUT the production URL
-
-```dart
-"https://api.flashlistapp.com/",
-```
-
 then all you need to do is navigate to `flashlist_flutter` and run:
 
 ```bash

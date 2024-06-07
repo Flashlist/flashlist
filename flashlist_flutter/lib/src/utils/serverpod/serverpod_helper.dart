@@ -10,8 +10,7 @@ part 'serverpod_helper.g.dart';
 
 @riverpod
 Client client(ClientRef ref) => Client(
-      // "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
-      "https://api.flashlistapp.com/",
+      "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
       authenticationKeyManager: FlutterAuthenticationKeyManager(),
     )..connectivityMonitor = FlutterConnectivityMonitor();
 
