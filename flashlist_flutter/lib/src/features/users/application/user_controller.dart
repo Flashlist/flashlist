@@ -53,6 +53,11 @@ class UserController {
     final client = ref.read(clientProvider);
     return await client.appUser.getRequestForUserByParameter(parameter);
   }
+
+  Future<bool> deleteUser() async {
+    final client = ref.read(clientProvider);
+    return await client.appUser.deleteUser();
+  }
 }
 
 @riverpod

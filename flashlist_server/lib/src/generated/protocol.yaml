@@ -10,6 +10,7 @@ appUser:
   - acceptConnectionRequest:
   - getConnections:
   - removeConnection:
+  - deleteUser:
 flashlist:
   - getFlashlistById:
   - getUserAccessLevelForFlashlist:
