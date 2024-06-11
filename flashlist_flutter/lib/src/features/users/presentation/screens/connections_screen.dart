@@ -53,7 +53,7 @@ class ConnectionsScreen extends ConsumerWidget {
                               context: context,
                               title: context.localizations
                                   .removeConnection(connection.username),
-                              confirmAction: context.localizations.share,
+                              confirmAction: context.localizations.remove,
                               cancelAction: context.localizations.cancel,
                             );
 
