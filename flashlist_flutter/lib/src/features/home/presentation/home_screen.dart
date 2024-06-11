@@ -20,7 +20,6 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(serverpodHelperProvider);
     final editModeController = ref.watch(editModePanelControllerProvider);
     final flashlistController = ref.watch(flashlistControllerProvider);
 
