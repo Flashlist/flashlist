@@ -101,6 +101,12 @@ class EndpointAppUser extends _i1.EndpointRef {
         'removeConnection',
         {'userId': userId},
       );
+
+  _i2.Future<bool> deleteUser() => caller.callServerEndpoint<bool>(
+        'appUser',
+        'deleteUser',
+        {},
+      );
 }
 
 /// {@category Endpoint}

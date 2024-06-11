@@ -219,6 +219,15 @@ class Endpoints extends _i1.EndpointDispatch {
             params['userId'],
           ),
         ),
+        'deleteUser': _i1.MethodConnector(
+          name: 'deleteUser',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['appUser'] as _i2.AppUserEndpoint).deleteUser(session),
+        ),
       },
     );
     connectors['flashlist'] = _i1.EndpointConnector(

@@ -1,6 +1,7 @@
+import 'package:serverpod/serverpod.dart';
+
 import 'package:flashlist_server/src/generated/protocol.dart';
 import 'package:flashlist_server/src/helpers/user/user_helper.dart';
-import 'package:serverpod/serverpod.dart';
 
 class AppUserEndpoint extends Endpoint {
   final userHelper = UserHelper();
@@ -265,5 +266,9 @@ class AppUserEndpoint extends Endpoint {
       print('Failed to remove connection: $e');
       rethrow;
     }
+  }
+
+  Future<bool> deleteUser(Session session) async {
+    return await userHelper.deleteAccount(session);
   }
 }
