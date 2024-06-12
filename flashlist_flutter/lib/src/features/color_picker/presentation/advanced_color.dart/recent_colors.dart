@@ -38,7 +38,7 @@ class RecentColors extends ConsumerWidget {
               margin: const EdgeInsets.only(right: 2),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: colorSchemeOf(context).onBackground,
+                  color: colorSchemeOf(context).onSurface,
                 ),
                 color: color,
                 borderRadius: const BorderRadius.all(

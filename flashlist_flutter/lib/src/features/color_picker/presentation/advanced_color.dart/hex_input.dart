@@ -43,7 +43,7 @@ class HexInput extends ConsumerWidget {
             width: Sizes.p42,
             decoration: BoxDecoration(
               border: Border.all(
-                color: colorSchemeOf(context).onBackground,
+                color: colorSchemeOf(context).onSurface,
               ),
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),

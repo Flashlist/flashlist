@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "RUN: serverpod generate",
+            "type": "shell",
+            "command": "serverpod generate",
+            "args": [],
+            "options": {
+                "cwd": "./flashlist_server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start DB",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "-f",
+                "flashlist_server/docker-compose.yaml",
+                "up",
+                "--build",
+                "--detach"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "STOP: DB",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "-f",
+                "flashlist_server/docker-compose.yaml",
+                "down"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "RUN: Server",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "bin/main.dart"
+            ],
+            "options": {
+                "cwd": "./flashlist_server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "RUN: Server with migrations",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "bin/main.dart --apply-migrations"
+            ],
+            "options": {
+                "cwd": "./flashlist_server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "RUN: Flutter App",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "run"
+            ],
+            "options": {
+                "cwd": "./flashlist_flutter"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "RUN: Flutter App (Release)",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "run",
+                "--release"
+            ],
+            "options": {
+                "cwd": "./flashlist_flutter"
+            },
+            "problemMatcher": []
+        },
+    ]
+}

@@ -11,7 +11,6 @@ import 'package:flashlist_flutter/src/features/flashlist/presentation/flashlist_
 import 'package:flashlist_flutter/src/features/home/presentation/notification_badge.dart';
 import 'package:flashlist_flutter/src/features/home/presentation/side_drawer.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
-import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
 class HomeScreen extends HookConsumerWidget {
   /// HomeScreen is the default screen when the user is authenticated
@@ -46,8 +45,8 @@ class HomeScreen extends HookConsumerWidget {
             ? null
             : FloatingActionButton(
                 backgroundColor: isDarkThemeOf(context)
-                    ? colorSchemeOf(context).onBackground
-                    : colorSchemeOf(context).onBackground.withOpacity(0.8),
+                    ? colorSchemeOf(context).onSurface
+                    : colorSchemeOf(context).onSurface.withOpacity(0.8),
                 shape: const CircleBorder(),
                 onPressed: () {
                   flashlistController.createFlashlist(

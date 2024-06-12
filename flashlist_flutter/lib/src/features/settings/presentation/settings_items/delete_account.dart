@@ -1,12 +1,11 @@
-import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flashlist_flutter/src/features/authentication/application/authentication.dart';
+import 'package:flashlist_flutter/src/features/users/application/user_controller.dart';
 import 'package:flashlist_flutter/src/shared/confirm_dialog.dart';
 import 'package:flashlist_flutter/src/utils/context_helper.dart';
-import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
 
 class DeleteAccountSetting extends ConsumerWidget {
   const DeleteAccountSetting({super.key});
