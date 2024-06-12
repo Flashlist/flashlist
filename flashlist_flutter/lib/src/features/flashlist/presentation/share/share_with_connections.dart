@@ -33,6 +33,7 @@ class ShareWithConnections extends ConsumerWidget {
     return AsyncValueWidget(
       withLoadingIndicator: false,
       value: ref.watch(connectionsProvider),
+      onReloadPress: () => ref.invalidate(connectionsProvider),
       data: (connections) {
         return ListView.builder(
           shrinkWrap: true,
