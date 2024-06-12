@@ -41,6 +41,7 @@ class ConnectionsScreen extends ConsumerWidget {
               AsyncValueListWithTitle(
                 title: context.localizations.connections,
                 value: ref.watch(connectionsProvider),
+                onReloadPress: () => ref.invalidate(connectionsProvider),
                 listItemBuilder: (AppUser? connection) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,6 +72,7 @@ class ConnectionsScreen extends ConsumerWidget {
               AsyncValueListWithTitle(
                 title: context.localizations.pendingConnectionRequests,
                 value: ref.watch(pendingRequestsProvider('connection')),
+                onReloadPress: () => ref.invalidate(pendingRequestsProvider),
                 listItemBuilder: (UserRequest? request) {
                   return ConnectionRequestRow(request!);
                 },
@@ -82,6 +84,7 @@ class ConnectionsScreen extends ConsumerWidget {
               AsyncValueListWithTitle(
                 title: context.localizations.pendingFlashlistRequests,
                 value: ref.watch(pendingRequestsProvider('join_flashlist')),
+                onReloadPress: () => ref.invalidate(pendingRequestsProvider),
                 listItemBuilder: (UserRequest? request) {
                   return request != null
                       ? ConnectionRequestRow(request)

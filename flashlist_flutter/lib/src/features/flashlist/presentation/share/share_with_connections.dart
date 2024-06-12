@@ -33,7 +33,24 @@ class ShareWithConnections extends ConsumerWidget {
     return AsyncValueWidget(
       withLoadingIndicator: false,
       value: ref.watch(connectionsProvider),
+      onReloadPress: () => ref.invalidate(connectionsProvider),
       data: (connections) {
+        if (connections.isEmpty) {
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'You have no connections yet.',
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                'Go to "Connections and Requests" and send or accept an invite!',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          );
+        }
+
         return ListView.builder(
           shrinkWrap: true,
           itemCount: connections.length,

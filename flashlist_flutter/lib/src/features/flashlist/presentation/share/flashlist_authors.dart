@@ -31,7 +31,10 @@ class FlashlistAuthors extends ConsumerWidget {
 
     if (authors == null || authors.isEmpty) {
       return Center(
-        child: Text(context.localizations.noEditorsMessage),
+        child: Text(
+          context.localizations.noEditorsMessage,
+          textAlign: TextAlign.center,
+        ),
       );
     }
 
