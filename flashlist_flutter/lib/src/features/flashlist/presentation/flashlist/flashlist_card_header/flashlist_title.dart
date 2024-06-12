@@ -33,6 +33,7 @@ class FlashlistTitle extends ConsumerWidget {
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.top,
               maxLines: 1,
+              maxLength: 20,
               onChanged: (value) {
                 textEditingController.text = value;
               },
