@@ -55,37 +55,46 @@ class ShareWithConnections extends ConsumerWidget {
           shrinkWrap: true,
           itemCount: connections.length,
           itemBuilder: (context, index) {
-            // TODO: think about just disabling the connection if it's already an author
             final connection = connections[index];
-            final authorIds =
-                Set.from(flashlist.authors!.map((c) => c?.userId));
-            if (authorIds.contains(connection?.userId)) {
-              return const SizedBox.shrink();
+
+            if (connection == null) {
+              return const SizedBox();
             }
 
-            return ListTile(
-              leading: AvatarPlaceholder(
-                radius: Sizes.p20,
-                username: connection!.username,
-              ),
-              title: Text(connection.username),
-              onTap: () async {
-                final wantsToShare = await showConfirmDialog(
-                  context: context,
-                  title: context.localizations
-                      .inviteNamedUser(connection.username),
-                  content: context.localizations.wantToInviteNamedUserMessage(
-                    connection.username,
-                    flashlist.title,
-                  ),
-                  confirmAction: context.localizations.share,
-                  cancelAction: context.localizations.cancel,
-                );
+            final authorIds =
+                Set.from(flashlist.authors?.map((c) => c?.userId) ?? []);
 
-                if (wantsToShare == true) {
-                  shareWithConnection(connection);
-                }
-              },
+            final isAuthor = authorIds.contains(connection.userId);
+
+            return Opacity(
+              opacity: isAuthor ? 0.3 : 1.0,
+              child: ListTile(
+                leading: AvatarPlaceholder(
+                  radius: Sizes.p20,
+                  username: connection.username,
+                ),
+                title: Text(connection.username),
+                onTap: isAuthor
+                    ? null
+                    : () async {
+                        final wantsToShare = await showConfirmDialog(
+                          context: context,
+                          title: context.localizations
+                              .inviteNamedUser(connection.username),
+                          content: context.localizations
+                              .wantToInviteNamedUserMessage(
+                            connection.username,
+                            flashlist.title,
+                          ),
+                          confirmAction: context.localizations.share,
+                          cancelAction: context.localizations.cancel,
+                        );
+
+                        if (wantsToShare == true) {
+                          shareWithConnection(connection);
+                        }
+                      },
+              ),
             );
           },
         );
