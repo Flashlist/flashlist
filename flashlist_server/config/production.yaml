@@ -21,7 +21,7 @@ insightsServer:
 # Configuration for the web server.
 webServer:
   port: 8082
-  publicHost: app.flashlistapp.com
+  publicHost: flashlistapp.com
   publicPort: 443
   publicScheme: https
 
