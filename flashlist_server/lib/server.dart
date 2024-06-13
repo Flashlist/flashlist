@@ -2,7 +2,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as auth;
 
 import 'package:flashlist_server/src/utils/send_mail.dart';
-import 'package:flashlist_server/src/web/routes/root.dart';
+import 'package:flashlist_server/src/web/routes/how_to_delete.dart';
 
 import 'src/generated/endpoints.dart';
 import 'src/generated/protocol.dart';
@@ -20,17 +20,7 @@ void run(List<String> args) async {
     authenticationHandler: auth.authenticationHandler,
   );
 
-  // If you are using any future calls, they need to be registered here.
-  // pod.registerFutureCall(ExampleFutureCall(), 'exampleFutureCall');
-
-  // Setup a default page at the web root.
-  pod.webServer.addRoute(RouteRoot(), '/');
-  pod.webServer.addRoute(RouteRoot(), '/index.html');
-  // Serve all files in the /static directory.
-  pod.webServer.addRoute(
-    RouteStaticDirectory(serverDirectory: 'static', basePath: '/'),
-    '/*',
-  );
+  pod.webServer.addRoute(HowToDeleteRoute(), '/how-to-delete');
 
   auth.AuthConfig.set(
     auth.AuthConfig(
