@@ -14,7 +14,7 @@ class UserHelper {
     try {
       final userId = await getAuthenticatedUserId(session);
       if (userId == null) {
-        throw Exception('User not authenticated');
+        return null;
       }
 
       final user = await AppUser.db.findFirstRow(
