@@ -1,6 +1,7 @@
-import 'package:flashlist_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_server/serverpod_auth_server.dart';
+
+import 'package:flashlist_server/src/generated/protocol.dart';
 
 /// Helper Class for user-specific methods
 /// that are shared among endpoints.
