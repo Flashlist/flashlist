@@ -1,3 +1,4 @@
+import 'package:flashlist_server/src/helpers/flashlist/flashlist_helper.dart';
 import 'package:serverpod/serverpod.dart';
 
 import 'package:flashlist_server/src/generated/protocol.dart';
@@ -5,6 +6,7 @@ import 'package:flashlist_server/src/helpers/user/user_helper.dart';
 
 class AppUserEndpoint extends Endpoint {
   final userHelper = UserHelper();
+  final flashlistHelper = FlashlistHelper();
 
   Future<AppUser?> getCurrentUser(Session session) async {
     return await userHelper.getAuthenticatedUser(session);
@@ -245,7 +247,6 @@ class AppUserEndpoint extends Endpoint {
   Future<void> removeConnection(Session session, int userId) async {
     try {
       final currentUser = await userHelper.getAuthenticatedUser(session);
-  
 
       final connection = await UserRelation.db.findFirstRow(
         session,
@@ -269,6 +270,7 @@ class AppUserEndpoint extends Endpoint {
   }
 
   Future<bool> deleteUser(Session session) async {
+    await flashlistHelper.deleteAllFlashlistsOwnedByUser(session);
     return await userHelper.deleteAccount(session);
   }
 }

@@ -66,6 +66,38 @@ class FlashlistHelper {
     }
   }
 
+  /// Deletes all flashlists the currently authenticated user owns.
+  /// This should only be used when a user account is deleted!
+  Future<bool> deleteAllFlashlistsOwnedByUser(Session session) async {
+    try {
+      final permissionsForUser = await flashlistPermissionHelper
+          .getFlashlistPermissionsForUser(session);
+
+      if (permissionsForUser.isEmpty) {
+        return true;
+      } else {
+        final permissionsForUserIds = permissionsForUser
+            .where((e) => e.accessLevel == 'owner')
+            .map((e) => e.flashlistId)
+            .toSet();
+
+        final flashlistCollection = await Flashlist.db.find(
+          session,
+          where: (flashlist) => flashlist.id.inSet(permissionsForUserIds),
+        );
+
+        if (flashlistCollection.isEmpty) {
+          return true;
+        }
+
+        await Flashlist.db.delete(session, flashlistCollection);
+        return true;
+      }
+    } catch (e) {
+      throw Exception('Failed to get owned flashlists for user: $e');
+    }
+  }
+
   /// Returns the flashlist with the given [flashlistId].
   /// Throws an exception if the user does not have permission to view the flashlist.
   /// Returns null if the flashlist does not exist.
