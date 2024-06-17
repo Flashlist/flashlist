@@ -23,7 +23,39 @@ development:
   redis: 'QC_mss_jkyaTZDiMhJvDJj0M6quWjOal'
 ```
 
-Navigate to the server directory
+To be able to easily create users on your local DB navigate to `/flashlist/flashlist_server/lib/server.dart`.
+There you:
+1. Uncomment the `print` and `return` statement.
+2. Comment out the try-catch with the sendEmailFromFlashlist Function
+
+```dart
+  auth.AuthConfig.set(
+    auth.AuthConfig(
+      sendValidationEmail: (session, email, validationCode) async {
+        //  Send the validation email to the user.
+        // Return `true` if the email was successfully sent, otherwise `false`.
+
+        //UNCOMMENT the two lines beneath
+        // print(validationCode);
+        // return true;
+
+        // COMMENT OUT this try / catch
+        try {
+          return await sendEmailFromFlashlist(
+            session.server.passwords['emailUsername']!,
+            session.server.passwords['emailPassword']!,
+            email,
+            'Flashlist Email Validation',
+            'Your validation code is: $validationCode',
+          );
+        } catch (e) {
+          print(e);
+          return false;
+        }
+      },
+```
+
+Navigate to the server directory in your shell
 
 ```bash
 cd flashlist/flashlist_server
