@@ -43,7 +43,7 @@ class DeleteAccountSetting extends ConsumerWidget {
                 confirmAction: 'Yes',
               );
 
-              if (wantsToDelete != null) {
+              if (wantsToDelete != null && wantsToDelete) {
                 bool isDeleted =
                     await ref.read(userControllerProvider).deleteUser();
                 if (isDeleted) {
