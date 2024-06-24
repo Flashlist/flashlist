@@ -6,6 +6,22 @@
 
 Flashlist is a crossplattform mobile app that allows you to manage and share shopping lists, tasks and todos. Providing realtime-updates through WebSockets for perfect sync.
 
+
+## In case you haven't already install the following:
+
+### Install Flutter and Dart. 
+You can follow the instructions on the official Flutter website: [Flutter Installation Guide](https://docs.flutter.dev/get-started/install)
+
+### Install Docker. 
+You can follow the instructions on the official Docker website: [Docker Installation Guide](https://docs.docker.com/get-docker/)
+
+### Install Serverpod CLI
+Once you have Flutter and Docker installed and configured, open up a terminal and install Serverpod by running:
+```bash
+dart pub global activate serverpod_cli
+```
+
+
 ## Clone Flashlist
 To clone run: 
 
