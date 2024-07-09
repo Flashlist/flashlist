@@ -47,5 +47,5 @@ jobs:
           file: ./flashlist_server/DockerfileProduction
           push: true
           tags:
-            ghcr.io/benauerdev/flashlist:latest
+            ghcr.io/flashlist/flashlist:latest
           labels: ${{ steps.meta.outputs.labels }}
