@@ -1,23 +1,24 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class FlashlistPermission extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class FlashlistPermission
+    implements _i1.TableRow, _i1.ProtocolSerialization {
   FlashlistPermission._({
-    int? id,
+    this.id,
     required this.userId,
     required this.flashlistId,
     required this.accessLevel,
-  }) : super(id);
+  });
 
   factory FlashlistPermission({
     int? id,
@@ -38,6 +39,9 @@ abstract class FlashlistPermission extends _i1.TableRow
   static final t = FlashlistPermissionTable();
 
   static const db = FlashlistPermissionRepository._();
+
+  @override
+  int? id;
 
   int userId;
 
@@ -201,7 +205,7 @@ class FlashlistPermissionRepository {
   const FlashlistPermissionRepository._();
 
   Future<List<FlashlistPermission>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistPermissionTable>? where,
     int? limit,
     int? offset,
@@ -210,19 +214,19 @@ class FlashlistPermissionRepository {
     _i1.OrderByListBuilder<FlashlistPermissionTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<FlashlistPermission>(
+    return databaseAccessor.db.find<FlashlistPermission>(
       where: where?.call(FlashlistPermission.t),
       orderBy: orderBy?.call(FlashlistPermission.t),
       orderByList: orderByList?.call(FlashlistPermission.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<FlashlistPermission?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistPermissionTable>? where,
     int? offset,
     _i1.OrderByBuilder<FlashlistPermissionTable>? orderBy,
@@ -230,118 +234,118 @@ class FlashlistPermissionRepository {
     _i1.OrderByListBuilder<FlashlistPermissionTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<FlashlistPermission>(
+    return databaseAccessor.db.findFirstRow<FlashlistPermission>(
       where: where?.call(FlashlistPermission.t),
       orderBy: orderBy?.call(FlashlistPermission.t),
       orderByList: orderByList?.call(FlashlistPermission.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<FlashlistPermission?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<FlashlistPermission>(
+    return databaseAccessor.db.findById<FlashlistPermission>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<FlashlistPermission>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<FlashlistPermission> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<FlashlistPermission>(
+    return databaseAccessor.db.insert<FlashlistPermission>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<FlashlistPermission> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     FlashlistPermission row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<FlashlistPermission>(
+    return databaseAccessor.db.insertRow<FlashlistPermission>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<FlashlistPermission>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<FlashlistPermission> rows, {
     _i1.ColumnSelections<FlashlistPermissionTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<FlashlistPermission>(
+    return databaseAccessor.db.update<FlashlistPermission>(
       rows,
       columns: columns?.call(FlashlistPermission.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<FlashlistPermission> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     FlashlistPermission row, {
     _i1.ColumnSelections<FlashlistPermissionTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<FlashlistPermission>(
+    return databaseAccessor.db.updateRow<FlashlistPermission>(
       row,
       columns: columns?.call(FlashlistPermission.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<FlashlistPermission>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<FlashlistPermission> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<FlashlistPermission>(
+    return databaseAccessor.db.delete<FlashlistPermission>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<FlashlistPermission> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     FlashlistPermission row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<FlashlistPermission>(
+    return databaseAccessor.db.deleteRow<FlashlistPermission>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<FlashlistPermission>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<FlashlistPermissionTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<FlashlistPermission>(
+    return databaseAccessor.db.deleteWhere<FlashlistPermission>(
       where: where(FlashlistPermission.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistPermissionTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<FlashlistPermission>(
+    return databaseAccessor.db.count<FlashlistPermission>(
       where: where?.call(FlashlistPermission.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

@@ -1,26 +1,25 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Notification extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Notification implements _i1.TableRow, _i1.ProtocolSerialization {
   Notification._({
-    int? id,
+    this.id,
     required this.userId,
     required this.requestId,
     required this.type,
     required this.isRead,
     required this.timestamp,
-  }) : super(id);
+  });
 
   factory Notification({
     int? id,
@@ -46,6 +45,9 @@ abstract class Notification extends _i1.TableRow
   static final t = NotificationTable();
 
   static const db = NotificationRepository._();
+
+  @override
+  int? id;
 
   int userId;
 
@@ -241,7 +243,7 @@ class NotificationRepository {
   const NotificationRepository._();
 
   Future<List<Notification>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? limit,
     int? offset,
@@ -250,19 +252,19 @@ class NotificationRepository {
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Notification>(
+    return databaseAccessor.db.find<Notification>(
       where: where?.call(Notification.t),
       orderBy: orderBy?.call(Notification.t),
       orderByList: orderByList?.call(Notification.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Notification?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? offset,
     _i1.OrderByBuilder<NotificationTable>? orderBy,
@@ -270,118 +272,118 @@ class NotificationRepository {
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Notification>(
+    return databaseAccessor.db.findFirstRow<Notification>(
       where: where?.call(Notification.t),
       orderBy: orderBy?.call(Notification.t),
       orderByList: orderByList?.call(Notification.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Notification?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Notification>(
+    return databaseAccessor.db.findById<Notification>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Notification>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Notification> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Notification>(
+    return databaseAccessor.db.insert<Notification>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Notification> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Notification>(
+    return databaseAccessor.db.insertRow<Notification>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Notification>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Notification> rows, {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Notification>(
+    return databaseAccessor.db.update<Notification>(
       rows,
       columns: columns?.call(Notification.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Notification> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Notification row, {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Notification>(
+    return databaseAccessor.db.updateRow<Notification>(
       row,
       columns: columns?.call(Notification.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Notification>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Notification> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Notification>(
+    return databaseAccessor.db.delete<Notification>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Notification> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Notification>(
+    return databaseAccessor.db.deleteRow<Notification>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Notification>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<NotificationTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Notification>(
+    return databaseAccessor.db.deleteWhere<Notification>(
       where: where(Notification.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Notification>(
+    return databaseAccessor.db.count<Notification>(
       where: where?.call(Notification.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

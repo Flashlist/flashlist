@@ -1,21 +1,20 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../protocol.dart' as _i2;
-import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Flashlist extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Flashlist implements _i1.TableRow, _i1.ProtocolSerialization {
   Flashlist._({
-    int? id,
+    this.id,
     required this.uuid,
     required this.title,
     required this.color,
@@ -24,7 +23,7 @@ abstract class Flashlist extends _i1.TableRow
     this.isCollapsed,
     required this.createdAt,
     this.updatedAt,
-  }) : super(id);
+  });
 
   factory Flashlist({
     int? id,
@@ -66,6 +65,9 @@ abstract class Flashlist extends _i1.TableRow
   static final t = FlashlistTable();
 
   static const db = FlashlistRepository._();
+
+  @override
+  int? id;
 
   String uuid;
 
@@ -203,8 +205,12 @@ class _FlashlistImpl extends Flashlist {
       uuid: uuid ?? this.uuid,
       title: title ?? this.title,
       color: color ?? this.color,
-      items: items is List<_i2.FlashlistItem?>? ? items : this.items?.clone(),
-      authors: authors is List<_i2.AppUser?>? ? authors : this.authors?.clone(),
+      items: items is List<_i2.FlashlistItem?>?
+          ? items
+          : this.items?.map((e0) => e0?.copyWith()).toList(),
+      authors: authors is List<_i2.AppUser?>?
+          ? authors
+          : this.authors?.map((e0) => e0?.copyWith()).toList(),
       isCollapsed: isCollapsed is bool? ? isCollapsed : this.isCollapsed,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
@@ -291,7 +297,7 @@ class FlashlistRepository {
   const FlashlistRepository._();
 
   Future<List<Flashlist>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistTable>? where,
     int? limit,
     int? offset,
@@ -300,19 +306,19 @@ class FlashlistRepository {
     _i1.OrderByListBuilder<FlashlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Flashlist>(
+    return databaseAccessor.db.find<Flashlist>(
       where: where?.call(Flashlist.t),
       orderBy: orderBy?.call(Flashlist.t),
       orderByList: orderByList?.call(Flashlist.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Flashlist?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistTable>? where,
     int? offset,
     _i1.OrderByBuilder<FlashlistTable>? orderBy,
@@ -320,118 +326,118 @@ class FlashlistRepository {
     _i1.OrderByListBuilder<FlashlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Flashlist>(
+    return databaseAccessor.db.findFirstRow<Flashlist>(
       where: where?.call(Flashlist.t),
       orderBy: orderBy?.call(Flashlist.t),
       orderByList: orderByList?.call(Flashlist.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Flashlist?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Flashlist>(
+    return databaseAccessor.db.findById<Flashlist>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Flashlist>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Flashlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Flashlist>(
+    return databaseAccessor.db.insert<Flashlist>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Flashlist> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Flashlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Flashlist>(
+    return databaseAccessor.db.insertRow<Flashlist>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Flashlist>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Flashlist> rows, {
     _i1.ColumnSelections<FlashlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Flashlist>(
+    return databaseAccessor.db.update<Flashlist>(
       rows,
       columns: columns?.call(Flashlist.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Flashlist> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Flashlist row, {
     _i1.ColumnSelections<FlashlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Flashlist>(
+    return databaseAccessor.db.updateRow<Flashlist>(
       row,
       columns: columns?.call(Flashlist.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Flashlist>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Flashlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Flashlist>(
+    return databaseAccessor.db.delete<Flashlist>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Flashlist> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Flashlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Flashlist>(
+    return databaseAccessor.db.deleteRow<Flashlist>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Flashlist>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<FlashlistTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Flashlist>(
+    return databaseAccessor.db.deleteWhere<Flashlist>(
       where: where(Flashlist.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<FlashlistTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Flashlist>(
+    return databaseAccessor.db.count<Flashlist>(
       where: where?.call(Flashlist.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
