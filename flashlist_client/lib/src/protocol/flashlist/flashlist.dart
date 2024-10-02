@@ -1,11 +1,12 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -158,8 +159,12 @@ class _FlashlistImpl extends Flashlist {
       uuid: uuid ?? this.uuid,
       title: title ?? this.title,
       color: color ?? this.color,
-      items: items is List<_i2.FlashlistItem?>? ? items : this.items?.clone(),
-      authors: authors is List<_i2.AppUser?>? ? authors : this.authors?.clone(),
+      items: items is List<_i2.FlashlistItem?>?
+          ? items
+          : this.items?.map((e0) => e0?.copyWith()).toList(),
+      authors: authors is List<_i2.AppUser?>?
+          ? authors
+          : this.authors?.map((e0) => e0?.copyWith()).toList(),
       isCollapsed: isCollapsed is bool? ? isCollapsed : this.isCollapsed,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,

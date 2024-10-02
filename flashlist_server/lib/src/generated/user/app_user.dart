@@ -1,24 +1,24 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class AppUser extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class AppUser implements _i1.TableRow, _i1.ProtocolSerialization {
   AppUser._({
-    int? id,
+    this.id,
     required this.userId,
     required this.username,
     required this.email,
     this.imageSrc,
-  }) : super(id);
+  });
 
   factory AppUser({
     int? id,
@@ -41,6 +41,9 @@ abstract class AppUser extends _i1.TableRow
   static final t = AppUserTable();
 
   static const db = AppUserRepository._();
+
+  @override
+  int? id;
 
   int userId;
 
@@ -219,7 +222,7 @@ class AppUserRepository {
   const AppUserRepository._();
 
   Future<List<AppUser>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,
     int? limit,
     int? offset,
@@ -228,19 +231,19 @@ class AppUserRepository {
     _i1.OrderByListBuilder<AppUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<AppUser>(
+    return databaseAccessor.db.find<AppUser>(
       where: where?.call(AppUser.t),
       orderBy: orderBy?.call(AppUser.t),
       orderByList: orderByList?.call(AppUser.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<AppUser?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,
     int? offset,
     _i1.OrderByBuilder<AppUserTable>? orderBy,
@@ -248,118 +251,118 @@ class AppUserRepository {
     _i1.OrderByListBuilder<AppUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<AppUser>(
+    return databaseAccessor.db.findFirstRow<AppUser>(
       where: where?.call(AppUser.t),
       orderBy: orderBy?.call(AppUser.t),
       orderByList: orderByList?.call(AppUser.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<AppUser?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<AppUser>(
+    return databaseAccessor.db.findById<AppUser>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<AppUser>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<AppUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<AppUser>(
+    return databaseAccessor.db.insert<AppUser>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<AppUser> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     AppUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<AppUser>(
+    return databaseAccessor.db.insertRow<AppUser>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<AppUser>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<AppUser> rows, {
     _i1.ColumnSelections<AppUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<AppUser>(
+    return databaseAccessor.db.update<AppUser>(
       rows,
       columns: columns?.call(AppUser.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<AppUser> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     AppUser row, {
     _i1.ColumnSelections<AppUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<AppUser>(
+    return databaseAccessor.db.updateRow<AppUser>(
       row,
       columns: columns?.call(AppUser.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<AppUser>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<AppUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<AppUser>(
+    return databaseAccessor.db.delete<AppUser>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<AppUser> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     AppUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<AppUser>(
+    return databaseAccessor.db.deleteRow<AppUser>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<AppUser>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<AppUserTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<AppUser>(
+    return databaseAccessor.db.deleteWhere<AppUser>(
       where: where(AppUser.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<AppUser>(
+    return databaseAccessor.db.count<AppUser>(
       where: where?.call(AppUser.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
