@@ -26,7 +26,7 @@ dart pub global activate serverpod_cli
 To clone run: 
 
 ```bash
-git clone https://github.com/BenAuerDev/flashlist.git
+git clone https://github.com/Flashlist/flashlist.git
 ```
 
 ## Server Setup
@@ -96,7 +96,7 @@ dart bin/main.dart
 
 
 
-## Flutter Setup
+## Flutter
 then all you need to do is navigate to `flashlist_flutter` and run:
 
 ```bash
