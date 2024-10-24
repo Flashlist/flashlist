@@ -1,0 +1,6 @@
+name: flashlist
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dev_dependencies:
+  melos: ^6.1.0

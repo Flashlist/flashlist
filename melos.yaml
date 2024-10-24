@@ -1,0 +1,12 @@
+name: flashlist
+
+packages:
+  - flashlist_flutter
+  - flashlist_server
+
+scripts:
+  migrate: cd ./flashlist_server && dart bin/main.dart --apply-migrations && cd ..
+  startDb: cd ./flashlist_server && docker compose up --build --detach && cd ..
+  dev : cd ./flashlist_server && dart bin/main.dart && cd ..
+  gen: cd ./flashlist_server && serverpod generate && cd ..
+  genwatch: cd ./flashlist_server && serverpod generate --watch
