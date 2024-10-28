@@ -13,7 +13,7 @@ class SideDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
-      backgroundColor: colorSchemeOf(context).background,
+      backgroundColor: colorSchemeOf(context).surface,
       shape: const BeveledRectangleBorder(),
       child: ListView(
         padding: EdgeInsets.zero,

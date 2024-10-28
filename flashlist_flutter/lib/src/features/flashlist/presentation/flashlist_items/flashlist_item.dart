@@ -35,8 +35,7 @@ class FlashlistItemWidget extends StatelessWidget {
       ),
       child: Card(
         child: Container(
-          height: 35,
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
+          padding: const EdgeInsets.all(Sizes.p8),
           child: Center(
             child: Text(
               item.name,

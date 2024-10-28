@@ -19,12 +19,18 @@ class SettingsScreen extends ConsumerWidget {
         centerTitle: true,
         title: Text(context.localizations.settings),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        children: const [
-          AppVersionInfo(),
-          ThemeBrightness(),
-          DeleteAccountSetting(),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: const [
+                AppVersionInfo(),
+                ThemeBrightness(),
+              ],
+            ),
+          ),
+          const DeleteAccountSetting(),
         ],
       ),
     );
