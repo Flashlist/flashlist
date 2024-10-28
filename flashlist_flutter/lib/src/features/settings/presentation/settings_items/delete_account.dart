@@ -23,6 +23,7 @@ class DeleteAccountSetting extends ConsumerWidget {
     }
 
     return ListTile(
+      tileColor: colorSchemeOf(context).error.withOpacity(0.1),
       title: const Text('Delete Account'),
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
