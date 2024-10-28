@@ -65,7 +65,6 @@ class FlashlistItemInput extends ConsumerWidget {
                 key: flashlistItemFormKey,
                 child: TextFormField(
                   autofocus: true,
-                  maxLength: 40,
                   textInputAction: TextInputAction.unspecified,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
