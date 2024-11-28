@@ -2,6 +2,8 @@ type: server
 
 client_package_path: ../flashlist_client
 
+server_test_tools_path: test/integration/test_tools
+
 modules:
   serverpod_auth:
     nickname: auth
