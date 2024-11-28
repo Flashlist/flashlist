@@ -243,7 +243,7 @@ class UserRequestRepository {
   const UserRequestRepository._();
 
   Future<List<UserRequest>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UserRequestTable>? where,
     int? limit,
     int? offset,
@@ -252,19 +252,19 @@ class UserRequestRepository {
     _i1.OrderByListBuilder<UserRequestTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<UserRequest>(
+    return session.db.find<UserRequest>(
       where: where?.call(UserRequest.t),
       orderBy: orderBy?.call(UserRequest.t),
       orderByList: orderByList?.call(UserRequest.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<UserRequest?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UserRequestTable>? where,
     int? offset,
     _i1.OrderByBuilder<UserRequestTable>? orderBy,
@@ -272,118 +272,118 @@ class UserRequestRepository {
     _i1.OrderByListBuilder<UserRequestTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<UserRequest>(
+    return session.db.findFirstRow<UserRequest>(
       where: where?.call(UserRequest.t),
       orderBy: orderBy?.call(UserRequest.t),
       orderByList: orderByList?.call(UserRequest.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<UserRequest?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<UserRequest>(
+    return session.db.findById<UserRequest>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<List<UserRequest>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<UserRequest> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<UserRequest>(
+    return session.db.insert<UserRequest>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<UserRequest> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     UserRequest row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<UserRequest>(
+    return session.db.insertRow<UserRequest>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<List<UserRequest>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<UserRequest> rows, {
     _i1.ColumnSelections<UserRequestTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<UserRequest>(
+    return session.db.update<UserRequest>(
       rows,
       columns: columns?.call(UserRequest.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<UserRequest> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     UserRequest row, {
     _i1.ColumnSelections<UserRequestTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<UserRequest>(
+    return session.db.updateRow<UserRequest>(
       row,
       columns: columns?.call(UserRequest.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<List<UserRequest>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<UserRequest> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<UserRequest>(
+    return session.db.delete<UserRequest>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<UserRequest> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     UserRequest row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<UserRequest>(
+    return session.db.deleteRow<UserRequest>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<List<UserRequest>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<UserRequestTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<UserRequest>(
+    return session.db.deleteWhere<UserRequest>(
       where: where(UserRequest.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UserRequestTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<UserRequest>(
+    return session.db.count<UserRequest>(
       where: where?.call(UserRequest.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 }

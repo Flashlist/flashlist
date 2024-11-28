@@ -8,8 +8,7 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
@@ -34,9 +33,8 @@ import 'user/app_user.dart' as _i19;
 import 'user/notification.dart' as _i20;
 import 'user/user_relation.dart' as _i21;
 import 'user/user_request.dart' as _i22;
-import 'protocol.dart' as _i23;
-import 'package:flashlist_server/src/generated/user/user_request.dart' as _i24;
-import 'package:flashlist_server/src/generated/user/app_user.dart' as _i25;
+import 'package:flashlist_server/src/generated/user/user_request.dart' as _i23;
+import 'package:flashlist_server/src/generated/user/app_user.dart' as _i24;
 export 'flashlist/flashlist.dart';
 export 'flashlist/flashlist_permission.dart';
 export 'flashlist/stream_messages/authors/accept_invite_to_flashlist.dart';
@@ -702,29 +700,29 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i22.UserRequest?>()) {
       return (data != null ? _i22.UserRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i23.FlashlistItem?>?>()) {
+    if (t == _i1.getType<List<_i15.FlashlistItem?>?>()) {
       return (data != null
           ? (data as List)
-              .map((e) => deserialize<_i23.FlashlistItem?>(e))
+              .map((e) => deserialize<_i15.FlashlistItem?>(e))
               .toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i23.AppUser?>?>()) {
+    if (t == _i1.getType<List<_i19.AppUser?>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i23.AppUser?>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i19.AppUser?>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i23.Flashlist>) {
-      return (data as List).map((e) => deserialize<_i23.Flashlist>(e)).toList()
+    if (t == List<_i4.Flashlist>) {
+      return (data as List).map((e) => deserialize<_i4.Flashlist>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i24.UserRequest?>) {
+    if (t == List<_i23.UserRequest?>) {
       return (data as List)
-          .map((e) => deserialize<_i24.UserRequest?>(e))
+          .map((e) => deserialize<_i23.UserRequest?>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i25.AppUser>) {
-      return (data as List).map((e) => deserialize<_i25.AppUser>(e)).toList()
+    if (t == List<_i24.AppUser>) {
+      return (data as List).map((e) => deserialize<_i24.AppUser>(e)).toList()
           as dynamic;
     }
     try {
@@ -810,69 +808,73 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'Flashlist') {
+    var dataClassName = data['className'];
+    if (dataClassName is! String) {
+      return super.deserializeByClassName(data);
+    }
+    if (dataClassName == 'Flashlist') {
       return deserialize<_i4.Flashlist>(data['data']);
     }
-    if (data['className'] == 'FlashlistPermission') {
+    if (dataClassName == 'FlashlistPermission') {
       return deserialize<_i5.FlashlistPermission>(data['data']);
     }
-    if (data['className'] == 'AcceptInviteToFlashlist') {
+    if (dataClassName == 'AcceptInviteToFlashlist') {
       return deserialize<_i6.AcceptInviteToFlashlist>(data['data']);
     }
-    if (data['className'] == 'AddUserToFlashlist') {
+    if (dataClassName == 'AddUserToFlashlist') {
       return deserialize<_i7.AddUserToFlashlist>(data['data']);
     }
-    if (data['className'] == 'InviteUserToFlashlist') {
+    if (dataClassName == 'InviteUserToFlashlist') {
       return deserialize<_i8.InviteUserToFlashlist>(data['data']);
     }
-    if (data['className'] == 'JoinFlashlist') {
+    if (dataClassName == 'JoinFlashlist') {
       return deserialize<_i9.JoinFlashlist>(data['data']);
     }
-    if (data['className'] == 'LeaveFlashlist') {
+    if (dataClassName == 'LeaveFlashlist') {
       return deserialize<_i10.LeaveFlashlist>(data['data']);
     }
-    if (data['className'] == 'RemoveUserFromFlashlist') {
+    if (dataClassName == 'RemoveUserFromFlashlist') {
       return deserialize<_i11.RemoveUserFromFlashlist>(data['data']);
     }
-    if (data['className'] == 'DeleteFlashlist') {
+    if (dataClassName == 'DeleteFlashlist') {
       return deserialize<_i12.DeleteFlashlist>(data['data']);
     }
-    if (data['className'] == 'FlashlistBatch') {
+    if (dataClassName == 'FlashlistBatch') {
       return deserialize<_i13.FlashlistBatch>(data['data']);
     }
-    if (data['className'] == 'UpdateFlashlist') {
+    if (dataClassName == 'UpdateFlashlist') {
       return deserialize<_i14.UpdateFlashlist>(data['data']);
     }
-    if (data['className'] == 'FlashlistItem') {
+    if (dataClassName == 'FlashlistItem') {
       return deserialize<_i15.FlashlistItem>(data['data']);
     }
-    if (data['className'] == 'DeleteFlashlistItem') {
+    if (dataClassName == 'DeleteFlashlistItem') {
       return deserialize<_i16.DeleteFlashlistItem>(data['data']);
     }
-    if (data['className'] == 'InsertFlashlistItem') {
+    if (dataClassName == 'InsertFlashlistItem') {
       return deserialize<_i17.InsertFlashlistItem>(data['data']);
     }
-    if (data['className'] == 'ReOrderFlashlistItem') {
+    if (dataClassName == 'ReOrderFlashlistItem') {
       return deserialize<_i18.ReOrderFlashlistItem>(data['data']);
     }
-    if (data['className'] == 'AppUser') {
+    if (dataClassName == 'AppUser') {
       return deserialize<_i19.AppUser>(data['data']);
     }
-    if (data['className'] == 'Notification') {
+    if (dataClassName == 'Notification') {
       return deserialize<_i20.Notification>(data['data']);
     }
-    if (data['className'] == 'UserRelation') {
+    if (dataClassName == 'UserRelation') {
       return deserialize<_i21.UserRelation>(data['data']);
     }
-    if (data['className'] == 'UserRequest') {
+    if (dataClassName == 'UserRequest') {
       return deserialize<_i22.UserRequest>(data['data']);
     }
-    if (data['className'].startsWith('serverpod.')) {
-      data['className'] = data['className'].substring(10);
+    if (dataClassName.startsWith('serverpod.')) {
+      data['className'] = dataClassName.substring(10);
       return _i2.Protocol().deserializeByClassName(data);
     }
-    if (data['className'].startsWith('serverpod_auth.')) {
-      data['className'] = data['className'].substring(15);
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
       return _i3.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);

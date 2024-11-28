@@ -18,5 +18,31 @@ services:
     command: redis-server --requirepass "QC_mss_jkyaTZDiMhJvDJj0M6quWjOal"
     environment:
       - REDIS_REPLICATION_MODE=master
+
+  # Add to the existing services
+  postgres_test:
+    image: postgres:16.3
+    ports:
+      - '9090:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: flashlist_test
+      POSTGRES_PASSWORD: "<insert database test password>"
+    volumes:
+      - flashlist_test_data:/var/lib/postgresql/data
+    profiles:
+      - '' # Default profile
+      - test
+  redis_test:
+    image: redis:6.2.6
+    ports:
+      - '9091:6379'
+    command: redis-server --requirepass "<insert redis test password>"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    profiles:
+      - '' # Default profile
+      - test
 volumes:
   flashlist_data:
+  flashlist_test_data:

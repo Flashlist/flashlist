@@ -10,7 +10,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import '../protocol.dart' as _i2;
+import '../flashlist_item/flashlist_item.dart' as _i2;
+import '../user/app_user.dart' as _i3;
 
 abstract class Flashlist implements _i1.SerializableModel {
   Flashlist._({
@@ -31,7 +32,7 @@ abstract class Flashlist implements _i1.SerializableModel {
     required String title,
     required String color,
     List<_i2.FlashlistItem?>? items,
-    List<_i2.AppUser?>? authors,
+    List<_i3.AppUser?>? authors,
     bool? isCollapsed,
     required DateTime createdAt,
     DateTime? updatedAt,
@@ -51,7 +52,7 @@ abstract class Flashlist implements _i1.SerializableModel {
       authors: (jsonSerialization['authors'] as List?)
           ?.map((e) => e == null
               ? null
-              : _i2.AppUser.fromJson((e as Map<String, dynamic>)))
+              : _i3.AppUser.fromJson((e as Map<String, dynamic>)))
           .toList(),
       isCollapsed: jsonSerialization['isCollapsed'] as bool?,
       createdAt:
@@ -75,7 +76,7 @@ abstract class Flashlist implements _i1.SerializableModel {
 
   List<_i2.FlashlistItem?>? items;
 
-  List<_i2.AppUser?>? authors;
+  List<_i3.AppUser?>? authors;
 
   bool? isCollapsed;
 
@@ -89,7 +90,7 @@ abstract class Flashlist implements _i1.SerializableModel {
     String? title,
     String? color,
     List<_i2.FlashlistItem?>? items,
-    List<_i2.AppUser?>? authors,
+    List<_i3.AppUser?>? authors,
     bool? isCollapsed,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -126,7 +127,7 @@ class _FlashlistImpl extends Flashlist {
     required String title,
     required String color,
     List<_i2.FlashlistItem?>? items,
-    List<_i2.AppUser?>? authors,
+    List<_i3.AppUser?>? authors,
     bool? isCollapsed,
     required DateTime createdAt,
     DateTime? updatedAt,
@@ -162,7 +163,7 @@ class _FlashlistImpl extends Flashlist {
       items: items is List<_i2.FlashlistItem?>?
           ? items
           : this.items?.map((e0) => e0?.copyWith()).toList(),
-      authors: authors is List<_i2.AppUser?>?
+      authors: authors is List<_i3.AppUser?>?
           ? authors
           : this.authors?.map((e0) => e0?.copyWith()).toList(),
       isCollapsed: isCollapsed is bool? ? isCollapsed : this.isCollapsed,
