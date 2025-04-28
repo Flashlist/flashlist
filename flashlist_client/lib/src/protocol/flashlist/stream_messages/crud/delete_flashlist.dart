@@ -23,6 +23,9 @@ abstract class DeleteFlashlist implements _i1.SerializableModel {
 
   int flashlistId;
 
+  /// Returns a shallow copy of this [DeleteFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   DeleteFlashlist copyWith({int? flashlistId});
   @override
   Map<String, dynamic> toJson() {
@@ -39,6 +42,9 @@ class _DeleteFlashlistImpl extends DeleteFlashlist {
   _DeleteFlashlistImpl({required int flashlistId})
       : super._(flashlistId: flashlistId);
 
+  /// Returns a shallow copy of this [DeleteFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   DeleteFlashlist copyWith({int? flashlistId}) {
     return DeleteFlashlist(flashlistId: flashlistId ?? this.flashlistId);

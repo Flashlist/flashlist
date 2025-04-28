@@ -45,6 +45,9 @@ abstract class InviteUserToFlashlist
 
   String accessLevel;
 
+  /// Returns a shallow copy of this [InviteUserToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   InviteUserToFlashlist copyWith({
     int? userId,
     String? email,
@@ -92,6 +95,9 @@ class _InviteUserToFlashlistImpl extends InviteUserToFlashlist {
           accessLevel: accessLevel,
         );
 
+  /// Returns a shallow copy of this [InviteUserToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   InviteUserToFlashlist copyWith({
     Object? userId = _Undefined,

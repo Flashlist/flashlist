@@ -194,25 +194,25 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List)
               .map((e) => deserialize<_i13.FlashlistItem?>(e))
               .toList()
-          : null) as dynamic;
+          : null) as T;
     }
     if (t == _i1.getType<List<_i17.AppUser?>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<_i17.AppUser?>(e)).toList()
-          : null) as dynamic;
+          : null) as T;
     }
     if (t == List<_i2.Flashlist>) {
       return (data as List).map((e) => deserialize<_i2.Flashlist>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i21.UserRequest?>) {
       return (data as List)
           .map((e) => deserialize<_i21.UserRequest?>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i22.AppUser>) {
       return (data as List).map((e) => deserialize<_i22.AppUser>(e)).toList()
-          as dynamic;
+          as T;
     }
     try {
       return _i23.Protocol().deserialize<T>(data, t);

@@ -39,6 +39,9 @@ abstract class UpdateFlashlist
 
   String? color;
 
+  /// Returns a shallow copy of this [UpdateFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   UpdateFlashlist copyWith({
     int? id,
     String? title,
@@ -81,6 +84,9 @@ class _UpdateFlashlistImpl extends UpdateFlashlist {
           color: color,
         );
 
+  /// Returns a shallow copy of this [UpdateFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   UpdateFlashlist copyWith({
     int? id,

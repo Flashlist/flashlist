@@ -27,6 +27,9 @@ abstract class FlashlistBatch implements _i1.SerializableModel {
 
   List<_i2.Flashlist> collection;
 
+  /// Returns a shallow copy of this [FlashlistBatch]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   FlashlistBatch copyWith({List<_i2.Flashlist>? collection});
   @override
   Map<String, dynamic> toJson() {
@@ -43,6 +46,9 @@ class _FlashlistBatchImpl extends FlashlistBatch {
   _FlashlistBatchImpl({required List<_i2.Flashlist> collection})
       : super._(collection: collection);
 
+  /// Returns a shallow copy of this [FlashlistBatch]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   FlashlistBatch copyWith({List<_i2.Flashlist>? collection}) {
     return FlashlistBatch(

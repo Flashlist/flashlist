@@ -11,7 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class AppUser implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class AppUser
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   AppUser._({
     this.id,
     required this.userId,
@@ -54,8 +55,11 @@ abstract class AppUser implements _i1.TableRow, _i1.ProtocolSerialization {
   String? imageSrc;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [AppUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   AppUser copyWith({
     int? id,
     int? userId,
@@ -132,6 +136,9 @@ class _AppUserImpl extends AppUser {
           imageSrc: imageSrc,
         );
 
+  /// Returns a shallow copy of this [AppUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   AppUser copyWith({
     Object? id = _Undefined,
@@ -150,7 +157,7 @@ class _AppUserImpl extends AppUser {
   }
 }
 
-class AppUserTable extends _i1.Table {
+class AppUserTable extends _i1.Table<int?> {
   AppUserTable({super.tableRelation}) : super(tableName: 'flashlist_app_user') {
     userId = _i1.ColumnInt(
       'userId',
@@ -195,7 +202,7 @@ class AppUserInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => AppUser.t;
+  _i1.Table<int?> get table => AppUser.t;
 }
 
 class AppUserIncludeList extends _i1.IncludeList {
@@ -215,12 +222,34 @@ class AppUserIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => AppUser.t;
+  _i1.Table<int?> get table => AppUser.t;
 }
 
 class AppUserRepository {
   const AppUserRepository._();
 
+  /// Returns a list of [AppUser]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<AppUser>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,
@@ -242,6 +271,23 @@ class AppUserRepository {
     );
   }
 
+  /// Returns the first matching [AppUser] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<AppUser?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,
@@ -261,6 +307,7 @@ class AppUserRepository {
     );
   }
 
+  /// Finds a single [AppUser] by its [id] or null if no such row exists.
   Future<AppUser?> findById(
     _i1.Session session,
     int id, {
@@ -272,6 +319,12 @@ class AppUserRepository {
     );
   }
 
+  /// Inserts all [AppUser]s in the list and returns the inserted rows.
+  ///
+  /// The returned [AppUser]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<AppUser>> insert(
     _i1.Session session,
     List<AppUser> rows, {
@@ -283,6 +336,9 @@ class AppUserRepository {
     );
   }
 
+  /// Inserts a single [AppUser] and returns the inserted row.
+  ///
+  /// The returned [AppUser] will have its `id` field set.
   Future<AppUser> insertRow(
     _i1.Session session,
     AppUser row, {
@@ -294,6 +350,11 @@ class AppUserRepository {
     );
   }
 
+  /// Updates all [AppUser]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<AppUser>> update(
     _i1.Session session,
     List<AppUser> rows, {
@@ -307,6 +368,9 @@ class AppUserRepository {
     );
   }
 
+  /// Updates a single [AppUser]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<AppUser> updateRow(
     _i1.Session session,
     AppUser row, {
@@ -320,6 +384,9 @@ class AppUserRepository {
     );
   }
 
+  /// Deletes all [AppUser]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<AppUser>> delete(
     _i1.Session session,
     List<AppUser> rows, {
@@ -331,6 +398,7 @@ class AppUserRepository {
     );
   }
 
+  /// Deletes a single [AppUser].
   Future<AppUser> deleteRow(
     _i1.Session session,
     AppUser row, {
@@ -342,6 +410,7 @@ class AppUserRepository {
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<AppUser>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<AppUserTable> where,
@@ -353,6 +422,8 @@ class AppUserRepository {
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<AppUserTable>? where,

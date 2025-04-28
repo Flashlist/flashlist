@@ -34,6 +34,9 @@ abstract class RemoveUserFromFlashlist implements _i1.SerializableModel {
 
   int flashlistId;
 
+  /// Returns a shallow copy of this [RemoveUserFromFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   RemoveUserFromFlashlist copyWith({
     int? userId,
     int? flashlistId,
@@ -61,6 +64,9 @@ class _RemoveUserFromFlashlistImpl extends RemoveUserFromFlashlist {
           flashlistId: flashlistId,
         );
 
+  /// Returns a shallow copy of this [RemoveUserFromFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   RemoveUserFromFlashlist copyWith({
     int? userId,

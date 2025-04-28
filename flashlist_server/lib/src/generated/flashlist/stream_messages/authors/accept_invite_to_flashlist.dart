@@ -45,6 +45,9 @@ abstract class AcceptInviteToFlashlist
 
   String accessLevel;
 
+  /// Returns a shallow copy of this [AcceptInviteToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   AcceptInviteToFlashlist copyWith({
     int? userId,
     int? flashlistId,
@@ -90,6 +93,9 @@ class _AcceptInviteToFlashlistImpl extends AcceptInviteToFlashlist {
           accessLevel: accessLevel,
         );
 
+  /// Returns a shallow copy of this [AcceptInviteToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   AcceptInviteToFlashlist copyWith({
     int? userId,

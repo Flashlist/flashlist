@@ -84,6 +84,9 @@ abstract class Flashlist implements _i1.SerializableModel {
 
   DateTime? updatedAt;
 
+  /// Returns a shallow copy of this [Flashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Flashlist copyWith({
     int? id,
     String? uuid,
@@ -143,6 +146,9 @@ class _FlashlistImpl extends Flashlist {
           updatedAt: updatedAt,
         );
 
+  /// Returns a shallow copy of this [Flashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Flashlist copyWith({
     Object? id = _Undefined,

@@ -46,6 +46,9 @@ abstract class FlashlistPermission implements _i1.SerializableModel {
 
   String accessLevel;
 
+  /// Returns a shallow copy of this [FlashlistPermission]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   FlashlistPermission copyWith({
     int? id,
     int? userId,
@@ -83,6 +86,9 @@ class _FlashlistPermissionImpl extends FlashlistPermission {
           accessLevel: accessLevel,
         );
 
+  /// Returns a shallow copy of this [FlashlistPermission]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   FlashlistPermission copyWith({
     Object? id = _Undefined,

@@ -51,6 +51,9 @@ abstract class AppUser implements _i1.SerializableModel {
 
   String? imageSrc;
 
+  /// Returns a shallow copy of this [AppUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   AppUser copyWith({
     int? id,
     int? userId,
@@ -92,6 +95,9 @@ class _AppUserImpl extends AppUser {
           imageSrc: imageSrc,
         );
 
+  /// Returns a shallow copy of this [AppUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   AppUser copyWith({
     Object? id = _Undefined,

@@ -40,6 +40,9 @@ abstract class AddUserToFlashlist implements _i1.SerializableModel {
 
   String accessLevel;
 
+  /// Returns a shallow copy of this [AddUserToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   AddUserToFlashlist copyWith({
     _i2.AppUser? user,
     int? flashlistId,
@@ -71,6 +74,9 @@ class _AddUserToFlashlistImpl extends AddUserToFlashlist {
           accessLevel: accessLevel,
         );
 
+  /// Returns a shallow copy of this [AddUserToFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   AddUserToFlashlist copyWith({
     _i2.AppUser? user,

@@ -40,6 +40,9 @@ abstract class JoinFlashlist implements _i1.SerializableModel {
 
   String accessLevel;
 
+  /// Returns a shallow copy of this [JoinFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   JoinFlashlist copyWith({
     _i2.AppUser? user,
     int? flashlistId,
@@ -71,6 +74,9 @@ class _JoinFlashlistImpl extends JoinFlashlist {
           accessLevel: accessLevel,
         );
 
+  /// Returns a shallow copy of this [JoinFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   JoinFlashlist copyWith({
     _i2.AppUser? user,

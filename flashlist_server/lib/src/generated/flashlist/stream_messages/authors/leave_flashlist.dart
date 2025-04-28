@@ -34,6 +34,9 @@ abstract class LeaveFlashlist
 
   int flashlistId;
 
+  /// Returns a shallow copy of this [LeaveFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   LeaveFlashlist copyWith({
     int? userId,
     int? flashlistId,
@@ -69,6 +72,9 @@ class _LeaveFlashlistImpl extends LeaveFlashlist {
           flashlistId: flashlistId,
         );
 
+  /// Returns a shallow copy of this [LeaveFlashlist]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   LeaveFlashlist copyWith({
     int? userId,

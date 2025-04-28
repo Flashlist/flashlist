@@ -46,6 +46,9 @@ abstract class FlashlistItem implements _i1.SerializableModel {
 
   int orderNr;
 
+  /// Returns a shallow copy of this [FlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   FlashlistItem copyWith({
     int? id,
     String? name,
@@ -83,6 +86,9 @@ class _FlashlistItemImpl extends FlashlistItem {
           orderNr: orderNr,
         );
 
+  /// Returns a shallow copy of this [FlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   FlashlistItem copyWith({
     Object? id = _Undefined,

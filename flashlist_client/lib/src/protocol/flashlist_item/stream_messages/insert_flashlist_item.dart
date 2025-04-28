@@ -26,6 +26,9 @@ abstract class InsertFlashlistItem implements _i1.SerializableModel {
 
   _i2.FlashlistItem item;
 
+  /// Returns a shallow copy of this [InsertFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   InsertFlashlistItem copyWith({_i2.FlashlistItem? item});
   @override
   Map<String, dynamic> toJson() {
@@ -42,6 +45,9 @@ class _InsertFlashlistItemImpl extends InsertFlashlistItem {
   _InsertFlashlistItemImpl({required _i2.FlashlistItem item})
       : super._(item: item);
 
+  /// Returns a shallow copy of this [InsertFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   InsertFlashlistItem copyWith({_i2.FlashlistItem? item}) {
     return InsertFlashlistItem(item: item ?? this.item.copyWith());
