@@ -34,6 +34,9 @@ abstract class DeleteFlashlistItem
 
   int parentId;
 
+  /// Returns a shallow copy of this [DeleteFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   DeleteFlashlistItem copyWith({
     int? id,
     int? parentId,
@@ -69,6 +72,9 @@ class _DeleteFlashlistItemImpl extends DeleteFlashlistItem {
           parentId: parentId,
         );
 
+  /// Returns a shallow copy of this [DeleteFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   DeleteFlashlistItem copyWith({
     int? id,

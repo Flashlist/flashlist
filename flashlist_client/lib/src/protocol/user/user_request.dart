@@ -57,6 +57,9 @@ abstract class UserRequest implements _i1.SerializableModel {
 
   DateTime timestamp;
 
+  /// Returns a shallow copy of this [UserRequest]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   UserRequest copyWith({
     int? id,
     int? userId1,
@@ -102,6 +105,9 @@ class _UserRequestImpl extends UserRequest {
           timestamp: timestamp,
         );
 
+  /// Returns a shallow copy of this [UserRequest]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   UserRequest copyWith({
     Object? id = _Undefined,

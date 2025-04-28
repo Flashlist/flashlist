@@ -5,15 +5,15 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: f256b0c0ba6c7577c15e2e4e114755640a875e885099367bf6e012b19314c834
+      sha256: "16e298750b6d0af7ce8a3ba7c18c69c3785d11b15ec83f6dcd0ad2a0009b3cab"
       url: "https://pub.dev"
     source: hosted
-    version: "72.0.0"
+    version: "76.0.0"
   _macros:
     dependency: transitive
     description: dart
     source: sdk
-    version: "0.3.2"
+    version: "0.3.3"
   adaptive_theme:
     dependency: "direct main"
     description:
@@ -26,10 +26,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: b652861553cd3990d8ed361f7979dc6d7053a9ac8843fa73820ab68ce5410139
+      sha256: "1f14db053a8c23e260789e9b0980fa27f2680dd640932cae5e1137cce0e46e1e"
       url: "https://pub.dev"
     source: hosted
-    version: "6.7.0"
+    version: "6.11.0"
   analyzer_plugin:
     dependency: transitive
     description:
@@ -218,10 +218,10 @@ packages:
     dependency: transitive
     description:
       name: collection
-      sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
+      sha256: a1ace0a119f20aabc852d165077c036cd864315bd99b7eaa10a60100341941bf
       url: "https://pub.dev"
     source: hosted
-    version: "1.18.0"
+    version: "1.19.0"
   connectivity_plus:
     dependency: transitive
     description:
@@ -701,18 +701,18 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "3f87a60e8c63aecc975dda1ceedbc8f24de75f09e4856ea27daf8958f2f0ce05"
+      sha256: "7bb2830ebd849694d1ec25bf1f44582d6ac531a57a365a803a6034ff751d2d06"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.5"
+    version: "10.0.7"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: "932549fb305594d82d7183ecd9fa93463e9914e1b67cacc34bc40906594a1806"
+      sha256: "9491a714cca3667b60b5c420da8217e6de0d1ba7a5ec322fab01758f6998f379"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.5"
+    version: "3.0.8"
   leak_tracker_testing:
     dependency: transitive
     description:
@@ -741,10 +741,10 @@ packages:
     dependency: transitive
     description:
       name: macros
-      sha256: "0acaed5d6b7eab89f63350bccd82119e6c602df0f391260d0e32b5e23db79536"
+      sha256: "1d9e801cd66f7ea3663c45fc708450db1fa57f988142c64289142c9b7ee80656"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.2-main.4"
+    version: "0.1.3-main.0"
   matcher:
     dependency: transitive
     description:
@@ -973,50 +973,50 @@ packages:
     dependency: transitive
     description:
       name: serverpod_auth_client
-      sha256: "977673bf9b7092d027715c07e7dff6c4a62a3fe9a99e42f879bf45f7f8b709dd"
+      sha256: "51aab7f19b1e43751fc24f73d1ee17a19cda34bb5626d8f7466ed4d1665db575"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   serverpod_auth_email_flutter:
     dependency: "direct main"
     description:
       name: serverpod_auth_email_flutter
-      sha256: "4b4b0b72d332da5a9a0bb5a7ebb41d3b34e74a93b380869d5229102504f43647"
+      sha256: "3eeb680b11aa6facbe4f6514c020770286f4d5dc40496070cd2c1e47078b0fb1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   serverpod_auth_shared_flutter:
     dependency: "direct main"
     description:
       name: serverpod_auth_shared_flutter
-      sha256: fd4523080097fee5ad50f009ff7d116388a9a4044a0edc09a073392583741ce0
+      sha256: "5f3cf3e8d21851e49618786dbf22d4ca1286739cd54ad0d78d1db4f938969c7e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   serverpod_client:
     dependency: transitive
     description:
       name: serverpod_client
-      sha256: bfdad439904cb8c6515a85ff49b7e25600ab1b5523d09d141aa407398c9c7346
+      sha256: "23c7a08b91b18ca7ecc73580ba5fc2c3b399925d6d9dd96fc8847f3d61552efd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   serverpod_flutter:
     dependency: "direct main"
     description:
       name: serverpod_flutter
-      sha256: "784f2a29fd19674b53ad62ab3698673c0ef05feb2d149e009444f532633448d0"
+      sha256: "13747345025a63ab5fa0027ca6b4419610e13b7e3fe32a8b9d30157d162124d1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: "3e6fec996eb78b61c092d73145ddd66a959083abec1d1f074b2c2f1649490afd"
+      sha256: "721e7a708df865767be014d26b4f4dd639f448307471218d401995fdb5720be7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -1093,7 +1093,7 @@ packages:
     dependency: transitive
     description: flutter
     source: sdk
-    version: "0.0.99"
+    version: "0.0.0"
   source_gen:
     dependency: transitive
     description:
@@ -1138,10 +1138,10 @@ packages:
     dependency: transitive
     description:
       name: stack_trace
-      sha256: "73713990125a6d93122541237550ee3352a2d84baad52d375a4cad2eb9b7ce0b"
+      sha256: "9f47fd3630d76be3ab26f0ee06d213679aa425996925ff3feffdec504931c377"
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.1"
+    version: "1.12.0"
   state_notifier:
     dependency: transitive
     description:
@@ -1266,10 +1266,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: f6be3ed8bd01289b34d679c2b62226f63c0e69f9fd2e50a6b3c1c729a961041b
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.4"
+    version: "14.3.0"
   watcher:
     dependency: transitive
     description:

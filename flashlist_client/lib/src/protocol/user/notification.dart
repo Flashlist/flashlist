@@ -57,6 +57,9 @@ abstract class Notification implements _i1.SerializableModel {
 
   DateTime timestamp;
 
+  /// Returns a shallow copy of this [Notification]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Notification copyWith({
     int? id,
     int? userId,
@@ -102,6 +105,9 @@ class _NotificationImpl extends Notification {
           timestamp: timestamp,
         );
 
+  /// Returns a shallow copy of this [Notification]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Notification copyWith({
     Object? id = _Undefined,

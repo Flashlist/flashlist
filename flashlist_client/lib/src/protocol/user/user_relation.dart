@@ -52,6 +52,9 @@ abstract class UserRelation implements _i1.SerializableModel {
 
   String type;
 
+  /// Returns a shallow copy of this [UserRelation]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   UserRelation copyWith({
     int? id,
     int? userId1,
@@ -93,6 +96,9 @@ class _UserRelationImpl extends UserRelation {
           type: type,
         );
 
+  /// Returns a shallow copy of this [UserRelation]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   UserRelation copyWith({
     Object? id = _Undefined,

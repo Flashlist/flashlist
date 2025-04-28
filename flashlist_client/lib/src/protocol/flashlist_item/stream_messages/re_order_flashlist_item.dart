@@ -44,6 +44,9 @@ abstract class ReOrderFlashlistItem implements _i1.SerializableModel {
 
   int? newOrderNr;
 
+  /// Returns a shallow copy of this [ReOrderFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   ReOrderFlashlistItem copyWith({
     int? id,
     int? parentId,
@@ -81,6 +84,9 @@ class _ReOrderFlashlistItemImpl extends ReOrderFlashlistItem {
           newOrderNr: newOrderNr,
         );
 
+  /// Returns a shallow copy of this [ReOrderFlashlistItem]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   ReOrderFlashlistItem copyWith({
     int? id,
