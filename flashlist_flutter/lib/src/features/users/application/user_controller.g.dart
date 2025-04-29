@@ -20,8 +20,10 @@ final userControllerProvider = AutoDisposeProvider<UserController>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef UserControllerRef = AutoDisposeProviderRef<UserController>;
-String _$currentUserHash() => r'bac7f4e911f0d8fc08783f830fdd7b8dd190a232';
+String _$currentUserHash() => r'6f7ae35898e0a11575c42185d0bd469f26b06530';
 
 /// See also [currentUser].
 @ProviderFor(currentUser)
@@ -34,8 +36,10 @@ final currentUserProvider = AutoDisposeFutureProvider<AppUser?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CurrentUserRef = AutoDisposeFutureProviderRef<AppUser?>;
-String _$connectionsHash() => r'99c248a0741a9018ebfbb03ccc69651ecae3c334';
+String _$connectionsHash() => r'd3f24a3a3b1b037b50daf3d1a477e36b719b7222';
 
 /// See also [connections].
 @ProviderFor(connections)
@@ -48,8 +52,10 @@ final connectionsProvider = AutoDisposeFutureProvider<List<AppUser?>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ConnectionsRef = AutoDisposeFutureProviderRef<List<AppUser?>>;
-String _$pendingRequestsHash() => r'0fe904444e893ecd58e8f66adac764191c9354bd';
+String _$pendingRequestsHash() => r'576bff2371711cf7cd23afb4e1192a2a2a108121';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -186,6 +192,8 @@ class PendingRequestsProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PendingRequestsRef on AutoDisposeFutureProviderRef<List<UserRequest?>> {
   /// The parameter `parameter` of this provider.
   String? get parameter;
@@ -200,7 +208,7 @@ class _PendingRequestsProviderElement
   String? get parameter => (origin as PendingRequestsProvider).parameter;
 }
 
-String _$userByIdHash() => r'f2f634bb62b227c4331275c4f5f9adaed16777dc';
+String _$userByIdHash() => r'5f330f871bdcdacb061e33e82ac47d9ca4ee56cc';
 
 /// See also [userById].
 @ProviderFor(userById)
@@ -314,6 +322,8 @@ class UserByIdProvider extends AutoDisposeFutureProvider<AppUser?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserByIdRef on AutoDisposeFutureProviderRef<AppUser?> {
   /// The parameter `id` of this provider.
   int get id;
@@ -327,4 +337,4 @@ class _UserByIdProviderElement
   int get id => (origin as UserByIdProvider).id;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

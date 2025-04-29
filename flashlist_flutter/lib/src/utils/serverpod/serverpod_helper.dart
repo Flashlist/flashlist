@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -9,13 +10,13 @@ import 'package:flashlist_client/flashlist_client.dart';
 part 'serverpod_helper.g.dart';
 
 @riverpod
-Client client(ClientRef ref) => Client(
+Client client(Ref ref) => Client(
       "http://${Platform.isAndroid ? "10.0.3.2" : "localhost"}:8080/",
       authenticationKeyManager: FlutterAuthenticationKeyManager(),
     )..connectivityMonitor = FlutterConnectivityMonitor();
 
 @riverpod
-SessionManager sessionManager(SessionManagerRef ref) =>
+SessionManager sessionManager(Ref ref) =>
     SessionManager(caller: ref.watch(clientProvider).modules.auth);
 
 /// Helper class for [Serverpod] functionality.
@@ -43,7 +44,7 @@ class ServerpodHelper {
 /// Provider for the serverpodHelper class
 /// Automatically caches and disposes the helper when no longer used.
 @riverpod
-ServerpodHelper serverpodHelper(ServerpodHelperRef ref) => ServerpodHelper(
+ServerpodHelper serverpodHelper(Ref ref) => ServerpodHelper(
       ref.watch(clientProvider),
       ref.watch(sessionManagerProvider),
     );

@@ -6,7 +6,7 @@ part of 'settings_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appPackageInfoHash() => r'f68e0449eca755182143d16ee3ba36b99ff3be0d';
+String _$appPackageInfoHash() => r'b7c869e72ccfb3b85e276e96eb2a72db5f1d81a3';
 
 /// See also [appPackageInfo].
 @ProviderFor(appPackageInfo)
@@ -20,6 +20,8 @@ final appPackageInfoProvider = AutoDisposeFutureProvider<PackageInfo>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AppPackageInfoRef = AutoDisposeFutureProviderRef<PackageInfo>;
 String _$settingsControllerHash() =>
     r'bc8d5c23a6267c8e1fa59d1f4776311ec51fb0a6';
@@ -42,4 +44,4 @@ final settingsControllerProvider =
 
 typedef _$SettingsController = AutoDisposeNotifier<SettingsState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

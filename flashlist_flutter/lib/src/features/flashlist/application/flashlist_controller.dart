@@ -98,7 +98,7 @@ FlashlistController flashlistController(Ref ref) => FlashlistController(ref);
 
 @riverpod
 Future<Flashlist?> flashlistById(
-  FlashlistByIdRef ref,
+  Ref ref,
   int flashlistId,
 ) async {
   final flashlistController = ref.watch(flashlistControllerProvider);
@@ -107,7 +107,7 @@ Future<Flashlist?> flashlistById(
 
 @riverpod
 StreamingConnectionHandler streamingConnectionHandler(
-  StreamingConnectionHandlerRef ref,
+  Ref ref,
 ) {
   return StreamingConnectionHandler(
     client: ref.watch(clientProvider),
@@ -116,7 +116,7 @@ StreamingConnectionHandler streamingConnectionHandler(
 }
 
 @riverpod
-Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
+Stream<List<Flashlist?>> flashlistsForUser(Ref ref) async* {
   final client = ref.watch(clientProvider);
   final streamingConnectionHandler =
       ref.watch(streamingConnectionHandlerProvider);
@@ -138,7 +138,7 @@ Stream<List<Flashlist?>> flashlistsForUser(FlashlistsForUserRef ref) async* {
 
 @riverpod
 Future<String?> userAccessLevelForFlashlist(
-  UserAccessLevelForFlashlistRef ref,
+  Ref ref,
   int flashlistId,
 ) async {
   final flashlistController = ref.watch(flashlistControllerProvider);
