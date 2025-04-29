@@ -64,20 +64,20 @@ class UserController {
 UserController userController(Ref ref) => UserController(ref);
 
 @riverpod
-Future<AppUser?> currentUser(CurrentUserRef ref) =>
+Future<AppUser?> currentUser(Ref ref) =>
     ref.watch(userControllerProvider).getCurrentUser();
 
 @riverpod
-Future<List<AppUser?>> connections(ConnectionsRef ref) =>
+Future<List<AppUser?>> connections(Ref ref) =>
     ref.watch(userControllerProvider).getConnections();
 
 @riverpod
 Future<List<UserRequest?>> pendingRequests(
-  PendingRequestsRef ref,
+  Ref ref,
   String? parameter,
 ) =>
     ref.watch(userControllerProvider).getPendingRequestsByParameter(parameter);
 
 @riverpod
-Future<AppUser?> userById(UserByIdRef ref, int id) =>
+Future<AppUser?> userById(Ref ref, int id) =>
     ref.watch(userControllerProvider).getUserById(id);

@@ -41,11 +41,9 @@ class EditModeController {
 @riverpod
 
 /// Provider for the editModeController
-EditModeController editModeController(EditModeControllerRef ref) =>
-    EditModeController(ref: ref);
+EditModeController editModeController(Ref ref) => EditModeController(ref: ref);
 
 @riverpod
-TextEditingController flashlistTitleInputController(
-    FlashlistTitleInputControllerRef ref) {
+TextEditingController flashlistTitleInputController(Ref ref) {
   return TextEditingController();
 }

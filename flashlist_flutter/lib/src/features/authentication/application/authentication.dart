@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:flashlist_flutter/src/utils/serverpod/serverpod_helper.dart';
@@ -22,8 +23,7 @@ class AuthenticationController {
 
 /// Provider for the [AuthenticationController].
 @riverpod
-AuthenticationController authenticationController(
-        AuthenticationControllerRef ref) =>
+AuthenticationController authenticationController(Ref ref) =>
     AuthenticationController(
       ref.watch(sessionManagerProvider),
     );
@@ -31,7 +31,7 @@ AuthenticationController authenticationController(
 /// Provider for the authentication-state
 /// returns a [bool] corresponding with the current authentication state.
 @riverpod
-Stream<bool> isAuthenticated(IsAuthenticatedRef ref) async* {
+Stream<bool> isAuthenticated(Ref ref) async* {
   final SessionManager sessionManager = ref.watch(sessionManagerProvider);
 
   sessionManager.addListener(() {

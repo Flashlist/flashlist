@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -32,6 +33,6 @@ class SettingsController extends _$SettingsController {
 }
 
 @riverpod
-Future<PackageInfo> appPackageInfo(AppPackageInfoRef ref) async {
+Future<PackageInfo> appPackageInfo(Ref ref) async {
   return await PackageInfo.fromPlatform();
 }

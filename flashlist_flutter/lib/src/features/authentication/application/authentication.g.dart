@@ -7,7 +7,7 @@ part of 'authentication.dart';
 // **************************************************************************
 
 String _$authenticationControllerHash() =>
-    r'4a29f5be4dc9ec9c4e4f58e8419ff912484dfca5';
+    r'e54b8b577339ed106f71ff2ca6690b33119ea3fb';
 
 /// Provider for the [AuthenticationController].
 ///
@@ -24,9 +24,11 @@ final authenticationControllerProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AuthenticationControllerRef
     = AutoDisposeProviderRef<AuthenticationController>;
-String _$isAuthenticatedHash() => r'32d1f7ea4d2f6b33df48477e2316c94fc73cc456';
+String _$isAuthenticatedHash() => r'e406aafe8f6d5ee5a26cc415c60fd4fa539ec6d8';
 
 /// Provider for the authentication-state
 /// returns a [bool] corresponding with the current authentication state.
@@ -43,6 +45,8 @@ final isAuthenticatedProvider = AutoDisposeStreamProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef IsAuthenticatedRef = AutoDisposeStreamProviderRef<bool>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

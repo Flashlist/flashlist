@@ -22,8 +22,10 @@ final flashlistControllerProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FlashlistControllerRef = AutoDisposeProviderRef<FlashlistController>;
-String _$flashlistByIdHash() => r'48934ea51b1a21934d934b20c61b0fc9cceb2724';
+String _$flashlistByIdHash() => r'82ccf9a43cb5787b76f90d3badb85530c28a48d8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -159,6 +161,8 @@ class FlashlistByIdProvider extends AutoDisposeFutureProvider<Flashlist?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FlashlistByIdRef on AutoDisposeFutureProviderRef<Flashlist?> {
   /// The parameter `flashlistId` of this provider.
   int get flashlistId;
@@ -173,7 +177,7 @@ class _FlashlistByIdProviderElement
 }
 
 String _$streamingConnectionHandlerHash() =>
-    r'706a2c52689a60fa2268df06f15b53700d7e18b2';
+    r'7942429bb96c292d3950be4036b8b0608febc7e3';
 
 /// See also [streamingConnectionHandler].
 @ProviderFor(streamingConnectionHandler)
@@ -188,9 +192,11 @@ final streamingConnectionHandlerProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef StreamingConnectionHandlerRef
     = AutoDisposeProviderRef<StreamingConnectionHandler>;
-String _$flashlistsForUserHash() => r'85bb36982788c9b5adf6727c1d8f33c4e407730e';
+String _$flashlistsForUserHash() => r'db3da1ad92736c8b1613c7ca299b31ac339b0fd1';
 
 /// See also [flashlistsForUser].
 @ProviderFor(flashlistsForUser)
@@ -205,9 +211,11 @@ final flashlistsForUserProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FlashlistsForUserRef = AutoDisposeStreamProviderRef<List<Flashlist?>>;
 String _$userAccessLevelForFlashlistHash() =>
-    r'8d805aeb7aafe84a192af02f4af4f097cc98c5ed';
+    r'4f42eb225431266572d11f36eaeba9e8c93140e5';
 
 /// See also [userAccessLevelForFlashlist].
 @ProviderFor(userAccessLevelForFlashlist)
@@ -324,6 +332,8 @@ class UserAccessLevelForFlashlistProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserAccessLevelForFlashlistRef on AutoDisposeFutureProviderRef<String?> {
   /// The parameter `flashlistId` of this provider.
   int get flashlistId;
@@ -339,4 +349,4 @@ class _UserAccessLevelForFlashlistProviderElement
       (origin as UserAccessLevelForFlashlistProvider).flashlistId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
